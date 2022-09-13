@@ -1,0 +1,236 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Phigros存档跨版本转移 | Pil0tXia</title><meta name="description" content="本文由 简悦 SimpRead 转码， 原文地址 www.bilibili.com   2021&#x2F;10&#x2F;28 更新：截至 2021&#x2F;10&#x2F;27，Phigros 已在 Google Play Store 重新上架且已经更新至 v2.0.0，故删除原标题中的 “从 GooglePlay 到 TapTap”；但此教程依然适用于需要跨版本转移存档的玩家 (共存版亦可转移存档，但需要改成对应的共存版包名)"><meta name="keywords" content="迁移,phigros,音游,存档"><meta name="author" content="Pil0tXia"><meta name="copyright" content="Pil0tXia"><meta name="format-detection" content="telephone=no"><link rel="shortcut icon" href="/img/favicon.ico"><link rel="canonical" href="https://pil0txia.netlify.app/post/2022-03-12_phigros-merge-save/"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//fonts.googleapis.com" crossorigin="crossorigin"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta name="google-site-verification" content="rTQaiWh7-ABfHgHfDRir5VZEmaT71cHgcV-IPp_hjjk"/><meta name="baidu-site-verification" content="NJqTNAqxF4"/><meta property="og:type" content="article"><meta property="og:title" content="Phigros存档跨版本转移"><meta property="og:url" content="https://pil0txia.netlify.app/post/2022-03-12_phigros-merge-save/"><meta property="og:site_name" content="Pil0tXia"><meta property="og:description" content="本文由 简悦 SimpRead 转码， 原文地址 www.bilibili.com   2021&#x2F;10&#x2F;28 更新：截至 2021&#x2F;10&#x2F;27，Phigros 已在 Google Play Store 重新上架且已经更新至 v2.0.0，故删除原标题中的 “从 GooglePlay 到 TapTap”；但此教程依然适用于需要跨版本转移存档的玩家 (共存版亦可转移存档，但需要改成对应的共存版包名)"><meta property="og:image" content="https://cdn.jsdelivr.net/gh/Pil0tXia/imghost/picgo/230666302_267503308069670_2086783547919488980_n.jpg"><meta property="article:published_time" content="2022-03-12T12:00:20.000Z"><meta property="article:modified_time" content="2022-09-13T16:56:09.325Z"><meta name="twitter:card" content="summary"><script>var activateDarkMode = function () {
+  document.documentElement.setAttribute('data-theme', 'dark')
+  if (document.querySelector('meta[name="theme-color"]') !== null) {
+    document.querySelector('meta[name="theme-color"]').setAttribute('content', '#000')
+  }
+}
+var activateLightMode = function () {
+  document.documentElement.setAttribute('data-theme', 'light')
+  if (document.querySelector('meta[name="theme-color"]') !== null) {
+    document.querySelector('meta[name="theme-color"]').setAttribute('content', '#fff')
+  }
+}
+
+var getCookies = function (name) {
+  const value = `; ${document.cookie}`
+  const parts = value.split(`; ${name}=`)
+  if (parts.length === 2) return parts.pop().split(';').shift()
+}
+
+var autoChangeMode = 'false'
+var t = getCookies('theme')
+if (autoChangeMode === '1') {
+  var isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+  var isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+  var isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+  var hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+  if (t === undefined) {
+    if (isLightMode) activateLightMode()
+    else if (isDarkMode) activateDarkMode()
+    else if (isNotSpecified || hasNoSupport) {
+      console.log('You specified no preference for a color scheme or your browser does not support it. I Schedule dark mode during night time.')
+      var now = new Date()
+      var hour = now.getHours()
+      var isNight = hour <= 6 || hour >= 18
+      isNight ? activateDarkMode() : activateLightMode()
+    }
+    window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+      if (Cookies.get('theme') === undefined) {
+        e.matches ? activateDarkMode() : activateLightMode()
+      }
+    })
+  } else if (t === 'light') activateLightMode()
+  else activateDarkMode()
+} else if (autoChangeMode === '2') {
+  now = new Date()
+  hour = now.getHours()
+  isNight = hour <= 6 || hour >= 18
+  if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+  else if (t === 'light') activateLightMode()
+  else activateDarkMode()
+} else {
+  if (t === 'dark') activateDarkMode()
+  else if (t === 'light') activateLightMode()
+}</script><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css"><link rel="prev" title="计算机组成与系统结构笔记" href="https://pil0txia.netlify.app/post/2022-03-17_Computer-Organization-and-Architecture-notes/"><link rel="next" title="数据库系统笔记" href="https://pil0txia.netlify.app/post/2022-02-21_DBMS-notes/"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.css"><script src="https://cdn.jsdelivr.net/npm/gitalk@latest/dist/gitalk.min.js"></script><script src="https://cdn.jsdelivr.net/npm/blueimp-md5/js/md5.min.js"></script><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web&amp;display=swap"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容:${query}"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  bookmark: {
+    message_prev: '按',
+    message_next: '键将本页加入书签'
+  },
+  runtime_unit: '天',
+  runtime: true,
+  copyright: undefined,
+  ClickShowText: {"text":"骑砍出2了,大清亡了,黄石火山爆发了,罗辑换女朋友了,小米收购高通了,您的波函数坍塌了,您的银行卡被盗刷了,云天明和关一帆在一起了,计生局放开了,FS2020被破解了,小米发布MIX了,谢顿计划脱离正轨了,程心按下威慑开关了,宇宙由开放转为闭合了,普朗克常数扩大十倍了,富强,民主,文明,和谐,自由,平等,公正,法治,爱国,敬业,诚信,友善","fontSize":"15px"},
+  medium_zoom: false,
+  fancybox: true,
+  Snackbar: {"bookmark":{"message_prev":"按","message_next":"键将本页加入书签"},"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#121212","position":"top-right"},
+  justifiedGallery: {
+    js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+    css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+  },
+  baiduPush: false,
+  highlightCopy: true,
+  highlightLang: true,
+  isPhotoFigcaption: true,
+  islazyload: true,
+  isanchor: false    
+}</script><script>var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isSidebar: false
+  }</script><noscript><style>
+#nav {
+  opacity: 1
+}
+.justified-gallery img{
+  opacity: 1
+}
+</style></noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Pil0tXia/imghost/self_title-color_change.css"><meta name="generator" content="Hexo 4.2.1"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><canvas class="fireworks"></canvas><div id="mobile-sidebar"><div id="menu_mask"></div><div id="mobile-sidebar-menus"><div class="mobile_author_icon"><img class="avatar-img" src="/img/03_3.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="mobile_post_data"><div class="mobile_data_item is-center"><div class="mobile_data_link"><a href="/archives/"><div class="headline">文章</div><div class="length_num">38</div></a></div></div><div class="mobile_data_item is-center">      <div class="mobile_data_link"><a href="/tags/"><div class="headline">标签</div><div class="length_num">104</div></a></div></div><div class="mobile_data_item is-center">     <div class="mobile_data_link"><a href="/categories/"><div class="headline">分类</div><div class="length_num">8</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page"><i class="fa-fw fas fa-list"></i><span> 清单</span><i class="fas fa-chevron-down menus-expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(https://cdn.jsdelivr.net/gh/Pil0tXia/imghost/picgo/230666302_267503308069670_2086783547919488980_n.jpg)"><nav id="nav"><span class="pull-left" id="blog_name"><a class="blog_title" id="site-name" href="/">Pil0tXia</a></span><span class="pull-right menus"><div id="search_button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page"><i class="fa-fw fas fa-list"></i><span> 清单</span><i class="fas fa-chevron-down menus-expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><span class="toggle-menu close"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></span></span></nav><div id="post-info"><div id="post-title"><div class="posttitle">Phigros存档跨版本转移</div></div><div id="post-meta"><div class="meta-firstline"><time class="post-meta__date"><span class="post-meta__date-created" title="发表于 2022-03-12 20:00:20"><i class="far fa-calendar-alt fa-fw"></i> 发表于 2022-03-12</span><span class="post-meta__separator">|</span><span class="post-meta__date-updated" title="更新于 2022-09-14 00:56:09"><i class="fas fa-history fa-fw"></i> 更新于 2022-09-14</span></time><span class="post-meta__categories"><span class="post-meta__separator">|</span><i class="fas fa-inbox fa-fw post-meta__icon"></i><a class="post-meta__categories" href="/categories/ACG/">ACG</a></span></div><div class="meta-secondline"> <span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta__icon"></i><span>字数总计:</span><span class="word-count">1.3k</span><span class="post-meta__separator">|</span><i class="far fa-clock fa-fw post-meta__icon"></i><span>阅读时长: 4 分钟</span></span></div><div class="meta-thirdline"><span class="post-meta-pv-cv"><span class="post-meta__separator">|</span><i class="far fa-eye fa-fw post-meta__icon"></i><span>阅读量:</span><span id="busuanzi_value_page_pv"></span></span><span class="post-meta-commentcount"></span></div></div></div></header><main class="layout_post" id="content-inner"><article id="post"><div class="post-content" id="article-container"><blockquote>
+<p>本文由 <a href="http://ksria.com/simpread/" target="_blank" rel="noopener external nofollow noreferrer">简悦 SimpRead</a> 转码， 原文地址 <a href="https://www.bilibili.com/read/cv13597100" target="_blank" rel="noopener external nofollow noreferrer">www.bilibili.com</a></p>
+</blockquote>
+<blockquote>
+<p>2021/10/28 更新：截至 2021/10/27，Phigros 已在 Google Play Store 重新上架且已经更新至 v2.0.0，故删除原标题中的 “从 GooglePlay 到 TapTap”；但此教程依然适用于需要跨版本转移存档的玩家 (共存版亦可转移存档，但需要改成对应的共存版包名)。</p>
+</blockquote>
+<p><strong>2021/10/28 更新：截至 2021/10/27，Phigros 已在 Google Play Store 重新上架且已经更新至 v2.0.0，故删除原标题中的 “**</strong>从 GooglePlay 到 TapTap<strong>**”；但此教程依然适用于需要跨版本转移存档的玩家 (共存版亦可转移存档，但需要改成对应的共存版包名)。</strong></p>
+<p><img src= "/img/loading.gif" data-src="http://i0.hdslb.com/bfs/article/02db465212d3c374a43c60fa2625cc1caeaab796.png" alt=""></p>
+<p>Phigros 官方：Phigros 2.0.0 版本将于 2021.10.22 更新！</p>
+<p>lchzh：我用的还是 GooglePlay 版的 1.6.9 版本怎么办？</p>
+<p><img src= "/img/loading.gif" data-src="http://i0.hdslb.com/bfs/article/ef6b6c550aa05dfb43c94d0a8501aa4bfc5ad83c.png@890w_1181h_progressive.webp" alt="">GooglePlay 似乎无法更新…</p>
+<p>然后 lchzh 试图直接安装 TapTap 的 1.6.11，结果如图：</p>
+<p><img src= "/img/loading.gif" data-src="http://i0.hdslb.com/bfs/article/d4af2555023435d76db1b7dc2ed06e9e364a949d.png@942w_779h_progressive.webp" alt="">但如果重新安装，我存档就没了啊啊啊</p>
+<p>于是 lchzh 在官群找到了一篇来自 b 站专栏的教程：</p>
+<p><img src= "/img/loading.gif" data-src="http://i0.hdslb.com/bfs/article/08f5e06b66ac6cc6841b3744fde592e27cec6671.png@942w_350h_progressive.webp" alt="">万能的群友们</p>
+<p>于是照做，但由于<strong>前后版本不一致</strong>在最后的恢复阶段以失败告终…</p>
+<p><img src= "/img/loading.gif" data-src="http://i0.hdslb.com/bfs/article/e6c935b28e8ba1964ea788f0e6756fe38c321e48.png@812w_117h_progressive.webp" alt=""><a href="https://www.taptap.com/topic/13630492" target="_blank" rel="noopener external nofollow noreferrer">https://www.taptap.com/topic/13630492</a></p>
+<p>// 话说我转移存档的需求是<strong>在相同手机的不同版本之间</strong>转移，并不是<strong>在不同手机之间</strong>转移，原来一开始就用不了 qwq  </p>
+<p><img src= "/img/loading.gif" data-src="http://i0.hdslb.com/bfs/article/7c040178f312b6a544687f079f1b43a8dd711d6c.png@900w_36h_progressive.webp" alt="">望着生成的 ab 文件陷入了思考</p>
+<p>然而经过一个下午加半个晚上的搜索，lchzh 最终找到了跨版本还原 ab 文件的方法！</p>
+<p><img src= "/img/loading.gif" data-src="http://i0.hdslb.com/bfs/article/e22bf3575ba3972ce07db47177edc512c09fd370.jpg@942w_435h_progressive.webp" alt="">Phigros 1.6.9 Google Play 版 个人页截图留念</p>
+<p>// 适用于大部分 Android 手机以及 Win10 系统的电脑</p>
+<p>// 包含的一些链接在部分地区可能需要科学上网</p>
+<p>首先在手机上操作：</p>
+<p>进入 “设置 | 关于手机”，多次点击“软件版本号” 直至进入开发者模式</p>
+<p><img src= "/img/loading.gif" data-src="http://i0.hdslb.com/bfs/article/3d075c1401c85a62c6e4530b6d2df88cce453de4.png@942w_429h_progressive.webp" alt="">不同手机的文案可能存在差异，下同</p>
+<p>此时 “设置” 界面应该会多出来“开发者选项”，找到并打开“USB 调试”</p>
+<p><img src= "/img/loading.gif" data-src="http://i0.hdslb.com/bfs/article/0436cc42606e2a761eb58d1ce12b49a1c113a169.png@942w_492h_progressive.webp" alt=""></p>
+<p><strong>将手机用数据线连接至电脑：</strong></p>
+<p>下拉通知栏，若出现选择 “仅充电 | 传输照片 | 管理文件”，请选择 “管理文件”</p>
+<p><img src= "/img/loading.gif" data-src="http://i0.hdslb.com/bfs/article/d51475e42ddcf9f41f33eb3ab1e13edbb6a36e84.png@942w_416h_progressive.webp" alt="">  </p>
+<p>若弹出消息框 “允许 USB 调试吗？”，请选择 “确定”  </p>
+<p><img src= "/img/loading.gif" data-src="http://i0.hdslb.com/bfs/article/a4923cea1cc3b302d0dc79e1f9f763fab66a164f.png@942w_431h_progressive.webp" alt=""></p>
+<p><strong>接下来在电脑上操作：</strong></p>
+<p>下载 <a href="https://dl.google.com/android/repository/platform-tools-latest-windows.zip" target="_blank" rel="noopener external nofollow noreferrer">https://dl.google.com/android/repository/platform-tools-latest-windows.zip</a> 并解压其中的 platform-tools 文件夹</p>
+<p><img src= "/img/loading.gif" data-src="http://i0.hdslb.com/bfs/article/9767e9886e93ee6c2d13b7ac505aead37d23c929.png@942w_480h_progressive.webp" alt=""></p>
+<p>在 platform-tools 文件夹的资源管理器界面地址栏输入 cmd 然后按 Enter(回车)</p>
+<p><img src= "/img/loading.gif" data-src="http://i0.hdslb.com/bfs/article/0b910f1569582c78dbde18f92bfc698b2078d8b8.png@942w_480h_progressive.webp" alt=""></p>
+<p>在弹出的窗口输入以下命令然后回车：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">adb devices</span><br></pre></td></tr></table></figure>
+
+<p>若出现：  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">List of devices attached</span><br><span class="line">[设备序列号] device</span><br></pre></td></tr></table></figure>
+
+<p>即为成功连接手机 (若啥也没有或出现 unauthorized 则需在手机端重新允许 USB 调试)</p>
+<p><img src= "/img/loading.gif" data-src="http://i0.hdslb.com/bfs/article/b422d2e51365074f08fb371d36794341daa89bb5.png@942w_323h_progressive.webp" alt=""></p>
+<p>在手机上运行 Phigros，输入以下命令然后回车：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">adb backup -f phi.ab -noapk -noshared -nosystem com.PigeonGames.Phigros</span><br></pre></td></tr></table></figure>
+
+<p><img src= "/img/loading.gif" data-src="http://i0.hdslb.com/bfs/article/624fad52eb3d67cc422e1c94270a65f0fe7cf986.png@942w_323h_progressive.webp" alt=""></p>
+<p>然后在手机端确认 (不要输入密码)  </p>
+<p><img src= "/img/loading.gif" data-src="http://i0.hdslb.com/bfs/article/2620a0da4a676367a78e9c90f3a95c097d8859ea.png@942w_468h_progressive.webp" alt=""></p>
+<p>备份完成后当前文件夹应该会多一个名为 phi.ab 的文件 (大小约 7-9MB)</p>
+<p>// 部分手机可能需要<strong>在备份时运行 Phigros</strong> 才能备份成功，否则会产生 0-1KB 的无效文件</p>
+<p><img src= "/img/loading.gif" data-src="http://i0.hdslb.com/bfs/article/7c4c4f8dc70bcea5d03ba01a4c648e2c8ec22e07.png@942w_480h_progressive.webp" alt="">这就是你的 Phigros 存档了!</p>
+<p>在确认备份文件大小无误后就能卸载 Phigros 旧版本并且安装新版本了！</p>
+<p>// 原教程的分歧点</p>
+<p>我们打开新安装的 Phigros 并游玩一遍新手教程 (使本地存档更新)</p>
+<p><img src= "/img/loading.gif" data-src="http://i0.hdslb.com/bfs/article/a9d4bfd2af6d1bd58c2d73df09cc2c2cf82a8ed1.jpg@942w_435h_progressive.webp" alt="">lchzh 菜</p>
+<p>然后电脑端输入以下命令然后回车：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">adb backup -f phi-.ab -noapk -noshared -nosystem com.PigeonGames.Phigros</span><br></pre></td></tr></table></figure>
+
+<p><img src= "/img/loading.gif" data-src="http://i0.hdslb.com/bfs/article/5b1f49828d8261ca2d6fb75a5705bc332a7b4ca3.png@942w_323h_progressive.webp" alt=""></p>
+<p>在手机端确认 (不要输入密码)</p>
+<p><img src= "/img/loading.gif" data-src="http://i0.hdslb.com/bfs/article/db75225feabec8d8b64ee7d3c7165cd639554cbc.png" alt=""></p>
+<p>于是我们获得了新旧两个版本的 ab 文件，其中 phi.ab 包含旧存档，phi-.ab 为新版本存档</p>
+<p><img src= "/img/loading.gif" data-src="http://i0.hdslb.com/bfs/article/e247f3ef659c9c3f41f6192fa3131b6a7fc89c90.png@942w_480h_progressive.webp" alt=""></p>
+<p>注意到 ab 文件其实是经过处理的 tar 压缩文件，我们使用 abe 工具来解压并修改存档：  </p>
+<p>// 该工具依赖 Java11 + 环境，请自行安装 Java</p>
+<p>访问 <a href="https://github.com/nelenkov/android-backup-extractor/releases/latest" target="_blank" rel="noopener external nofollow noreferrer">https://github.com/nelenkov/android-backup-extractor/releases/latest</a></p>
+<p><img src= "/img/loading.gif" data-src="http://i0.hdslb.com/bfs/article/51401512325887ac77c706c80cdba32d8eb4101f.png@942w_666h_progressive.webp" alt=""></p>
+<p>点击页面内的 abe.jar 并下载到 platform-tools 文件夹</p>
+<p><img src= "/img/loading.gif" data-src="http://i0.hdslb.com/bfs/article/ef0adedf435af2e710d6d293ce2102ebcdc4f0f8.png@942w_480h_progressive.webp" alt=""></p>
+<p><strong>逐行输入以下代码并回车：</strong></p>
+<ol>
+<li>调用 abe.jar，将 ab 文件转换成计算机能直接读写的 tar 文件：</li>
+</ol>
+<p>（效果：生成了 phi.tar 和 phi-.tar 两个文件）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">abe.jar unpack phi.ab phi.tar</span><br><span class="line">abe.jar unpack phi-.ab phi-.tar</span><br></pre></td></tr></table></figure>
+
+<p>如果在建構ab檔的時候輸入了密碼的話，在轉換tar檔的時候要輸入以下指令：  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -jar abe.jar unpack phi.ab phi.tar PASSWD</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>解压 phi.tar，生成 apps 目录，释放其中的存档文件：</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -xf phi.tar</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>用 apps 目录里的存档文件覆写 phi-.tar，实现存档从旧版本到新版本转移</li>
+</ol>
+<p>（存档文件即 apps/com.PigeonGames.Phigros/sp/<strong>com.PigeonGames.Phigros.v2.playerprefs.xml</strong>）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -rf phi-.tar apps&#x2F;com.PigeonGames.Phigros&#x2F;sp&#x2F;com.PigeonGames.Phigros.v2.playerprefs.xml</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>调用 abe.jar，将 phi-.tar 转换成 phi–.ab：</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">abe.jar pack phi-.tar phi--.ab</span><br></pre></td></tr></table></figure>
+
+<ol start="5">
+<li>最后将 phi–.ab 恢复到手机上：</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">adb restore phi--.ab</span><br></pre></td></tr></table></figure>
+
+<p>在手机上确认：</p>
+<p><img src= "/img/loading.gif" data-src="http://i0.hdslb.com/bfs/article/973d8cb317fd3cbfd488cc22120e1e9459a6f4f8.png@942w_492h_progressive.webp" alt=""> <img src= "/img/loading.gif" data-src="http://i0.hdslb.com/bfs/article/b280bcbc0a11938a1a3aa4301fb6bef9e6a21fab.png@942w_134h_progressive.webp" alt=""></p>
+<p>恢复结束，成功实现了 Phigros 存档跨版本转移！</p>
+<p><img src= "/img/loading.gif" data-src="http://i0.hdslb.com/bfs/article/e7c11e58cd80d9dc4581c23bd0e91fdaffb7d77f.jpg@942w_435h_progressive.webp" alt="">Phigros 1.6.11 TapTap 版 个人页截图<img src= "/img/loading.gif" data-src="http://i0.hdslb.com/bfs/article/02db465212d3c374a43c60fa2625cc1caeaab796.png" alt=""></p>
+</div><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined" rel="external nofollow noreferrer">Pil0tXia</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://pil0txia.netlify.app/post/2022-03-12_phigros-merge-save/">https://pil0txia.netlify.app/post/2022-03-12_phigros-merge-save/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow noreferrer" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://pil0txia.netlify.app" target="_blank">Pil0tXia</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E8%BF%81%E7%A7%BB/">迁移</a><a class="post-meta__tags" href="/tags/phigros/">phigros</a><a class="post-meta__tags" href="/tags/%E9%9F%B3%E6%B8%B8/">音游</a><a class="post-meta__tags" href="/tags/%E5%AD%98%E6%A1%A3/">存档</a></div><div class="post_share"><div class="social-share" data-image="https://cdn.jsdelivr.net/gh/Pil0tXia/imghost/picgo/image-20220913160311958.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css"/><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js"></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/post/2022-03-17_Computer-Organization-and-Architecture-notes/"><img class="prev-cover" data-src="https://cdn.jsdelivr.net/gh/Pil0tXia/imghost/picgo/117555599_664168731124086_868759872245613453_n.jpg" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">计算机组成与系统结构笔记</div></div></a></div><div class="next-post pull-right"><a href="/post/2022-02-21_DBMS-notes/"><img class="next-cover" data-src="https://cdn.jsdelivr.net/gh/Pil0tXia/imghost/picgo/QQ%E5%9B%BE%E7%89%8720220228114653.jpg" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">数据库系统笔记</div></div></a></div></nav><div class="relatedPosts"><div class="relatedPosts_headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts_list"><div class="relatedPosts_item"><a href="/post/2020-08-12_free-host-merge-to-Discuz!/" title="免费虚拟主机迁移Discuz!"><img class="relatedPosts_cover" data-src="https://cdn.jsdelivr.net/gh/PilotXia/imghost/picgo/QQ%E5%9B%BE%E7%89%8720200909151426.png"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="far fa-calendar-alt fa-fw"></i> 2020-08-12</div><div class="relatedPosts_title">免费虚拟主机迁移Discuz!</div></div></a></div></div></div><hr><div id="post-comment"><div class="comment_headling"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div><div id="gitalk-container"></div><script>var gitalk = new Gitalk({
+  clientID: 'b71a7a2cd528b3ec4d30',
+  clientSecret: '24bd453205fbb670a2fb50759328ca0642e5eb61',
+  repo: 'gitalk',
+  owner: 'Pil0tXia',
+  admin: ['Pil0tXia'],
+  id: md5(decodeURI(location.pathname)),
+  language: 'zh-CN',
+  perPage: 10,
+  distractionFreeMode: false,
+  pagerDirection: 'last',
+  createIssueManually: false,
+  updateCountCallback: commentCount
+})
+gitalk.render('gitalk-container')
+
+function commentCount(n){
+  try {
+    document.getElementsByClassName('gitalk-comment-count')[0].innerHTML= n
+  } catch (e) {
+    return false
+  }
+}</script></div></article></main><footer id="footer" data-type="color"><div id="footer-wrap"><div class="copyright">&copy;2018 - 2022 By Pil0tXia</div><div class="framework-info"><span>驱动 </span><a href="https://hexo.io" target="_blank" rel="noopener external nofollow noreferrer"><span>Hexo</span></a><span class="footer-separator">|</span><span>主题 </span><a href="https://github.com/jerryc127/hexo-theme-butterfly" target="_blank" rel="noopener external nofollow noreferrer"><span>Butterfly</span></a></div><div class="footer_custom_text">不会摄影的白帽子不是好机长！</div></div></footer></div><section class="rightside" id="rightside"><div id="rightside-config-hide"><button id="readmode" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="font_plus" title="放大字体"><i class="fas fa-plus"></i></button><button id="font_minus" title="缩小字体"><i class="fas fa-minus"></i></button><button class="translate_chn_to_cht" id="translateLink" title="简繁转换">繁</button><button id="darkmode" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button></div><div id="rightside-config-show"><button id="rightside_config" title="设置"><i class="fas fa-cog"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="scroll_to_comment fas fa-comments"></i></a><button id="go-up" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></section><div class="search-dialog" id="local-search"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"><div id="local-hits"></div><div id="local-stats"><div class="local-search-stats__hr" id="hr"><span>由</span> <a href="https://github.com/wzpan/hexo-generator-search" target="_blank" rel="noopener external nofollow noreferrer" style="color:#49B1F5;">hexo-generator-search</a>
+ <span>提供支持</span></div></div></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div class="search-mask"></div><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="/js/third-party/fireworks.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script id="ribbon_piao" mobile="true" src="/js/third-party/piao.js"></script><script id="canvas_nest" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="/js/third-party/canvas-nest.js"></script><script src="/js/third-party/activate-power-mode.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = false;
+document.body.addEventListener('input', POWERMODE);
+</script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module" defer></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js" async></script><script src="/js/third-party/ClickShowText.js"></script><script src="/js/search/local-search.js"></script><script>var endLoading = function () {
+  document.body.style.overflow = 'auto';
+  document.getElementById('loading-box').classList.add("loaded")
+}
+window.addEventListener('load',endLoading)</script></body></html>

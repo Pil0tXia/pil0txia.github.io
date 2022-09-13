@@ -1,6 +1,86 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://pil0txia.netlify.app/post/2021-08-15_sunshine-16-rules/</loc>
+    <lastmod>2022-09-13</lastmod>
+  </url>
+  <url>
+    <loc>https://pil0txia.netlify.app/post/2021-08-27_subject-3-notes/</loc>
+    <lastmod>2022-09-13</lastmod>
+  </url>
+  <url>
+    <loc>https://pil0txia.netlify.app/post/2021-07-22_subject-2-notes/</loc>
+    <lastmod>2022-09-13</lastmod>
+  </url>
+  <url>
+    <loc>https://pil0txia.netlify.app/post/2022-03-12_phigros-merge-save/</loc>
+    <lastmod>2022-09-13</lastmod>
+  </url>
+  <url>
+    <loc>https://pil0txia.netlify.app/post/2021-08-05_java-only-pass-by-value/</loc>
+    <lastmod>2022-09-13</lastmod>
+  </url>
+  <url>
+    <loc>https://pil0txia.netlify.app/post/2022-03-18_23-spring-internship/</loc>
+    <lastmod>2022-09-13</lastmod>
+  </url>
+  <url>
+    <loc>https://pil0txia.netlify.app/post/2021-08-23_Art-Ensemble-New-Media-Center-Recruitment-Plan/</loc>
+    <lastmod>2022-09-13</lastmod>
+  </url>
+  <url>
+    <loc>https://pil0txia.netlify.app/post/2021-08-09_Art-Ensemble-New-Media-Center-Work-Plan/</loc>
+    <lastmod>2022-09-13</lastmod>
+  </url>
+  <url>
+    <loc>https://pil0txia.netlify.app/post/2022-09-13_assembler-language-notes/</loc>
+    <lastmod>2022-09-13</lastmod>
+  </url>
+  <url>
+    <loc>https://pil0txia.netlify.app/post/2022-09-08_os-notes/</loc>
+    <lastmod>2022-09-13</lastmod>
+  </url>
+  <url>
+    <loc>https://pil0txia.netlify.app/post/2022-05-17_linked-list-reverse/</loc>
+    <lastmod>2022-09-13</lastmod>
+  </url>
+  <url>
+    <loc>https://pil0txia.netlify.app/post/2022-03-18_computer-networks-notes/</loc>
+    <lastmod>2022-09-13</lastmod>
+  </url>
+  <url>
+    <loc>https://pil0txia.netlify.app/post/2022-03-17_Computer-Organization-and-Architecture-notes/</loc>
+    <lastmod>2022-09-13</lastmod>
+  </url>
+  <url>
+    <loc>https://pil0txia.netlify.app/post/2022-06-20_ai-introductory-theory-notes/</loc>
+    <lastmod>2022-09-13</lastmod>
+  </url>
+  <url>
+    <loc>https://pil0txia.netlify.app/post/2022-02-21_DBMS-notes/</loc>
+    <lastmod>2022-09-13</lastmod>
+  </url>
+  <url>
+    <loc>https://pil0txia.netlify.app/post/2020-05-07_moegirl-h/</loc>
+    <lastmod>2022-09-13</lastmod>
+  </url>
+  <url>
+    <loc>https://pil0txia.netlify.app/post/2020-05-22_web-ACG-games/</loc>
+    <lastmod>2022-09-13</lastmod>
+  </url>
+  <url>
+    <loc>https://pil0txia.netlify.app/post/2020-09-02_Angel-Beats!/</loc>
+    <lastmod>2022-09-13</lastmod>
+  </url>
+  <url>
+    <loc>https://pil0txia.netlify.app/post/2020-10-01_tenki-no-ko-4k-hdr-wallpaper/</loc>
+    <lastmod>2022-09-13</lastmod>
+  </url>
+  <url>
+    <loc>https://pil0txia.netlify.app/post/2020-07-19_memory-diagnostics-tool-loop-cant-stop/</loc>
+    <lastmod>2022-09-13</lastmod>
+  </url>
+  <url>
     <loc>https://pil0txia.netlify.app/post/2021-08-05_joplin-2-obsidian/</loc>
     <lastmod>2021-08-06</lastmod>
   </url>
@@ -17,19 +97,7 @@
     <lastmod>2021-08-04</lastmod>
   </url>
   <url>
-    <loc>https://pil0txia.netlify.app/post/2020-10-01_tenki-no-ko-4k-hdr-wallpaper/</loc>
-    <lastmod>2020-10-02</lastmod>
-  </url>
-  <url>
-    <loc>https://pil0txia.netlify.app/post/2020-05-22_web-ACG-games/</loc>
-    <lastmod>2020-09-09</lastmod>
-  </url>
-  <url>
     <loc>https://pil0txia.netlify.app/post/2020-08-12_free-host-merge-to-Discuz!/</loc>
-    <lastmod>2020-09-09</lastmod>
-  </url>
-  <url>
-    <loc>https://pil0txia.netlify.app/post/2020-09-02_Angel-Beats!/</loc>
     <lastmod>2020-09-09</lastmod>
   </url>
   <url>
@@ -61,10 +129,6 @@
     <lastmod>2020-07-22</lastmod>
   </url>
   <url>
-    <loc>https://pil0txia.netlify.app/post/2020-07-19_memory-diagnostics-tool-loop-can't-stop/</loc>
-    <lastmod>2020-07-22</lastmod>
-  </url>
-  <url>
     <loc>https://pil0txia.netlify.app/post/2020-07-18_jiangsu-comprehensive-evaluation-interview/</loc>
     <lastmod>2020-07-22</lastmod>
   </url>
@@ -86,10 +150,6 @@
   </url>
   <url>
     <loc>https://pil0txia.netlify.app/post/2020-05-16_file-server-upgrade/</loc>
-    <lastmod>2020-07-22</lastmod>
-  </url>
-  <url>
-    <loc>https://pil0txia.netlify.app/post/2020-05-07_moegirl-h/</loc>
     <lastmod>2020-07-22</lastmod>
   </url>
 </urlset> 
