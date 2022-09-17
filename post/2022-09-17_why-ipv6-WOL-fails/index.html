@@ -1,0 +1,185 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>为什么你的IPv6 Wake-On-WAN没有起效？ | Pil0tXia</title><meta name="description" content="家庭&#x2F;私人C类网络环境 此章节为我与WolOn APP开发者的往来邮件。基本Wake-On-LAN网络唤醒原理和主机设置就不赘述了。  A question about wake up on WAN with ipv6Hello! I encountered a problem when using your WolOn APP. My padavan router and PCs have na"><meta name="keywords" content="网络唤醒,IPv6,广播,校园网,路由器,Padavan,端口转发"><meta name="author" content="Pil0tXia"><meta name="copyright" content="Pil0tXia"><meta name="format-detection" content="telephone=no"><link rel="shortcut icon" href="/img/favicon.ico"><link rel="canonical" href="https://pil0txia.netlify.app/post/2022-09-17_why-ipv6-WOL-fails/"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//fonts.googleapis.com" crossorigin="crossorigin"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta name="google-site-verification" content="rTQaiWh7-ABfHgHfDRir5VZEmaT71cHgcV-IPp_hjjk"/><meta name="baidu-site-verification" content="NJqTNAqxF4"/><meta property="og:type" content="article"><meta property="og:title" content="为什么你的IPv6 Wake-On-WAN没有起效？"><meta property="og:url" content="https://pil0txia.netlify.app/post/2022-09-17_why-ipv6-WOL-fails/"><meta property="og:site_name" content="Pil0tXia"><meta property="og:description" content="家庭&#x2F;私人C类网络环境 此章节为我与WolOn APP开发者的往来邮件。基本Wake-On-LAN网络唤醒原理和主机设置就不赘述了。  A question about wake up on WAN with ipv6Hello! I encountered a problem when using your WolOn APP. My padavan router and PCs have na"><meta property="og:image" content="https://cdn.jsdelivr.net/gh/Pil0tXia/imghost/picgo/image-20220917142356270.png"><meta property="article:published_time" content="2022-09-17T04:48:04.000Z"><meta property="article:modified_time" content="2022-09-17T07:29:20.702Z"><meta name="twitter:card" content="summary"><script>var activateDarkMode = function () {
+  document.documentElement.setAttribute('data-theme', 'dark')
+  if (document.querySelector('meta[name="theme-color"]') !== null) {
+    document.querySelector('meta[name="theme-color"]').setAttribute('content', '#000')
+  }
+}
+var activateLightMode = function () {
+  document.documentElement.setAttribute('data-theme', 'light')
+  if (document.querySelector('meta[name="theme-color"]') !== null) {
+    document.querySelector('meta[name="theme-color"]').setAttribute('content', '#fff')
+  }
+}
+
+var getCookies = function (name) {
+  const value = `; ${document.cookie}`
+  const parts = value.split(`; ${name}=`)
+  if (parts.length === 2) return parts.pop().split(';').shift()
+}
+
+var autoChangeMode = 'false'
+var t = getCookies('theme')
+if (autoChangeMode === '1') {
+  var isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+  var isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+  var isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+  var hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+  if (t === undefined) {
+    if (isLightMode) activateLightMode()
+    else if (isDarkMode) activateDarkMode()
+    else if (isNotSpecified || hasNoSupport) {
+      console.log('You specified no preference for a color scheme or your browser does not support it. I Schedule dark mode during night time.')
+      var now = new Date()
+      var hour = now.getHours()
+      var isNight = hour <= 6 || hour >= 18
+      isNight ? activateDarkMode() : activateLightMode()
+    }
+    window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+      if (Cookies.get('theme') === undefined) {
+        e.matches ? activateDarkMode() : activateLightMode()
+      }
+    })
+  } else if (t === 'light') activateLightMode()
+  else activateDarkMode()
+} else if (autoChangeMode === '2') {
+  now = new Date()
+  hour = now.getHours()
+  isNight = hour <= 6 || hour >= 18
+  if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+  else if (t === 'light') activateLightMode()
+  else activateDarkMode()
+} else {
+  if (t === 'dark') activateDarkMode()
+  else if (t === 'light') activateLightMode()
+}</script><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css"><link rel="next" title="汇编语言程序设计笔记" href="https://pil0txia.netlify.app/post/2022-09-13_assembler-language-notes/"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.css"><script src="https://cdn.jsdelivr.net/npm/gitalk@latest/dist/gitalk.min.js"></script><script src="https://cdn.jsdelivr.net/npm/blueimp-md5/js/md5.min.js"></script><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web&amp;display=swap"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容:${query}"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  bookmark: {
+    message_prev: '按',
+    message_next: '键将本页加入书签'
+  },
+  runtime_unit: '天',
+  runtime: true,
+  copyright: undefined,
+  ClickShowText: {"text":"骑砍出2了,大清亡了,黄石火山爆发了,罗辑换女朋友了,小米收购高通了,您的波函数坍塌了,您的银行卡被盗刷了,云天明和关一帆在一起了,计生局放开了,FS2020被破解了,小米发布MIX了,谢顿计划脱离正轨了,程心按下威慑开关了,宇宙由开放转为闭合了,普朗克常数扩大十倍了,富强,民主,文明,和谐,自由,平等,公正,法治,爱国,敬业,诚信,友善","fontSize":"15px"},
+  medium_zoom: false,
+  fancybox: true,
+  Snackbar: {"bookmark":{"message_prev":"按","message_next":"键将本页加入书签"},"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#121212","position":"top-right"},
+  justifiedGallery: {
+    js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+    css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+  },
+  baiduPush: false,
+  highlightCopy: true,
+  highlightLang: true,
+  isPhotoFigcaption: true,
+  islazyload: true,
+  isanchor: false    
+}</script><script>var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isSidebar: true
+  }</script><noscript><style>
+#nav {
+  opacity: 1
+}
+.justified-gallery img{
+  opacity: 1
+}
+</style></noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Pil0tXia/imghost/self_title-color_change.css"><meta name="generator" content="Hexo 4.2.1"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><canvas class="fireworks"></canvas><div id="mobile-sidebar"><div id="menu_mask"></div><div id="mobile-sidebar-menus"><div class="mobile_author_icon"><img class="avatar-img" src="/img/03_3.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="mobile_post_data"><div class="mobile_data_item is-center"><div class="mobile_data_link"><a href="/archives/"><div class="headline">文章</div><div class="length_num">39</div></a></div></div><div class="mobile_data_item is-center">      <div class="mobile_data_link"><a href="/tags/"><div class="headline">标签</div><div class="length_num">111</div></a></div></div><div class="mobile_data_item is-center">     <div class="mobile_data_link"><a href="/categories/"><div class="headline">分类</div><div class="length_num">8</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page"><i class="fa-fw fas fa-list"></i><span> 清单</span><i class="fas fa-chevron-down menus-expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><i class="fas fa-arrow-right on" id="toggle-sidebar"></i><div id="sidebar"><div class="sidebar-toc"><div class="sidebar-toc__title">目录</div><div class="sidebar-toc__progress"><span class="progress-notice">你已经读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar">     </div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#家庭-私人C类网络环境"><span class="toc-number">1.</span> <span class="toc-text">家庭&#x2F;私人C类网络环境</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#A-question-about-wake-up-on-WAN-with-ipv6"><span class="toc-number">1.1.</span> <span class="toc-text">A question about wake up on WAN with ipv6</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1"><span class="toc-number">1.1.1.</span> <span class="toc-text">1</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2"><span class="toc-number">1.1.2.</span> <span class="toc-text">2</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3"><span class="toc-number">1.1.3.</span> <span class="toc-text">3</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#The-supplement-of-“A-question-about-wake-up-on-WAN-with-ipv6”"><span class="toc-number">1.2.</span> <span class="toc-text">The supplement of “A question about wake up on WAN with ipv6”</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Re-The-supplement-of-“A-question-about-wake-up-on-WAN-with-ipv6”"><span class="toc-number">1.3.</span> <span class="toc-text">Re: The supplement of “A question about wake up on WAN with ipv6”</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Thank-you-for-your-reply"><span class="toc-number">1.4.</span> <span class="toc-text">Thank you for your reply.</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#简洁翻译"><span class="toc-number">1.5.</span> <span class="toc-text">简洁翻译</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#校园-办公B类网络环境"><span class="toc-number">2.</span> <span class="toc-text">校园&#x2F;办公B类网络环境</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-number">3.</span> <span class="toc-text">总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#学习资料"><span class="toc-number">4.</span> <span class="toc-text">学习资料</span></a></li></ol></div></div></div><div id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(https://cdn.jsdelivr.net/gh/Pil0tXia/imghost/picgo/image-20220917142356270.png)"><nav id="nav"><span class="pull-left" id="blog_name"><a class="blog_title" id="site-name" href="/">Pil0tXia</a></span><span class="pull-right menus"><div id="search_button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page"><i class="fa-fw fas fa-list"></i><span> 清单</span><i class="fas fa-chevron-down menus-expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><span class="toggle-menu close"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></span></span></nav><div id="post-info"><div id="post-title"><div class="posttitle">为什么你的IPv6 Wake-On-WAN没有起效？</div></div><div id="post-meta"><div class="meta-firstline"><time class="post-meta__date"><span class="post-meta__date-created" title="发表于 2022-09-17 12:48:04"><i class="far fa-calendar-alt fa-fw"></i> 发表于 2022-09-17</span><span class="post-meta__separator">|</span><span class="post-meta__date-updated" title="更新于 2022-09-17 15:29:20"><i class="fas fa-history fa-fw"></i> 更新于 2022-09-17</span></time><span class="post-meta__categories"><span class="post-meta__separator">|</span><i class="fas fa-inbox fa-fw post-meta__icon"></i><a class="post-meta__categories" href="/categories/%E8%BF%90%E7%BB%B4/">运维</a></span></div><div class="meta-secondline"> <span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta__icon"></i><span>字数总计:</span><span class="word-count">1.7k</span><span class="post-meta__separator">|</span><i class="far fa-clock fa-fw post-meta__icon"></i><span>阅读时长: 8 分钟</span></span></div><div class="meta-thirdline"><span class="post-meta-pv-cv"><span class="post-meta__separator">|</span><i class="far fa-eye fa-fw post-meta__icon"></i><span>阅读量:</span><span id="busuanzi_value_page_pv"></span></span><span class="post-meta-commentcount"></span></div></div></div></header><main class="layout_post" id="content-inner"><article id="post"><div class="post-content" id="article-container"><h2 id="家庭-私人C类网络环境"><a href="#家庭-私人C类网络环境" class="headerlink" title="家庭/私人C类网络环境"></a>家庭/私人C类网络环境</h2><blockquote>
+<p>此章节为我与WolOn APP开发者的往来邮件。基本Wake-On-LAN网络唤醒原理和主机设置就不赘述了。</p>
+</blockquote>
+<h3 id="A-question-about-wake-up-on-WAN-with-ipv6"><a href="#A-question-about-wake-up-on-WAN-with-ipv6" class="headerlink" title="A question about wake up on WAN with ipv6"></a><strong>A question about wake up on WAN with ipv6</strong></h3><p>Hello!</p>
+<p>I encountered a problem when using your WolOn APP. My padavan router and PCs have native ipv6 address and all configured ipv6 DDNS. My ISP can’t provide me with a public ipv4 address. So I would like to use the router to forward ipv6 packets when wake up on WAN.</p>
+<p>Wake up on LAN and wake up on WAN with ipv4 (like <code>192.168.1.2</code> and <code>100.65.119.101</code>) works very well. However wake up on WAN with ipv6 (like <code>2409:8a23:a60a:8698:c051:c583:f271:adef</code>) and pure ipv6 domain (only has AAAA record) doesn’t work.</p>
+<p>I configured router ipv6 firewall like this:</p>
+<h4 id="1"><a href="#1" class="headerlink" title="1"></a>1</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ip6tables -A INPUT -p udp --dport 9 -j ACCEPT</span><br><span class="line">ip6tables -I FORWARD -p udp --dport 9 -j ACCEPT</span><br></pre></td></tr></table></figure>
+
+<h4 id="2"><a href="#2" class="headerlink" title="2"></a>2</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ip6tables -A INPUT -p udp --dport 9 -j ACCEPT</span><br><span class="line">ip6tables -I FORWARD -p udp -d 2409:8a23:a6af:c612:3129:3b6f:e6a5:844b --dport 9 -j ACCEPT</span><br></pre></td></tr></table></figure>
+
+<h4 id="3"><a href="#3" class="headerlink" title="3"></a>3</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ip6tables -F</span><br><span class="line">ip6tables -X</span><br><span class="line">ip6tables -P INPUT ACCEPT</span><br><span class="line">ip6tables -P OUTPUT ACCEPT</span><br><span class="line">ip6tables -P FORWARD ACCEPT</span><br></pre></td></tr></table></figure>
+
+<p>Each kind of 3 configs doesn’t work.</p>
+<p>Does your software fully support ipv6? May you please give me some advice?</p>
+<p>Thank you.</p>
+<h3 id="The-supplement-of-“A-question-about-wake-up-on-WAN-with-ipv6”"><a href="#The-supplement-of-“A-question-about-wake-up-on-WAN-with-ipv6”" class="headerlink" title="The supplement of “A question about wake up on WAN with ipv6”"></a><strong>The supplement of “A question about wake up on WAN with ipv6”</strong></h3><p>Hello!</p>
+<p>I have done many attempts.</p>
+<p>I filled in “100.65.119.101”(the router ipv4 WAN IP) in the “Router IP/Hostname” of WolOn/WAN. The packets arrived. As is shown in the screenshot of Wireshark. The lower entry is for WolOn/LAN.</p>
+<p><img src= "/img/loading.gif" data-src="https://cdn.jsdelivr.net/gh/Pil0tXia/imghost/picgo/image-20220917141359119.png" alt="image-20220917141359119"></p>
+<p>I filled in the router ipv6 WAN IP in the “Router IP/Hostname” of WolOn/WAN. The packets didn’t arrive. Wireshark caught nothing. However, the router ip6table log indicates that the packet was accepted by the firewall:</p>
+<p><img src= "/img/loading.gif" data-src="https://cdn.jsdelivr.net/gh/Pil0tXia/imghost/picgo/image-20220917142356270.png" alt="image-20220917142356270"></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">Chain INPUT (policy DROP 0 packets, 0 bytes)</span><br><span class="line">num   pkts bytes target     prot opt <span class="keyword">in</span>     out     <span class="built_in">source</span>               destination         </span><br><span class="line">1        0     0 ACCEPT     udp      *      *       ::/0                 ::/0                 udp dpt:3389</span><br><span class="line">2        0     0 ACCEPT     tcp      *      *       ::/0                 ::/0                 tcp dpt:3389</span><br><span class="line">3       30  4500 ACCEPT     udp      *      *       ::/0                 ::/0                 udp dpt:9</span><br><span class="line">4       16  2694 ACCEPT     all      *      *       ::/0                 ::/0                 state RELATED,ESTABLISHED</span><br><span class="line">5      139 25724 ACCEPT     all      br0    *       ::/0                 ::/0               </span><br><span class="line">6        0     0 ACCEPT     all      lo     *       ::/0                 ::/0               </span><br><span class="line">7        8   600 logaccept  icmpv6    *      *       ::/0                 ::/0                 ipv6-icmp !<span class="built_in">type</span> 128</span><br><span class="line">8        0     0 DROP       all      *      *       ::/0                 ::/0                 state INVALID</span><br><span class="line">9        0     0 logaccept  udp      *      *       ::/0                 ::/0                 udp spt:547 dpt:546</span><br><span class="line">10       0     0 logaccept  tcp      *      *       ::/0                 ::/0                 tcp dpt:80</span><br><span class="line"></span><br><span class="line">Chain FORWARD (policy DROP 0 packets, 0 bytes)</span><br><span class="line">num   pkts bytes target     prot opt <span class="keyword">in</span>     out     <span class="built_in">source</span>               destination         </span><br><span class="line">1        0     0 ACCEPT     udp      *      *       ::/0                 ::/0                 udp dpt:3389</span><br><span class="line">2      102 19720 ACCEPT     tcp      *      *       ::/0                 ::/0                 tcp dpt:3389</span><br><span class="line">3        0     0 ACCEPT     udp      *      *       ::/0                 ::/0                 udp dpt:9</span><br><span class="line">4        0     0 ACCEPT     all      br0    br0     ::/0                 ::/0               </span><br><span class="line">5       66  4944 TCPMSS     tcp      *      !br0    ::/0                 ::/0                 tcp flags:0x06/0x02 TCPMSS clamp to PMTU</span><br><span class="line">6     3571 1582K ACCEPT     all      *      *       ::/0                 ::/0                 state RELATED,ESTABLISHED</span><br><span class="line">7        0     0 logaccept  icmpv6    *      *       ::/0                 ::/0                 ipv6-icmp !<span class="built_in">type</span> 128</span><br><span class="line">8       56  3866 DROP       all      *      *       ::/0                 ::/0                 state INVALID</span><br><span class="line">9      835  131K ACCEPT     all      br0    *       ::/0                 ::/0               </span><br><span class="line">10       0     0 upnp       all      *      *       ::/0                 ::/0               </span><br><span class="line"></span><br><span class="line">Chain OUTPUT (policy ACCEPT 557 packets, 215K bytes)</span><br><span class="line">num   pkts bytes target     prot opt <span class="keyword">in</span>     out     <span class="built_in">source</span>               destination         </span><br><span class="line"></span><br><span class="line">Chain bfplimit (0 references)</span><br><span class="line">num   pkts bytes target     prot opt <span class="keyword">in</span>     out     <span class="built_in">source</span>               destination         </span><br><span class="line"></span><br><span class="line">Chain logaccept (4 references)</span><br><span class="line">num   pkts bytes target     prot opt <span class="keyword">in</span>     out     <span class="built_in">source</span>               destination         </span><br><span class="line">1        0     0 LOG        all      *      *       ::/0                 ::/0                 state NEW LOG flags 6 level 4 prefix <span class="string">"ACCEPT "</span></span><br><span class="line">2        8   600 ACCEPT     all      *      *       ::/0                 ::/0               </span><br><span class="line"></span><br><span class="line">Chain upnp (1 references)</span><br><span class="line">num   pkts bytes target     prot opt <span class="keyword">in</span>     out     <span class="built_in">source</span>               destination</span><br></pre></td></tr></table></figure>
+
+<p>Each time I click on the botton of WolOn, the “pkts” adds 10.</p>
+<p>So what do these tests show? I am looking forward to your reply!</p>
+<h3 id="Re-The-supplement-of-“A-question-about-wake-up-on-WAN-with-ipv6”"><a href="#Re-The-supplement-of-“A-question-about-wake-up-on-WAN-with-ipv6”" class="headerlink" title="Re: The supplement of “A question about wake up on WAN with ipv6”"></a><strong>Re: The supplement of “A question about wake up on WAN with ipv6”</strong></h3><p>Hi,</p>
+<p>You’ve done some pretty deep research.</p>
+<p>For your internal network you should use IPv4 as WOL protocol doesn’t work on IPv6, it relies on broadcast and IPv6 doesn’t have broadcast addresses. I didn’t dive into your iptables config, but the idea is simple - get the WOL packed on your external router interface and broadcast it into your LAN. In your case I presume you should have your router’s external interface on IPv6 and your LAN on IPv4 then do the proper routing to broadcast WOL packets to your IPv4 network.</p>
+<p>WolOn sends a burst of WOL packets, so it’s ok if you see in logs more than one packet at a time.</p>
+<p>I hope it helps,</p>
+<p>Alex.</p>
+<h3 id="Thank-you-for-your-reply"><a href="#Thank-you-for-your-reply" class="headerlink" title="Thank you for your reply."></a><strong>Thank you for your reply.</strong></h3><p>Hello!</p>
+<p>Thank you for your prompt reply. I got you. I did add a static ARP IPv4-MAC binding rule in my router. However I have left my home and now back to campus. Maybe I should try to install a tool like <code>socat</code> or <code>xinetd</code> to forward ipv6 WAN packets as ipv4 into LAN (broadcast or directly sent to <code>192.168.123.48</code>) the next time.</p>
+<p>You may have noticed that there was a forward rule in my first email: <code>ip6tables -I FORWARD -p udp -d 2409:8a23:a6af:c612:3129:3b6f:e6a5:844b --dport 9 -j ACCEPT</code>. It means that the ipv6 wol packets will be forwarded to the PC with this ipv6 address, but the PC didn’t receive it. If the PC was shutdown, I guess that’s because there was no MAC record coresponding to this ipv6 address. But even if the PC was on, it didn’t receive the packets. That’s one question I have.</p>
+<p>Appreciate your efforts,</p>
+<p>Xia.</p>
+<h3 id="简洁翻译"><a href="#简洁翻译" class="headerlink" title="简洁翻译"></a>简洁翻译</h3><p>WOL协议在ipv6上无法工作，因为ipv6没有广播地址。路由器WAN口收到的ipv6 WOL包必须在内网以ipv4的方式广播出去。</p>
+<h2 id="校园-办公B类网络环境"><a href="#校园-办公B类网络环境" class="headerlink" title="校园/办公B类网络环境"></a>校园/办公B类网络环境</h2><p>PC在<code>10.12.148.143</code>，手机在<code>10.0.161.8</code>，分属于两个路由器下的广播域，虽然可以凭借静态路由表直接互相通信，但是广播WOL包只在<code>10.0.255.255</code>下起效，<code>10.12.255.254</code>网关不会广播来自<code>10.0.x.x</code>的WOL包。</p>
+<p>因此，跨网段只能直接发送WOL包实现唤醒，不能广播。关机后一段时间内，交换机还留存着IP地址对应的MAC地址，此时可以成功唤醒。但交换机没有设置静态ARP IP地址绑定，超过超时时间就无法唤醒了。</p>
+<p>但是校园网的这个情况也有解决方案，在台式机与网口之间再接一台路由器。路由器长期在线，手机也可以直接给路由器发送WOL数据包，由路由器端口转发给台式机。普通路由器可能会遇到地址过期后换了新地址的问题，但如果是Padavan的话，可以进行DDNS。虽然上传的是内网NAT的WAN口地址，但是只要手机也在内网，那就可以利用域名访问。</p>
+<p>这落后的校园网，明明去年还有2001开头的教育网IPv6，今年就没有了。打电话问了一下网络中心，被矢口否认了，便无法利用纯IPv6域名从公网访问路由器。NAT类型也只有对称型NAT4，连江苏移动都可以在路由拨号后做到全锥形NAT1，BT的末路，115大展拳脚。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p><code>LAN</code>指只填写MAC地址和广播地址的WOL方式，<code>WAN</code>指填写MAC地址和目标（主机或路由器）IP地址:端口号的WOL方式。以LAN方式直接发送给目标主机WOL包是没有意义的，因为WOL靠负载MAC工作。</p>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> LAN 同网段广播WOL包：成功</li>
+<li><input checked="" disabled="" type="checkbox"> LAN 跨网段广播WOL包：失败，路由器广播域隔离</li>
+<li><input checked="" disabled="" type="checkbox"> IPv4 WAN 直接发送给目标主机WOL包：成功，若路由器未设置静态ARP IP地址绑定，则会超时失效</li>
+<li><input checked="" disabled="" type="checkbox"> IPv4 WAN 直接发送给路由器WOL包：成功，由路由器端口转发</li>
+<li><input disabled="" type="checkbox"> IPv6 WAN 直接发送给目标主机WOL包：失败，Padavan无法设置IPv6地址绑定，需进一步探讨原因</li>
+<li><input checked="" disabled="" type="checkbox"> IPv6 WAN 直接发送给路由器WOL包：失败，IPv6不使用广播地址，需进行6to4转发</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">socat TCP6-LISTEN:9,fork TCP4:192.168.123.48:9</span><br></pre></td></tr></table></figure>
+
+<h2 id="学习资料"><a href="#学习资料" class="headerlink" title="学习资料"></a>学习资料</h2><p><a href="https://www.cnblogs.com/michael9/p/13360084.html" target="_blank" rel="noopener external nofollow noreferrer">隔离广播域的 VLAN 来了 - 来份锅包肉 - 博客园</a></p>
+<p><a href="https://serverfault.com/questions/276515/use-iptables-to-forward-ipv6-to-ipv4" target="_blank" rel="noopener external nofollow noreferrer">port forwarding - Use iptables to forward ipv6 to ipv4? - Server Fault</a></p>
+<p><a href="https://www.cnblogs.com/fengf233/p/10906444.html" target="_blank" rel="noopener external nofollow noreferrer">IPv6笔记-地址结构与分类 - fengf233 - 博客园</a></p>
+<p><a href="https://blog.51cto.com/u_7658423/1337745" target="_blank" rel="noopener external nofollow noreferrer">IPv6的组播地址（掌握IPv6通信原理的关键知识点）_无名的基督的技术博客_51CTO博客</a></p>
+</div><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined" rel="external nofollow noreferrer">Pil0tXia</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://pil0txia.netlify.app/post/2022-09-17_why-ipv6-WOL-fails/">https://pil0txia.netlify.app/post/2022-09-17_why-ipv6-WOL-fails/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow noreferrer" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://pil0txia.netlify.app" target="_blank">Pil0tXia</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E7%BD%91%E7%BB%9C%E5%94%A4%E9%86%92/">网络唤醒</a><a class="post-meta__tags" href="/tags/IPv6/">IPv6</a><a class="post-meta__tags" href="/tags/%E5%B9%BF%E6%92%AD/">广播</a><a class="post-meta__tags" href="/tags/%E6%A0%A1%E5%9B%AD%E7%BD%91/">校园网</a><a class="post-meta__tags" href="/tags/%E8%B7%AF%E7%94%B1%E5%99%A8/">路由器</a><a class="post-meta__tags" href="/tags/Padavan/">Padavan</a><a class="post-meta__tags" href="/tags/%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91/">端口转发</a></div><div class="post_share"><div class="social-share" data-image="https://cdn.jsdelivr.net/gh/Pil0tXia/imghost/picgo/image-20220917142356270.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css"/><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js"></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/post/2022-09-13_assembler-language-notes/"><img class="next-cover" data-src="https://cdn.jsdelivr.net/gh/Pil0tXia/imghost/picgo/image-20220913160311958.png" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">汇编语言程序设计笔记</div></div></a></div></nav><hr><div id="post-comment"><div class="comment_headling"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div><div id="gitalk-container"></div><script>var gitalk = new Gitalk({
+  clientID: 'b71a7a2cd528b3ec4d30',
+  clientSecret: '24bd453205fbb670a2fb50759328ca0642e5eb61',
+  repo: 'gitalk',
+  owner: 'Pil0tXia',
+  admin: ['Pil0tXia'],
+  id: md5(decodeURI(location.pathname)),
+  language: 'zh-CN',
+  perPage: 10,
+  distractionFreeMode: false,
+  pagerDirection: 'last',
+  createIssueManually: false,
+  updateCountCallback: commentCount
+})
+gitalk.render('gitalk-container')
+
+function commentCount(n){
+  try {
+    document.getElementsByClassName('gitalk-comment-count')[0].innerHTML= n
+  } catch (e) {
+    return false
+  }
+}</script></div></article></main><footer id="footer" data-type="color"><div id="footer-wrap"><div class="copyright">&copy;2018 - 2022 By Pil0tXia</div><div class="framework-info"><span>驱动 </span><a href="https://hexo.io" target="_blank" rel="noopener external nofollow noreferrer"><span>Hexo</span></a><span class="footer-separator">|</span><span>主题 </span><a href="https://github.com/jerryc127/hexo-theme-butterfly" target="_blank" rel="noopener external nofollow noreferrer"><span>Butterfly</span></a></div><div class="footer_custom_text">不会摄影的白帽子不是好机长！</div></div></footer></div><section class="rightside" id="rightside"><div id="rightside-config-hide"><button id="readmode" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="font_plus" title="放大字体"><i class="fas fa-plus"></i></button><button id="font_minus" title="缩小字体"><i class="fas fa-minus"></i></button><button class="translate_chn_to_cht" id="translateLink" title="简繁转换">繁</button><button id="darkmode" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button></div><div id="rightside-config-show"><button id="rightside_config" title="设置"><i class="fas fa-cog"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="scroll_to_comment fas fa-comments"></i></a><button class="close" id="mobile-toc-button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></section><div class="search-dialog" id="local-search"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"><div id="local-hits"></div><div id="local-stats"><div class="local-search-stats__hr" id="hr"><span>由</span> <a href="https://github.com/wzpan/hexo-generator-search" target="_blank" rel="noopener external nofollow noreferrer" style="color:#49B1F5;">hexo-generator-search</a>
+ <span>提供支持</span></div></div></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div class="search-mask"></div><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="/js/third-party/fireworks.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script id="ribbon_piao" mobile="true" src="/js/third-party/piao.js"></script><script id="canvas_nest" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="/js/third-party/canvas-nest.js"></script><script src="/js/third-party/activate-power-mode.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = false;
+document.body.addEventListener('input', POWERMODE);
+</script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module" defer></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js" async></script><script src="/js/third-party/ClickShowText.js"></script><script src="/js/search/local-search.js"></script><script>var endLoading = function () {
+  document.body.style.overflow = 'auto';
+  document.getElementById('loading-box').classList.add("loaded")
+}
+window.addEventListener('load',endLoading)</script></body></html>
