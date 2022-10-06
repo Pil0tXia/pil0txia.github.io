@@ -5,12 +5,30 @@
     
     <entry>
       <title>2022-9-29_Servlet中请求和响应过程中的乱码问题解决</title>
-      <link href="/post/2022-09-29_undefined/"/>
-      <url>/post/2022-09-29_undefined/</url>
+      <link href="/post/2022-09-29_servlet-get-post-garbage-characters/"/>
+      <url>/post/2022-09-29_servlet-get-post-garbage-characters/</url>
       
         <content type="html"><![CDATA[<h3 id="一、POST请求中的乱码问题："><a href="#一、POST请求中的乱码问题：" class="headerlink" title="一、POST请求中的乱码问题："></a>一、POST请求中的乱码问题：</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 必须要在获取请求参数之前调用才有效</span></span><br><span class="line">request.setCharacterEncoding(<span class="string">"UTF-8"</span>);</span><br></pre></td></tr></table></figure><h3 id="二、Get请求中的乱码问题："><a href="#二、Get请求中的乱码问题：" class="headerlink" title="二、Get请求中的乱码问题："></a>二、Get请求中的乱码问题：</h3><p>可以在获取到请求参数后，先进行tomcat端的编码（也就是先以 iso8859-1 进行编码），然后再用utf-8解码。</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">String</span> name = request.getParameter(<span class="string">"name"</span>);</span><br><span class="line">name = <span class="keyword">new</span> <span class="built_in">String</span>(name.getBytes(<span class="string">"iso-8859-1"</span>),<span class="string">"UTF-8"</span>);</span><br></pre></td></tr></table></figure><h3 id="三、响应中的乱码问题解决："><a href="#三、响应中的乱码问题解决：" class="headerlink" title="三、响应中的乱码问题解决："></a>三、响应中的乱码问题解决：</h3><h4 id="方案一："><a href="#方案一：" class="headerlink" title="方案一："></a>方案一：</h4><p>将服务器端和浏览器端的字符集都统一设置为UTF-8字符集。位置没要求。</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 设置服务器字符集为 UTF-8</span></span><br><span class="line">response.setCharacterEncoding(<span class="string">"UTF-8"</span>);</span><br><span class="line"><span class="comment">// 通过响应头，设置浏览器也使用 UTF-8 字符集</span></span><br><span class="line">response.setHeader(<span class="string">"Content-Type"</span>, <span class="string">"text/html; charset=UTF-8"</span>);</span><br></pre></td></tr></table></figure><h4 id="方案二（推荐）："><a href="#方案二（推荐）：" class="headerlink" title="方案二（推荐）："></a>方案二（推荐）：</h4><p>代码更加简洁，但是这种方式设置一定要在获取流对象之前调用才会生效。</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 它会同时设置服务器和客户端都使用UTF-8字符集，还设置了响应头</span></span><br><span class="line">response.setContentType(<span class="string">"text/html; Charset=UTF-8"</span>);</span><br><span class="line"><span class="comment">//一定要记住在获取流对象之前调用才会有效。</span></span><br></pre></td></tr></table></figure>]]></content>
       
       
+      <categories>
+          
+          <category> Java </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Servlet </tag>
+            
+            <tag> post </tag>
+            
+            <tag> get </tag>
+            
+            <tag> 乱码 </tag>
+            
+        </tags>
       
     </entry>
     
@@ -635,6 +653,8 @@
       
         <tags>
             
+            <tag> 壁纸 </tag>
+            
             <tag> 天气之子 </tag>
             
             <tag> 新海诚 </tag>
@@ -646,8 +666,6 @@
             <tag> Potplayer </tag>
             
             <tag> Madvr </tag>
-            
-            <tag> 壁纸 </tag>
             
         </tags>
       
@@ -873,9 +891,9 @@
       
         <tags>
             
-            <tag> 江苏 </tag>
-            
             <tag> 大学 </tag>
+            
+            <tag> 江苏 </tag>
             
             <tag> 面试 </tag>
             
@@ -1175,9 +1193,9 @@
       
         <tags>
             
-            <tag> 壁纸 </tag>
-            
             <tag> 主题 </tag>
+            
+            <tag> 壁纸 </tag>
             
         </tags>
       
