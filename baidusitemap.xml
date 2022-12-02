@@ -2,7 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://pil0txia.com/post/2022-09-08_os-notes/</loc>
-    <lastmod>2022-11-19</lastmod>
+    <lastmod>2022-12-02</lastmod>
+  </url>
+  <url>
+    <loc>https://pil0txia.com/post/2022-09-13_assembler-language-notes/</loc>
+    <lastmod>2022-12-01</lastmod>
+  </url>
+  <url>
+    <loc>https://pil0txia.com/post/2022-05-17_linked-list-reverse/</loc>
+    <lastmod>2022-11-21</lastmod>
   </url>
   <url>
     <loc>https://pil0txia.com/post/2021-08-15_sunshine-16-rules/</loc>
@@ -17,10 +25,6 @@
     <lastmod>2022-11-18</lastmod>
   </url>
   <url>
-    <loc>https://pil0txia.com/post/2022-09-13_assembler-language-notes/</loc>
-    <lastmod>2022-11-15</lastmod>
-  </url>
-  <url>
     <loc>https://pil0txia.com/post/2022-11-10_why-python36-dict-is-ordered/</loc>
     <lastmod>2022-11-10</lastmod>
   </url>
@@ -30,10 +34,6 @@
   </url>
   <url>
     <loc>https://pil0txia.com/post/2021-08-05_java-only-pass-by-value/</loc>
-    <lastmod>2022-10-18</lastmod>
-  </url>
-  <url>
-    <loc>https://pil0txia.com/post/2022-05-17_linked-list-reverse/</loc>
     <lastmod>2022-10-18</lastmod>
   </url>
   <url>
