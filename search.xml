@@ -111,6 +111,45 @@
     
     
     <entry>
+      <title>替代JsDelivr？Cloudflare for SaaS + Backblaze B2 免备案自建图床</title>
+      <link href="/post/2022-12-06_cloudflare-for-saas-backblaze-b2/"/>
+      <url>/post/2022-12-06_cloudflare-for-saas-backblaze-b2/</url>
+      
+        <content type="html"><![CDATA[<p>后JsDelivr时代，你的下一个免备案免费自建图床该如何白嫖？</p><p><code>cdn.jsdelivr.net</code> 在国内早已被SNI阻断，现在看来恢复的可能性渺茫。<code>Github + JsDelivr + PicGo</code> 的薅羊毛方案行不通了。</p><h1 id="保守治疗"><a href="#保守治疗" class="headerlink" title="保守治疗"></a>保守治疗</h1><p><a href="https://github.com/PipecraftNet/hexo-filter-jsdelivr-auto-fallback">hexo-filter-jsdelivr-auto-fallback</a>插件可以自动在网站里添加上 <code>jsdelivr-auto-fallback</code> 代码，自动检测 <code>cdn.jsdelivr.net</code> 是否可用， 如果不可用时，会自动把所有 js, css, image 的地址切换到其他可用的域名。</p><p><code>fastly.jsdelivr.net</code>在国内的访问速度并没有<code>Cloudflare CDN</code>快，而且改个前缀就能解决的事情，fastly的后续也难说。</p><h1 id="Cloudflare-Backblaze-老瓶新酒"><a href="#Cloudflare-Backblaze-老瓶新酒" class="headerlink" title="Cloudflare + Backblaze 老瓶新酒"></a>Cloudflare + Backblaze 老瓶新酒</h1><p>这个搭配早就有，但一直不是很流行，就是因为想用 cf 的 cdn，就得由 cf 负责域名的 NS 解析。然而 cf 在国内的 DNS 解析速度实在太拉跨了，我的顶级域名一直放在 Dnspod 解析，尚且不满意于 Netlify 的 CDN速度，更不可能退步到 cf。</p><p><strong>如何只将二级域名接入 cf，用于访问静态资源，而顶级域名仍保留在 Dnspod 呢？</strong>这就是可能在未来相当长的一段时间里，<strong>最好用的免备案免费自建图床方案：</strong><code>BackBlaze B2 + Cloudflare for SaaS + picgo-plugin-s3 + picgo-plugin-compress + FileZilla Pro</code>。</p><h2 id="CNAME-方式接入-Cloudflare-for-SaaS"><a href="#CNAME-方式接入-Cloudflare-for-SaaS" class="headerlink" title="CNAME 方式接入 Cloudflare for SaaS"></a>CNAME 方式接入 Cloudflare for SaaS</h2><p>前置条件：一个顶级域名，一个可修改NS记录的闲置域名</p><p>CloudFlare for SaaS 的自主义主机功能可以接入非顶级域名，可修改NS记录的域名在 cf 上用作回退跳转域名。原理如图：</p><p><img src="https://static.pil0txia.com/picgo/image-20221217015128945.webp" alt="image-20221217015128945"></p><p>以我自己的配置为例，当用户向我的图片资源的域名<code>static.pil0txia.com</code>请求访问时，会先由 Dnspod CNAME 转发到位于 cf 上的<code>fallback.pil0txia.ml</code>，cf 会验证来源域，并确保只有来自<code>static.pil0txia.com</code>的流量被响应。然后回退到<code>fallback.pil0txia.ml</code>，再由<code>fallback.pil0txia.ml</code> CNAME 转发到<code>f002.backblazeb2.com</code>的 Backblaze 存储桶域名。在最后一步中，请求 URL 会被改写，以免暴露存储桶名称。</p><p><strong>虽说网上的教程都要求在<code>DNS</code>处新增A记录，但是我实测用CNAME记录指向Backblaze的<code>f002.backblazeb2.com</code>是完全OK的。</strong></p><p>操作教程，做到2.5即可：<a href="https://wzfou.com/cloudflare-cname-cdn/">CloudFlare免费CNAME和IP接入教程-无需修改NS直接接入CloudFlare</a></p><p><strong><code>回退源</code>填写<code>fallback.pil0txia.ml</code>，<code>自定义主机名</code>填写<code>static.pil0txia.com</code>。</strong></p><p>另外，使用 Cloudflare for SaaS 接入 cf 时，不可以开启 <code>Hotlink</code>防盗链功能，否则来自<code>static.pil0txia.com</code>的请求会被阻止。</p><blockquote><p>虽然Partner后台已经无法再提供以前的CNAME接入功能，但如果不熟悉 cf 的话可以看一眼有哪些设置，如<a href="https://www.mnn.tw/">梦牛网络</a>。</p></blockquote><h2 id="Backblaze-B2-配置"><a href="#Backblaze-B2-配置" class="headerlink" title="Backblaze B2 配置"></a>Backblaze B2 配置</h2><p><a href="https://www.cloudflare.com/zh-cn/bandwidth-alliance/">宽带联盟</a>中 Backblaze 到 Cloudflare 的所有出口流量完全免费。Backblaze 同时也提供10G的免费存储额度、每天1G的下载量和无限上传量。</p><p>老生常谈的内容，教程很多：<a href="https://blog.winer.website/archives/use_blackblaze_b2_and_cloudflare_cdn_to_bulid_a_free_oss.html">使用Backblaze B2 + Cloudflare CDN + PicGo实现可自定义域名的10G免费图床解决方案</a></p><p><strong>注意：在创建<code>转换规则</code>时，在<code>当传入请求匹配时...</code>中，需要填写你想要为静态资源分配的域名，如我的<code>static.pil0txia.com</code>，而不是接入cf的<code>fallback.pil0txia.ml</code>，否则将无法通过<code>static.pil0txia.com</code>访问资源。</strong></p><p>最后，你需要保存自己的：</p><ul><li>Endpoint</li><li>Application keyID</li><li>applicationKey (secret)</li></ul><h2 id="PicGo-插件"><a href="#PicGo-插件" class="headerlink" title="PicGo 插件"></a>PicGo 插件</h2><p><a href="https://github.com/wayjam/picgo-plugin-s3">picgo-plugin-s3</a>：上传至 AWS S3 兼容的 OSS</p><p>没有了Github上好用的（反应慢的）imgbot，<a href="https://github.com/JuZiSang/picgo-plugin-compress">picgo-plugin-compress</a>插件可以在上传前压缩图片。目前只有 webp 可以正常使用。</p><p>设定的自定义域名为<code>https://static.pil0txia.com</code></p><h2 id="文件管理器"><a href="#文件管理器" class="headerlink" title="文件管理器"></a>文件管理器</h2><p>以前用 Github 当图床的时候，可以很方便的用<code>SourceTree</code>做 Git 版本管理，传错图片了，本地文件资源管理器可以删，可以<code>revert</code>回滚记录，也可以直接<code>reset</code>回退多个版本，多端同步非常方便。</p><p>现在就只能回归 FTP 时代，在<a href="https://help.backblaze.com/hc/en-us/categories/202640068-Backblaze-B2-Cloud-Storage">Backblaze官网列举的文件管理工具</a>中，我用起来最顺手的居然还是<code>FileZilla Pro</code>。批量上传图片后，也只能在 cmd 中<code>dir /b</code>出所有文件名，然后批量加上 Markdown 语法的前缀和后缀。</p><p>虽说<code>CloudBerry Explorer</code>也不失为一个好的选择，但它年久失修的图形界面在高分屏上的模糊实在不甚友好，除了同步时可以手动修改单个文件的同步方向外，并没有显著的功能优势。</p><h1 id="七牛云OSS-多吉云CDN-新瓶旧酒"><a href="#七牛云OSS-多吉云CDN-新瓶旧酒" class="headerlink" title="七牛云OSS + 多吉云CDN 新瓶旧酒"></a>七牛云OSS + 多吉云CDN 新瓶旧酒</h1><p>新瓶：多吉云CDN有20G免费额度</p><p>旧酒：只是不用七牛云的CDN了而已</p><p>等哪天备案了就照着这个来吧。</p><h2 id="七牛云"><a href="#七牛云" class="headerlink" title="七牛云"></a>七牛云</h2><p>绑定域名需备案，OSS和CDN的https流量收费。</p><h2 id="多吉云"><a href="#多吉云" class="headerlink" title="多吉云"></a>多吉云</h2><p>绑定域名需备案，目前提供每月20G的免费https流量，可以和只能提供http回源的七牛云OSS搭配。</p><h1 id="Freenom-免费域名自动续期"><a href="#Freenom-免费域名自动续期" class="headerlink" title="Freenom 免费域名自动续期"></a>Freenom 免费域名自动续期</h1><p><a href="https://github.com/luolongfei/freenom">luolongfei&#x2F;freenom: Freenom 域名自动续期。</a></p><p>给接入 cf 的 pil0txia.ml 续期。Koyeb 注册成功后一直没收到下一步邮件，遂部署在了 mogenius 上。</p><p><img src="https://static.pil0txia.com/picgo/image-20221217004930223.webp" alt="image-20221217004930223"></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Web </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 图床 </tag>
+            
+            <tag> Cloudflare </tag>
+            
+            <tag> Backblaze </tag>
+            
+            <tag> 自建 </tag>
+            
+            <tag> JsDelivr </tag>
+            
+            <tag> 备案 </tag>
+            
+            <tag> 免费 </tag>
+            
+            <tag> 白嫖 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>为什么 Python 3.6 以后字典有序并且效率更高？</title>
       <link href="/post/2022-11-10_why-python36-dict-is-ordered/"/>
       <url>/post/2022-11-10_why-python36-dict-is-ordered/</url>
