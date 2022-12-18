@@ -1,4 +1,4 @@
-(function() {
+(function () {
   var $animate, $container, $message, $paragraph, MESSAGES, animate, initialise, scramble;
 
   MESSAGES = [];
@@ -24,12 +24,12 @@
   });
 
   MESSAGES.push({
-    delay: 5800,
-    text: "然而刚刚走出病房的你，还没来得及体会一下节日气氛，就又要踏入研究生考试的考场了。不要灰心，你是我的骄傲，你一直都很努力，我相信你会成功的。"
+    delay: 5450,
+    text: "然而刚刚走出病房的你，还没来得及体会一下节日气氛，就又要踏入研究生考试的考场了。不要灰心，你是我的骄傲，你一直都很努力，我相信你一定会成功的。"
   });
 
   MESSAGES.push({
-    delay: 8500,
+    delay: 10250,
     text: "我的爱人，祝你在这个圣诞节考试顺利❤💕❤️"
   });
 
@@ -41,14 +41,14 @@
 
   $paragraph = null;
 
-  scramble = function(element, text, options) {
+  scramble = function (element, text, options) {
     var $element, addGlitch, character, defaults, ghostCharacter, ghostCharacters, ghostLength, ghostText, ghosts, glitchCharacter, glitchCharacters, glitchIndex, glitchLength, glitchProbability, glitchText, glitches, i, j, letter, object, order, output, parameters, ref, settings, shuffle, target, textCharacters, textLength, wrap;
     // Default properties.
     defaults = {
       probability: 0.2,
       glitches: '-|/\\',
       blank: '',
-      duration: text.length * 50,
+      duration: text.length * 52,
       ease: 'easeInOutQuad',
       delay: 0.0
     };
@@ -56,14 +56,14 @@
     $element = $(element);
     settings = $.extend(defaults, options);
     // Convenience methods.
-    shuffle = function() {
+    shuffle = function () {
       if (Math.random() < 0.5) {
         return 1;
       } else {
         return -1;
       }
     };
-    wrap = function(text, classes) {
+    wrap = function (text, classes) {
       return `<span class="${classes}">${text}</span>`;
     };
     // Glitch values.
@@ -71,7 +71,7 @@
     glitchCharacters = glitchText.split('');
     glitchLength = glitchCharacters.length;
     glitchProbability = settings.probability;
-    glitches = (function() {
+    glitches = (function () {
       var j, len, results;
       results = [];
       for (j = 0, len = glitchCharacters.length; j < len; j++) {
@@ -84,7 +84,7 @@
     ghostText = $element.text();
     ghostCharacters = ghostText.split('');
     ghostLength = ghostCharacters.length;
-    ghosts = (function() {
+    ghosts = (function () {
       var j, len, results;
       results = [];
       for (j = 0, len = ghostCharacters.length; j < len; j++) {
@@ -97,13 +97,13 @@
     textCharacters = text.split('');
     textLength = textCharacters.length;
     // Order and output arrays.
-    order = (function() {
+    order = (function () {
       var results = [];
-      for (var j = 0; 0 <= textLength ? j < textLength : j > textLength; 0 <= textLength ? j++ : j--){ results.push(j); }
+      for (var j = 0; 0 <= textLength ? j < textLength : j > textLength; 0 <= textLength ? j++ : j--) { results.push(j); }
       return results;
     }).apply(this).sort(this.shuffle);
     output = [];
-// Build the output array.
+    // Build the output array.
     for (i = j = 0, ref = textLength; (0 <= ref ? j < ref : j > ref); i = 0 <= ref ? ++j : --j) {
       glitchIndex = Math.floor(Math.random() * (glitchLength - 1));
       glitchCharacter = glitches[glitchIndex];
@@ -122,7 +122,7 @@
     parameters = {
       duration: settings.duration,
       ease: settings.ease,
-      step: function() {
+      step: function () {
         var index, k, progress, ref1;
         progress = Math.floor(object.value * (textLength - 1));
         for (i = k = 0, ref1 = progress; (0 <= ref1 ? k <= ref1 : k >= ref1); i = 0 <= ref1 ? ++k : --k) {
@@ -131,7 +131,7 @@
         }
         return $element.html(output.join(''));
       },
-      complete: function() {
+      complete: function () {
         return $element.html(text);
       }
     };
@@ -139,7 +139,7 @@
     return $(object).delay(settings.delay).animate(target, parameters);
   };
 
-  animate = function() {
+  animate = function () {
     var data, element, index, j, len, options;
     for (index = j = 0, len = MESSAGES.length; j < len; index = ++j) {
       data = MESSAGES[index];
@@ -152,7 +152,7 @@
     }
   };
 
-  initialise = function() {
+  initialise = function () {
     var index, j, len, text;
     $animate.click(animate);
     for (index = j = 0, len = MESSAGES.length; j < len; index = ++j) {
