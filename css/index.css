@@ -3362,7 +3362,7 @@ h1.page-title + .tag-cloud-list {
 #page-header {
   position: relative;
   width: 100%;
-  background-color: #49b1f5;
+  background-color: rgba(40,57,101,0.15);
   background-position: 25% center;
   background-size: cover;
   background-repeat: no-repeat;
