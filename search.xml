@@ -4,6 +4,41 @@
   
     
     <entry>
+      <title>基于不蒜子2.3自定义站点访问量(site_pv, site_uv, page_pv)</title>
+      <link href="/post/2023-01-16_busuanzi-modified/"/>
+      <url>/post/2023-01-16_busuanzi-modified/</url>
+      
+        <content type="html"><![CDATA[<h1 id="busuanzi-modified"><a href="#busuanzi-modified" class="headerlink" title="busuanzi-modified"></a>busuanzi-modified</h1><p>基于不蒜子2.3官网数据自定义站点访问量(site_pv, site_uv, page_pv)。Customize your site view count based on busuanzi.</p><p><a href="https://github.com/Pil0tXia/busuanzi-modified">https://github.com/Pil0tXia/busuanzi-modified</a></p><h2 id="修改"><a href="#修改" class="headerlink" title="修改"></a>修改</h2><p>你可以自定义<code>busuanzi.pure.js</code>中的第75, 80, 85行，分别对应了站点访问量、独立访客和文章阅读量。取一个你喜欢的数字，然后自行压缩并托管。</p><h2 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h2><p>将你的网站从<code>busuanzi.ibruce.info</code>引用的<code>busuanzi.pure.mini.js</code>替换为新的js地址，如本仓库的<code>https://raw.githubusercontent.com/Pil0tXia/busuanzi-modified/main/busuanzi.pure.mini.js</code></p><p>你也可以使用CDN加速访问：</p><ul><li><p>jsDelivr: <code>https://cdn.jsdelivr.net/gh/Pil0tXia/busuanzi-modified/busuanzi.pure.mini.js</code></p></li><li><p>渺软公益CDN：<code>https://jsd.onmicrosoft.cn/gh/Pil0tXia/busuanzi-modified/busuanzi.pure.mini.js</code></p></li><li><p>我自用的CDN（不作任何SLA承诺）：<code>https://static.pil0txia.com/assets/busuanzi/2.3/busuanzi.pure.mini.js</code></p></li></ul><p>如果你正在使用 Hexo 的 Butterfly 主题，请参考<a href="https://butterfly.js.org/posts/4aa8abbe/#%E8%A8%AA%E5%95%8F%E4%BA%BA%E6%95%B8-busuanzi-UV-%E5%92%8C-PV">这篇文档</a>修改地址。</p><h2 id="建议"><a href="#建议" class="headerlink" title="建议"></a>建议</h2><p>建议将其用来迁移站点历史访问量即可，例如从@记录迁移到了www，却丢失了以前的访问量。数字改得太大，SEO指数却很低，会被人笑话的。这只是一个建议。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 前端 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 不蒜子 </tag>
+            
+            <tag> 前端 </tag>
+            
+            <tag> 访问量 </tag>
+            
+            <tag> pv </tag>
+            
+            <tag> uv </tag>
+            
+            <tag> CDN </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Linux 后台程序的创建与管理</title>
       <link href="/post/2022-12-11_linux-background-programs/"/>
       <url>/post/2022-12-11_linux-background-programs/</url>

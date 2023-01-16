@@ -6,7 +6,7 @@
   <link href="https://www.pil0txia.com/atom.xml" rel="self"/>
   
   <link href="https://www.pil0txia.com/"/>
-  <updated>2022-12-10T17:46:39.000Z</updated>
+  <updated>2023-01-16T16:58:49.000Z</updated>
   <id>https://www.pil0txia.com/</id>
   
   <author>
@@ -15,6 +15,40 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>基于不蒜子2.3自定义站点访问量(site_pv, site_uv, page_pv)</title>
+    <link href="https://www.pil0txia.com/post/2023-01-16_busuanzi-modified/"/>
+    <id>https://www.pil0txia.com/post/2023-01-16_busuanzi-modified/</id>
+    <published>2023-01-16T10:58:49.000Z</published>
+    <updated>2023-01-16T16:58:49.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="busuanzi-modified"><a href="#busuanzi-modified" class="headerlink" title="busuanzi-modified"></a>busuanzi-modified</h1><p>基于不蒜子2.3官网数据自定义站点访问量(site_pv, site_uv, page_pv)。Customize your site view count based on busuanzi.</p><p><a href="https://github.com/Pil0tXia/busuanzi-modified">https://github.com/Pil0tXia/busuanzi-modified</a></p><h2 id="修改"><a href="#修改" class="headerlink" title="修改"></a>修改</h2><p>你可以自定义<code>busuanzi.pure.js</code>中的第75, 80, 85行，分别对应了站点访问量、独立访客和文章阅读量。取一个你喜欢的数字，然后自行压缩并托管。</p><h2 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h2><p>将你的网站从<code>busuanzi.ibruce.info</code>引用的<code>busuanzi.pure.mini.js</code>替换为新的js地址，如本仓库的<code>https://raw.githubusercontent.com/Pil0tXia/busuanzi-modified/main/busuanzi.pure.mini.js</code></p><p>你也可以使用CDN加速访问：</p><ul><li><p>jsDelivr: <code>https://cdn.jsdelivr.net/gh/Pil0tXia/busuanzi-modified/busuanzi.pure.mini.js</code></p></li><li><p>渺软公益CDN：<code>https://jsd.onmicrosoft.cn/gh/Pil0tXia/busuanzi-modified/busuanzi.pure.mini.js</code></p></li><li><p>我自用的CDN（不作任何SLA承诺）：<code>https://static.pil0txia.com/assets/busuanzi/2.3/busuanzi.pure.mini.js</code></p></li></ul><p>如果你正在使用 Hexo 的 Butterfly 主题，请参考<a href="https://butterfly.js.org/posts/4aa8abbe/#%E8%A8%AA%E5%95%8F%E4%BA%BA%E6%95%B8-busuanzi-UV-%E5%92%8C-PV">这篇文档</a>修改地址。</p><h2 id="建议"><a href="#建议" class="headerlink" title="建议"></a>建议</h2><p>建议将其用来迁移站点历史访问量即可，例如从@记录迁移到了www，却丢失了以前的访问量。数字改得太大，SEO指数却很低，会被人笑话的。这只是一个建议。</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;busuanzi-modified&quot;&gt;&lt;a href=&quot;#busuanzi-modified&quot; class=&quot;headerlink&quot; title=&quot;busuanzi-modified&quot;&gt;&lt;/a&gt;busuanzi-modified&lt;/h1&gt;&lt;p&gt;基于不蒜子2.3官网</summary>
+      
+    
+    
+    
+    <category term="前端" scheme="https://www.pil0txia.com/categories/%E5%89%8D%E7%AB%AF/"/>
+    
+    
+    <category term="不蒜子" scheme="https://www.pil0txia.com/tags/%E4%B8%8D%E8%92%9C%E5%AD%90/"/>
+    
+    <category term="前端" scheme="https://www.pil0txia.com/tags/%E5%89%8D%E7%AB%AF/"/>
+    
+    <category term="访问量" scheme="https://www.pil0txia.com/tags/%E8%AE%BF%E9%97%AE%E9%87%8F/"/>
+    
+    <category term="pv" scheme="https://www.pil0txia.com/tags/pv/"/>
+    
+    <category term="uv" scheme="https://www.pil0txia.com/tags/uv/"/>
+    
+    <category term="CDN" scheme="https://www.pil0txia.com/tags/CDN/"/>
+    
+  </entry>
   
   <entry>
     <title>Linux 后台程序的创建与管理</title>
@@ -621,34 +655,6 @@ p99 UCB1算法公式两项的含义&lt;/p&gt;
     <category term="模式" scheme="https://www.pil0txia.com/tags/%E6%A8%A1%E5%BC%8F/"/>
     
     <category term="映像" scheme="https://www.pil0txia.com/tags/%E6%98%A0%E5%83%8F/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>C1科目三笔记</title>
-    <link href="https://www.pil0txia.com/post/2021-08-27_subject-3-notes/"/>
-    <id>https://www.pil0txia.com/post/2021-08-27_subject-3-notes/</id>
-    <published>2021-08-27T07:58:27.000Z</published>
-    <updated>2021-08-27T07:58:27.000Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="准则"><a href="#准则" class="headerlink" title="准则"></a>准则</h2><ul><li>除直线行驶外，全程档位为三档或更小，速度控制在20到30码之间。</li><li>最高转速为2000转每分钟，1500转左右即可换挡。</li><li>减速踩刹车，停车踩离合和刹车。只要还在档位里，不踩离合减速会导致熄火。</li><li>停车后踩住离合和刹车，挂一档。</li><li>转向灯打满三秒后才可转向。</li><li>一号线、三号线起步需要向左变道，二号线考试时起步直行无需变道（练习时前方有车需要变道再变回来）。</li></ul><h2 id="夜间灯光"><a href="#夜间灯光" class="headerlink" title="夜间灯光"></a>夜间灯光</h2><p><img src="https://static.pil0txia.com/picgo/mmexport1631593032335.jpg"></p><h2 id="一号线"><a href="#一号线" class="headerlink" title="一号线"></a>一号线</h2><h3 id="起步"><a href="#起步" class="headerlink" title="起步"></a>起步</h3><p>踩离合刹车，挂一档，放手刹，打左转向灯，按喇叭，观察后方来车。</p><p>起步方式与半坡起步一样，车身开始抖动后，松刹车，保持离合器位置。行驶平稳后松离合踩油门。</p><h3 id="超车"><a href="#超车" class="headerlink" title="超车"></a>超车</h3><p>可以看到前方车打左转向灯后，提前打转向灯，并一直保留到路口左转结束。</p><h3 id="会车"><a href="#会车" class="headerlink" title="会车"></a>会车</h3><p>什么都不需要做。</p><h3 id="前方路口左转"><a href="#前方路口左转" class="headerlink" title="前方路口左转"></a>前方路口左转</h3><p>左转后先靠左侧车道行驶，随后自行打右转向灯，变道到右侧车道。</p><h3 id="前方路口掉头"><a href="#前方路口掉头" class="headerlink" title="前方路口掉头"></a>前方路口掉头</h3><p>在白线前停车，挂一档，方向盘打死。掉头后靠左侧车道行驶。</p><h3 id="变更车道"><a href="#变更车道" class="headerlink" title="变更车道"></a>变更车道</h3><p>可提前打右转向灯。变更车道后，保留右转向灯，及时进入右转向车道。</p><h3 id="前方路口右转"><a href="#前方路口右转" class="headerlink" title="前方路口右转"></a>前方路口右转</h3><p>过了斑马线后再打方向，靠右侧车道行驶。</p><h3 id="直线行驶"><a href="#直线行驶" class="headerlink" title="直线行驶"></a>直线行驶</h3><p>右转完成后，可提前打右转向灯。直行看到地上三道白线，加速到35码。过了三道白线后，挂四档，加速到40码保持。</p><h3 id="靠边停车"><a href="#靠边停车" class="headerlink" title="靠边停车"></a>靠边停车</h3><p>直线行驶完成后，（打右转向灯），踩离合刹车，停车（不用向路边靠，容易压线）。挂一档，用纸片和方向盘中间括住地上白线（不可压着离合对线，作45度小幅度调整），停车，关转向灯，挂空挡，拉手刹，松离合刹车，熄火，解开安全带，观察后方来车，下车，关门。</p><h2 id="二号线"><a href="#二号线" class="headerlink" title="二号线"></a>二号线</h2><h3 id="起步-1"><a href="#起步-1" class="headerlink" title="起步"></a>起步</h3><p>起步直行，无需变道，练习时前方有车需要变道再变回来。靠右侧行驶，若前方有掉头的教练车，考试时跟在后面一个个走，练习时向左变道，再立即及时变回来。</p><h3 id="前方路口右转-1"><a href="#前方路口右转-1" class="headerlink" title="前方路口右转"></a>前方路口右转</h3><p>打右转向灯。若前方有教练车，在白线前停车，等待对方完成右转后再右转，避免对方熄火使自己路口停车。右转后靠左侧车道行驶。</p><h3 id="会车-1"><a href="#会车-1" class="headerlink" title="会车"></a>会车</h3><p>注意下坡松油门避免超速。上坡加油门。</p><h3 id="超车-1"><a href="#超车-1" class="headerlink" title="超车"></a>超车</h3><p>只需开启左转向灯，无需变道。保留左转向灯到掉头完成。</p><h3 id="前方路口掉头-1"><a href="#前方路口掉头-1" class="headerlink" title="前方路口掉头"></a>前方路口掉头</h3><p>车头盖到白线停车。方向盘向左打90度，进入左转弯车道。再次打左转向灯，随后掉头，进入左侧车道。</p><h3 id="直线行驶-1"><a href="#直线行驶-1" class="headerlink" title="直线行驶"></a>直线行驶</h3><p>下坡上坡控制好车速。加速方式和标记与一号线一致。直线行驶完成后松开油门，等速度低于30码时挂三档，维持速度。</p><h3 id="前方路口左转-1"><a href="#前方路口左转-1" class="headerlink" title="前方路口左转"></a>前方路口左转</h3><p>直线行驶完成后，打左转向灯，左转后靠左侧车道行驶。注意观察对向车道无社会车辆。</p><h3 id="变更车道-1"><a href="#变更车道-1" class="headerlink" title="变更车道"></a>变更车道</h3><p>左转完成后，打右转向灯，靠右侧车道行驶。</p><h3 id="靠边停车-1"><a href="#靠边停车-1" class="headerlink" title="靠边停车"></a>靠边停车</h3><p>看到写着蓝色“靠边”字样的路灯杆时，在下一个路灯杆处停车。挂一档，对线，听到“请靠边停车”的语音播报后再停车（考试时报得会比练习时晚一点），接下来同一号线。</p><h2 id="三号线"><a href="#三号线" class="headerlink" title="三号线"></a>三号线</h2><h3 id="起步-2"><a href="#起步-2" class="headerlink" title="起步"></a>起步</h3><p>同一号线，在右侧第二车道行驶。过红绿灯靠右侧车道行驶，随后打左转向灯变道到中间车道（不可压错位虚线）。保留转向灯到路口左转完成。</p><h3 id="变更车道-2"><a href="#变更车道-2" class="headerlink" title="变更车道"></a>变更车道</h3><p>变更到最左侧车道。</p><h3 id="会车-2"><a href="#会车-2" class="headerlink" title="会车"></a>会车</h3><p>什么都不需要做。</p><h3 id="前方路口左转-2"><a href="#前方路口左转-2" class="headerlink" title="前方路口左转"></a>前方路口左转</h3><p>进入左转弯车道，左转后靠左侧车道行驶。随后打左转向灯准备掉头。</p><h3 id="前方路口掉头-2"><a href="#前方路口掉头-2" class="headerlink" title="前方路口掉头"></a>前方路口掉头</h3><p>同一号线。掉头后靠右侧车道行驶。</p><h3 id="前方路口右转-2"><a href="#前方路口右转-2" class="headerlink" title="前方路口右转"></a>前方路口右转</h3><p>打右转向灯，进入右转向车道，右转后靠右侧车道行驶。</p><h3 id="超车-2"><a href="#超车-2" class="headerlink" title="超车"></a>超车</h3><p>打左转向灯，变道到中间车道。</p><h3 id="直线行驶-2"><a href="#直线行驶-2" class="headerlink" title="直线行驶"></a>直线行驶</h3><p>同一号线。完成后松油门踩离合刹车退三档。</p><p>进入右侧第二直行车道，打右转向灯，过红绿灯靠右侧车道行驶。</p><h3 id="靠边停车-2"><a href="#靠边停车-2" class="headerlink" title="靠边停车"></a>靠边停车</h3><p>听到语音提示后再停车。同一号线。</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h2 id=&quot;准则&quot;&gt;&lt;a href=&quot;#准则&quot; class=&quot;headerlink&quot; title=&quot;准则&quot;&gt;&lt;/a&gt;准则&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;除直线行驶外，全程档位为三档或更小，速度控制在20到30码之间。&lt;/li&gt;
-&lt;li&gt;最高转速为2000转每分钟，1500转左右即</summary>
-      
-    
-    
-    
-    <category term="生活" scheme="https://www.pil0txia.com/categories/%E7%94%9F%E6%B4%BB/"/>
-    
-    
-    <category term="驾照" scheme="https://www.pil0txia.com/tags/%E9%A9%BE%E7%85%A7/"/>
-    
-    <category term="考试" scheme="https://www.pil0txia.com/tags/%E8%80%83%E8%AF%95/"/>
     
   </entry>
   
