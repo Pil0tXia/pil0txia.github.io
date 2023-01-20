@@ -40,11 +40,11 @@
     
     <category term="迁移" scheme="https://www.pil0txia.com/tags/%E8%BF%81%E7%A7%BB/"/>
     
+    <category term="CDN" scheme="https://www.pil0txia.com/tags/CDN/"/>
+    
     <category term="域名" scheme="https://www.pil0txia.com/tags/%E5%9F%9F%E5%90%8D/"/>
     
     <category term="DNS" scheme="https://www.pil0txia.com/tags/DNS/"/>
-    
-    <category term="CDN" scheme="https://www.pil0txia.com/tags/CDN/"/>
     
     <category term="SEO" scheme="https://www.pil0txia.com/tags/SEO/"/>
     
@@ -72,8 +72,6 @@
     <category term="前端" scheme="https://www.pil0txia.com/categories/%E5%89%8D%E7%AB%AF/"/>
     
     
-    <category term="CDN" scheme="https://www.pil0txia.com/tags/CDN/"/>
-    
     <category term="不蒜子" scheme="https://www.pil0txia.com/tags/%E4%B8%8D%E8%92%9C%E5%AD%90/"/>
     
     <category term="前端" scheme="https://www.pil0txia.com/tags/%E5%89%8D%E7%AB%AF/"/>
@@ -83,6 +81,8 @@
     <category term="pv" scheme="https://www.pil0txia.com/tags/pv/"/>
     
     <category term="uv" scheme="https://www.pil0txia.com/tags/uv/"/>
+    
+    <category term="CDN" scheme="https://www.pil0txia.com/tags/CDN/"/>
     
   </entry>
   
