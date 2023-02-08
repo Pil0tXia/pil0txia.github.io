@@ -26,11 +26,11 @@
             
             <tag> 网络运维 </tag>
             
-            <tag> CDN </tag>
-            
             <tag> 域名 </tag>
             
             <tag> DNS </tag>
+            
+            <tag> CDN </tag>
             
             <tag> SEO </tag>
             
@@ -59,6 +59,8 @@
       
         <tags>
             
+            <tag> CDN </tag>
+            
             <tag> JavaScript </tag>
             
             <tag> 不蒜子 </tag>
@@ -70,8 +72,6 @@
             <tag> pv </tag>
             
             <tag> uv </tag>
-            
-            <tag> CDN </tag>
             
         </tags>
       
@@ -975,8 +975,6 @@
       
         <tags>
             
-            <tag> 壁纸 </tag>
-            
             <tag> 天气之子 </tag>
             
             <tag> 新海诚 </tag>
@@ -988,6 +986,8 @@
             <tag> Potplayer </tag>
             
             <tag> madVR </tag>
+            
+            <tag> 壁纸 </tag>
             
         </tags>
       
@@ -1335,7 +1335,7 @@
             
             <tag> IDE </tag>
             
-            <tag> vscode </tag>
+            <tag> VSCode </tag>
             
             <tag> 配置 </tag>
             
@@ -1541,9 +1541,9 @@
             
             <tag> 桌面运维 </tag>
             
-            <tag> 主题 </tag>
-            
             <tag> 壁纸 </tag>
+            
+            <tag> 主题 </tag>
             
         </tags>
       
