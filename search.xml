@@ -915,13 +915,13 @@
             
             <tag> Joplin </tag>
             
+            <tag> OneDrive </tag>
+            
             <tag> Obsidian </tag>
             
             <tag> 简悦 </tag>
             
             <tag> 符号链接 </tag>
-            
-            <tag> OneDrive </tag>
             
             <tag> FolderSync </tag>
             
@@ -975,8 +975,6 @@
       
         <tags>
             
-            <tag> 壁纸 </tag>
-            
             <tag> 天气之子 </tag>
             
             <tag> 新海诚 </tag>
@@ -988,6 +986,8 @@
             <tag> Potplayer </tag>
             
             <tag> madVR </tag>
+            
+            <tag> 壁纸 </tag>
             
         </tags>
       
@@ -1076,9 +1076,9 @@
             
             <tag> 桌面运维 </tag>
             
-            <tag> NAS </tag>
-            
             <tag> 想法 </tag>
+            
+            <tag> NAS </tag>
             
         </tags>
       
@@ -1107,13 +1107,13 @@
             
             <tag> 桌面运维 </tag>
             
-            <tag> 想法 </tag>
-            
             <tag> ITX </tag>
             
             <tag> 轻薄本 </tag>
             
             <tag> 游戏本 </tag>
+            
+            <tag> 想法 </tag>
             
         </tags>
       
@@ -1541,9 +1541,9 @@
             
             <tag> 桌面运维 </tag>
             
-            <tag> 主题 </tag>
-            
             <tag> 壁纸 </tag>
+            
+            <tag> 主题 </tag>
             
         </tags>
       
