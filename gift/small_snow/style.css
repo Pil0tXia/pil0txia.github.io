@@ -1,0 +1,141 @@
+body{
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background: #66272A;
+  min-width: 480px;
+}
+
+.content::after, .content::before{
+  clear: both;
+}
+
+._block{
+  position: relative;
+  width: 25%;
+  height: 100vh;
+  background: #e2e2e2;
+  display: inline-block;
+  margin: 0;
+  overflow: hidden;
+  float: left;
+  -webkit-transition: 0.2s;
+  -moz-transition: 0.2s;
+  -o-transition: 0.2s;
+  -ms-transition: 0.2s;
+  transition: 0.2s;
+}
+
+.content:hover ._block{
+  width: 20%;
+}
+
+.content:active ._block{
+  width: 22%;
+}
+
+.content:hover ._block:hover{
+  width: 40%;
+}
+
+.content:hover ._block:active{
+  width: 34%;
+}
+
+._block svg{
+  width: 100px;
+  heihgt: 100px;
+  position: absolute;
+  top:0;
+  left:0;
+  right:0;
+  bottom:0;
+  margin: auto;
+}
+
+._block:nth-of-type(1){
+  background: #468966;
+}
+
+._block svg{
+  -webkit-transition: 0.2s;
+}
+
+._block:hover svg{
+  -webkit-transform: rotate(35deg);
+  -moz-transform: rotate(35deg);
+  -o-transform: rotate(35deg);
+  -ms-transform: rotate(35deg);
+  transform: rotate(35deg);
+}
+
+._block:nth-of-type(2){
+  background: #FFF0A5;
+}
+
+._block:nth-of-type(3){
+  background: #FFB03B;
+}
+
+._block:nth-of-type(4){
+  background: #66272A;
+}
+
+._block:nth-of-type(4):hover svg, ._block:hover ._content svg{
+  -webkit-transform: rotate(0);
+  -moz-transform: rotate(0);
+  -o-transform: rotate(0);
+  -ms-transform: rotate(0);
+  transform: rotate(0);
+}
+
+.content.__open ._block{
+  width: 0%;
+}
+
+.content.__open ._block.__active{
+  width: 100%;
+}
+
+._content svg{
+  width: 50%;
+  top: -150px;
+  opacity: 0;
+}
+
+.content.__open .__active ._content svg{
+  opacity: 1;
+}
+
+._spoiler{
+  position: absolute;
+  top: 60vh;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  width: 50px;
+  height: 20px;
+  text-align: center;
+  font-family: script, cursive;
+  font-size: 10pt;
+  color: #dddddd;
+  opacity: 0;
+   -webkit-transition: 0.2s;
+  -moz-transition: 0.2s;
+  -o-transition: 0.2s;
+  -ms-transition: 0.2s;
+  transition: 0.2s;
+}
+
+._block:nth-of-type(2) ._spoiler{
+  color: #471B1D;
+}
+
+._block:nth-of-type(3) ._spoiler{
+  color: #471B1D;
+}
+
+._block:hover ._spoiler, ._block:hover ._spoiler svg{
+  opacity: 1;
+}
