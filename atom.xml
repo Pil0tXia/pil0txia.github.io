@@ -6,7 +6,7 @@
   <link href="https://www.pil0txia.com/atom.xml" rel="self"/>
   
   <link href="https://www.pil0txia.com/"/>
-  <updated>2023-04-05T14:42:16.000Z</updated>
+  <updated>2023-05-05T15:03:43.000Z</updated>
   <id>https://www.pil0txia.com/</id>
   
   <author>
@@ -15,6 +15,37 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>【联想实习笔记】软件开发的流程和规范</title>
+    <link href="https://www.pil0txia.com/post/2023-05-05_dev-processes-and-specifications/"/>
+    <id>https://www.pil0txia.com/post/2023-05-05_dev-processes-and-specifications/</id>
+    <published>2023-05-05T15:03:43.000Z</published>
+    <updated>2023-05-05T15:03:43.000Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p>持续更新中</p></blockquote><h2 id="入职前他人的指导"><a href="#入职前他人的指导" class="headerlink" title="入职前他人的指导"></a>入职前他人的指导</h2><blockquote><p><a href="https://www.v2ex.com/t/935603">24 届实习，求问联想 Java 开发和奇安信 Go 开发选哪个？ - V2EX</a></p><p>ChaYedan666 #53</p></blockquote><p>我看了你的简历，如果简历没有夸大的话，你的水平是能够上手初级开发来承接需求的，对于应届生来说，你的积累已经够了，是很优秀的，去实习的时候，一定要去联想或者大厂的正常部门跟着走一遍接需求的流程，学怎么工作，你现在需要的我认为不是技术方面的问题，因为开发不仅是技术，你需要跟很多人沟通，对齐，怎么 cover 住你负责的需求。</p><p>作为一个前年毕业的应届生，跟你一样经历过很卷的面试和迷茫期，这个迷茫是因为目前的校招的招聘难度已经远远大于了应届生匹配的水平，所以我知道你现在是在怀疑人生，感觉自己什么都会一点，但一旦让你自己上手写，可能就有点抓瞎，但你需要记住，你现在是大三，是大学生，是一个普通人，这是很正常的情况，你不需要再在这上面想太多，我认为对于你现阶段的目前很明确：</p><ol><li><p>去实习，了解职场中软件开发的流程和规范，怎么和需求方，PM ，上下游 RD ，QA 沟通和掌握整体的开发节奏。</p></li><li><p>对于实习中，你会参与到系统很小一部分的改动，你会阅读到大量的代码，遇到不懂的，多去与这个系统的人交流，因为系统是为了实现业务需求，你需要了解业务流程，才能知道为什么代码这么写</p></li><li><p>因为七月秋招应该就会开始了，所以你首先把表达你实习期间掌握的业务流程和你对于业务的理解和自己做需求时遇到的难点用文字清晰的表达在简历上，正常面试的话，面试官肯定会根据你简历问；下班时间，写你的简历，根据你的简历你思考会有什么面试题，例如你简历上写了 Java ，那么 Java 的基本知识的面试题你就得多看看，写了 mysql ，mysql 的面试题什么索引啊，慢查啊，怎么避免慢查这样的面试题多看看，然后还有重要的算法题，你应该下班时间每天至少上去写一两题</p></li><li><p>说会到个人时间的自学，高效自学就得上手写代码，我的意思是，在你个人时间里，实现自己的需求学习新知识，然后运用到工作中；我举个例子，例如你现在不会 kafka ，现在你又想看电子游戏相关的新闻；那么你自己写两个模块，用上 kafka 来进行学习；其中一个模块就是爬游戏网站例如 3DM 的游戏新闻页面，然后按照单个游戏维度，把新闻做聚合，然后发送 kafka 消息；另一个模块，就是消费你发送的消息，展现给用户（你自己）；这是个很明显的伪需求，只是你自己为了学习 kafka 而做的。但因为你自己实现了自己的伪需求，你就基本掌握了 kafka 的使用；如果在这之后，公司有新项目，新需求，需要使用到 kafka ，因为你在实现上述伪需求的时候已经掌握了，所以对你来说，工作是一件比较轻松的事情，但工作需要考虑到 kafka 的更多使用场景，例如稳定性，消费速率，消费失败重试等等情况，但你已经掌握了基本知识，就算遇到不懂的，也会学的非常快。</p></li></ol><blockquote><p>Telegram a q</p></blockquote><p>哈哈，联想直接叫 x 老师就行，大部分时间都是 teams 沟通，见不到人的</p><p>一般需求都是在 Confluence 上写清楚的，各个团队都有知识库，让你 leader 给你开权限就能看</p><p>另外联想和互联网企业架构有点不一样</p><p>都是平台给需求，中间有个 DT 岗拆解需求，然后给 PA 继续拆解，BA 来做原型逻辑设计，然后是 IT 团队写代码，代码完了再内测，UAT，安全审查等等，一套流程下来一个大需求差不多也得几个月上线哈哈</p><p>另外开发都得会 jira，一般都是在 jira 上沟通问题</p><h2 id="岗位简写解释"><a href="#岗位简写解释" class="headerlink" title="岗位简写解释"></a>岗位简写解释</h2><p>PM: Product &amp; Marketing 产品经理</p><p>RD: Research and Development Engineer 研发工程师。对某种不存在的事物进行系统的研究和开发并具有一定经验的专业工作者，或者对已经存在的事物进行改进以达到优化目的的专业工作者。</p><p>QA: Quality Assurance Engineer</p><p>DT: Data Technology Business Process Design “根据业务情况梳理客户 LTV 经营业务流程，挖掘客户经营机会和提升点；规划客户 LTV 经营产品平台，包括客户数据分析的数据产品规划和面向运营和营销的平台工具规划”</p><p>PA: Project Administrator</p><p>BA: Business Analyst 商务分析师。Business Analytic 和 Business Analysis 有点不一样，一个偏数据分析，一个偏业务和需求分析。</p><p>UAT: User Acceptance Test 用户验收测试</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;blockquote&gt;
+&lt;p&gt;持续更新中&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&quot;入职前他人的指导&quot;&gt;&lt;a href=&quot;#入职前他人的指导&quot; class=&quot;headerlink&quot; title=&quot;入职前他人的指导&quot;&gt;&lt;/a&gt;入职前他人的指导&lt;/h2&gt;&lt;blockquo</summary>
+      
+    
+    
+    
+    <category term="Java" scheme="https://www.pil0txia.com/categories/Java/"/>
+    
+    
+    <category term="实习" scheme="https://www.pil0txia.com/tags/%E5%AE%9E%E4%B9%A0/"/>
+    
+    <category term="流程" scheme="https://www.pil0txia.com/tags/%E6%B5%81%E7%A8%8B/"/>
+    
+    <category term="规范" scheme="https://www.pil0txia.com/tags/%E8%A7%84%E8%8C%83/"/>
+    
+  </entry>
   
   <entry>
     <title>《你的名字。》 2K SDR 4K 原盘超采样壁纸</title>
@@ -665,32 +696,6 @@ p99 UCB1 算法公式两项的含义&lt;/p&gt;
     <category term="逆置" scheme="https://www.pil0txia.com/tags/%E9%80%86%E7%BD%AE/"/>
     
     <category term="算法" scheme="https://www.pil0txia.com/tags/%E7%AE%97%E6%B3%95/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>23 年春招实习准备</title>
-    <link href="https://www.pil0txia.com/post/2022-03-18_23-spring-internship/"/>
-    <id>https://www.pil0txia.com/post/2022-03-18_23-spring-internship/</id>
-    <published>2022-03-18T15:23:35.000Z</published>
-    <updated>2023-01-06T15:23:35.000Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="形势"><a href="#形势" class="headerlink" title="形势"></a>形势</h2><p>校招 (含实习生春招) 指南 - 知乎<br><a href="https://zhuanlan.zhihu.com/p/30178304">https://zhuanlan.zhihu.com/p/30178304</a></p><p>春招实习，暑期实习和日常实习有哪些区别？ - 知乎<br><a href="https://www.zhihu.com/question/380709386">https://www.zhihu.com/question/380709386</a></p><p>现在计算机大厂 985 本科是不是难进了？- 知乎<br><a href="https://www.zhihu.com/question/446863957">https://www.zhihu.com/question/446863957</a></p><h2 id="简历"><a href="#简历" class="headerlink" title="简历"></a>简历</h2><p>可能是一份没什么用的互联网校招指南… - 知乎<br><a href="https://zhuanlan.zhihu.com/p/24887478">https://zhuanlan.zhihu.com/p/24887478</a></p><h2 id="资料"><a href="#资料" class="headerlink" title="资料"></a>资料</h2><p>如果一定要在 C++ 和 JAVA 中选择，是 C++ 还是 java？ - 知乎<br><a href="https://www.zhihu.com/question/20736151">https://www.zhihu.com/question/20736151</a></p><p>计算机专业大学生应该在大学四年踏实学哪些东西？- 知乎<br><a href="https://www.zhihu.com/question/27368268/answer/1912558542">https://www.zhihu.com/question/27368268/answer/1912558542</a></p><h2 id="刷题"><a href="#刷题" class="headerlink" title="刷题"></a>刷题</h2><p>剑指 Offer_在线编程 + 题解_牛客题霸_牛客网<br><a href="https://www.nowcoder.com/ta/coding-interviews">https://www.nowcoder.com/ta/coding-interviews</a></p><p>剑指 Offer（第 2 版） - 力扣（LeetCode）<br><a href="https://leetcode.cn/problem-list/xb9nqhhg/">https://leetcode.cn/problem-list/xb9nqhhg/</a></p><h3 id="牛客有的力扣没有的题"><a href="#牛客有的力扣没有的题" class="headerlink" title="牛客有的力扣没有的题"></a>牛客有的力扣没有的题</h3><ul><li><input disabled="" type="checkbox"> jz23</li><li><input disabled="" type="checkbox"> jz76</li><li><input disabled="" type="checkbox"> jz77</li><li><input disabled="" type="checkbox"> jz78</li></ul><h3 id="需要复习"><a href="#需要复习" class="headerlink" title="需要复习"></a>需要复习</h3><ul><li><input disabled="" type="checkbox"> jz38</li></ul><h2 id="找实习网站"><a href="#找实习网站" class="headerlink" title="找实习网站"></a>找实习网站</h2><p>牛客</p><p>实习僧_大学生实习、校招求职招聘网站_实习_校园招聘丨萌想科技<br><a href="https://www.shixiseng.com/">https://www.shixiseng.com/</a></p><p>「南京招聘网」海量南京人才招聘信息 - BOSS 直聘<br><a href="https://www.zhipin.com/nanjing/">https://www.zhipin.com/nanjing/</a></p><p>互联网求职招聘找工作 - 上拉勾招聘 - 专业的互联网求职招聘网站<br><a href="https://www.lagou.com/">https://www.lagou.com/</a></p><p>高薪职位列表_名企职位推荐_热门行业推荐 - 大街网<br><a href="https://www.dajie.com/">https://www.dajie.com/</a></p><h2 id="阿里云云原生Serverless技术实践营南京站"><a href="#阿里云云原生Serverless技术实践营南京站" class="headerlink" title="阿里云云原生Serverless技术实践营南京站"></a>阿里云云原生 Serverless 技术实践营南京站</h2><p>与微信<code>阿里云Serverless团队负责人花名弈川</code>一番交谈得：</p><ul><li>有关考研，若大三时得到大厂实习机会，大四可以进入大厂，就无需再考研</li><li>腾讯的实习机会较多，从日常实习开始，再暑期实习</li><li>大部分 985 学生无法进入大厂，比例不到 30%</li></ul><p>与钉钉<code>阿里云Serverless团队运营姜曦</code>一番交谈得：</p><ul><li>关注 <code>阿里巴巴招聘官网-学生板块</code> 获得实习信息</li><li>关注 <code>阿里云开发者社区</code>关注比赛信息</li><li>此次实践营全场最快做出全部五个实操对他们团队而言认可度较高，可以直接投简历给真人，包括钉钉<code>阿里云Serverless负责人望宸</code></li></ul><h2 id="面试技巧"><a href="#面试技巧" class="headerlink" title="面试技巧"></a>面试技巧</h2><h3 id="BV1ME411K71g"><a href="#BV1ME411K71g" class="headerlink" title="BV1ME411K71g"></a>BV1ME411K71g</h3><p>面试常见问题：</p><ol><li>你的缺点是什么</li></ol><ul><li>避开会影响工作的缺点，避开性格方面的缺点。</li><li>以专业知识为切入点。</li></ul><ol start="2"><li>你的职业规划是什么</li></ol><ul><li>表达出稳定性和目标感。</li><li>对行业和岗位，逻辑表达清晰。</li></ul><ol start="3"><li>为什么想来我们公司、投这个岗位</li></ol><ul><li>了解这个公司的背景，对前景的看法、机遇和挑战。</li><li>你的求职目标和投递岗位的匹配度，个人发展空间。</li></ul><ol start="4"><li>你有什么问题要问我的</li></ol><ul><li>可以问：岗位业务流程、学习、推荐、入职培训机制等。</li><li>避免问：薪资、私人问题、和岗位无关的问题等。</li></ul><h2 id="2023春招简历更新思路"><a href="#2023春招简历更新思路" class="headerlink" title="2023春招简历更新思路"></a>2023 春招简历更新思路</h2><p>基础扎实：操作系统、数据结构、算法、计算机网络</p><p>学习能力：阿里云 Serverless，自建 Hexo、VuePress、ChatGPT 等服务</p><p>博客 PV 高量</p><h3 id="重难点"><a href="#重难点" class="headerlink" title="重难点"></a>重难点</h3><ul><li><input disabled="" type="checkbox"> 分表查询优化 <a href="https://segmentfault.com/a/1190000008859706">MySQL 的 limit 用法和分页查询的性能分析及优化 - 刻意练习 - SegmentFault 思否</a></li><li><input disabled="" type="checkbox"> java 数据库 调用出错 踩坑</li><li><input disabled="" type="checkbox"> 商城项目：怎么防止超卖，怎么保证事务</li></ul><h3 id="实习生项目经历应该怎么写？-V2EX"><a href="#实习生项目经历应该怎么写？-V2EX" class="headerlink" title="实习生项目经历应该怎么写？ - V2EX"></a><a href="https://v2ex.com/t/673752">实习生项目经历应该怎么写？ - V2EX</a></h3><blockquote><p>很多实习和校招简历都是使用招聘网站自动生成的，比如拉勾、boss 、牛客网等。 这些简历去除学校名、实习公司名、项目名，剩下的内容几乎一样，很难有区分度。特别是项目经历，很多人都是两句话：一句话介绍项目，一句话介绍自己做的事情。</p><p>我戏称之为 “两句话简历”。简短的文字很难让别人发现你的与众不同，也很难体现你的技术实力。实习期间的项目，少则一个周，长则几个月。你的业务理解，你的架构能力，你的技术思考，你的疑难攻坚，你的技术增长，这些都是都通过文字来表达。两句话难道就能讲清楚？这里不是让大家写作文。工作经历也不是堆砌业务术语。而是要糅合你对业务和架构理解，对自身工作的总结，对技术细节的提炼。</p><p>好的项目经历，应该包含：</p><ul><li>项目周期和项目名称</li><li>项目简介（建议，项目背景，项目特色）</li><li>项目架构（可无，技术栈，各子系统关系）</li><li>个人角色（建议）</li><li>设计思路（可无）</li><li>主要工作（重要，突出业务理解，技术深度）</li><li>个人收获（可无，技术提升，疑难攻坚）</li></ul><p>口说无凭，数据说话。</p><table><thead><tr><th>评估状态</th><th>人数</th><th>项目数量 &gt; 2 个</th><th>简介 &gt; 1 句</th><th>项目架构</th><th>角色</th><th>设计思路</th><th>主要工作 &gt; 3 条</th><th>个人收获</th></tr></thead><tbody><tr><td>通过</td><td> 31</td><td>17</td><td>7</td><td>4</td><td>9</td><td>1</td><td>12</td><td>3</td></tr><tr><td> 不通过</td><td> 69</td><td>25</td><td>7</td><td>4</td><td>8</td><td></td><td>9</td><td>3</td></tr></tbody></table><h2 id="简历不通过的共性问题："><a href="#简历不通过的共性问题：" class="headerlink" title="简历不通过的共性问题："></a>简历不通过的共性问题：</h2><h3 id="项目经验少"><a href="#项目经验少" class="headerlink" title="项目经验少"></a>项目经验少</h3><p>确实没有实习项目，怎么办？编程比赛，开源项目，导师项目这些经历也可以写出来。但是不要一句话描述了。</p><h3 id="对项目整体不了解"><a href="#对项目整体不了解" class="headerlink" title="对项目整体不了解"></a>对项目整体不了解</h3><p>项目背景，整体架构，技术栈，了解这些，可以更加深入理解后端开发的工作内容。找到自己的技术短板。可以找你的 mentor 或者同事聊一下之前的项目，通过对项目背景和架构的理解，可以了解到你的业务短板。</p><h3 id="主要工作不会总结"><a href="#主要工作不会总结" class="headerlink" title="主要工作不会总结"></a>主要工作不会总结</h3><p>回顾一下完成的代码，周报，项目总结。可以写自己的技术点，学习难点。可以和同学聊一下你的工作内容。通过别人的眼睛更能发现问题和亮点。不建议罗列业务点，即使写业务点，也要通过技术细节和数据指标来突出自己的技术深度和技术成长。内容尽量客观，减少一些主观词语。注意：千万不要把自己不清楚的事情写上去，否则面试的时候很难自圆其说，甚至暴露自己的短板。</p><p>据我所知，目前很多公司都有自己的人才库，投递大公司的简历会被永久记录。这点应该是不公开的秘密。 请好好把握。认真对待自己的简历和每一次面试。存在技术短板，先抓紧时间补足一下基础知识和算法能力。 好的内推 er，会先看对方简历，感觉不会通过的，聊一下业务细节，一起探讨如何改进简历。对他人和自己负责。 我总是坚信：一个努力的人肯定是有发光点的，只是自己没发现。</p><p>不放心简历的可以先发给 luw2007 (AT)<a href="http://gmail.com/">gmail.com</a> ，每天清一次收件箱。可以帮你预审，提供修改意见。 努力的人请投递简历吧。</p></blockquote><blockquote><p>项目的描述都太偏业务了，面试官要是不了解这方面业务，你让他怎么问。<br>应适当在项目描述里融入技术名词，比如基于 xx 框架 / 工具，采用 xx 算法 / 方案 / 思想，解决了 xx 问题，达到了 xx 效果。</p><p>用 STAR 来写：某个系统业务遇到什么问题，目标达到怎么样，自己做了什么，最终获得什么收益。这样写看的人可以更了解到你解决问题的思维和能力，而不是空洞的做过 XX 模块 XX 功能。</p><ol><li><p>学校是打码挡住了吗？ 如果不是的话需要加上，有的公司有硬性条件筛选，如果没有这项甚至不会进入筛选。</p></li><li><p>项目经历里面，需要把使用到的技术栈名词列一下。 如果有优秀员工之类的，能证明绩效的东西，也可以列一下。项目经历要说自己参与的部分，不要列过多描述整个项目是做什么的，整个项目就是再功能强大，你没参与实现的部分都不重要。</p></li></ol></blockquote><h2 id="TODO"><a href="#TODO" class="headerlink" title="TODO"></a>TODO</h2><ul><li><input checked="" disabled="" type="checkbox"> JVM 调优太深了，javaguide</li><li><input checked="" disabled="" type="checkbox"> jvm 垃圾回收和 jvm 模型，集合中的 hashmap</li><li><input checked="" disabled="" type="checkbox"> 牛客面经</li><li><input disabled="" type="checkbox"> 尚硅谷的谷粒商城</li><li><input disabled="" type="checkbox"> 生产者消费者复习</li><li><input disabled="" type="checkbox"> 计算机网络复习</li><li><input disabled="" type="checkbox"> 操作系统复习</li><li><input disabled="" type="checkbox"> 算法和数据结构 刷题</li><li><input checked="" disabled="" type="checkbox"> LRU</li><li><input disabled="" type="checkbox"> fork 和 exec</li><li><input checked="" disabled="" type="checkbox"> Redis 缓存击穿 穿透 雪崩</li><li><input disabled="" type="checkbox"> 分布式 锁</li><li><input disabled="" type="checkbox"> 析构函数</li><li><input disabled="" type="checkbox"> 国企技术岗、信息技术岗名单整理</li></ul>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h2 id=&quot;形势&quot;&gt;&lt;a href=&quot;#形势&quot; class=&quot;headerlink&quot; title=&quot;形势&quot;&gt;&lt;/a&gt;形势&lt;/h2&gt;&lt;p&gt;校招 (含实习生春招) 指南 - 知乎&lt;br&gt;&lt;a href=&quot;https://zhuanlan.zhihu.com/p/30178304&quot;</summary>
-      
-    
-    
-    
-    <category term="学习" scheme="https://www.pil0txia.com/categories/%E5%AD%A6%E4%B9%A0/"/>
-    
-    
-    <category term="春招" scheme="https://www.pil0txia.com/tags/%E6%98%A5%E6%8B%9B/"/>
-    
-    <category term="实习" scheme="https://www.pil0txia.com/tags/%E5%AE%9E%E4%B9%A0/"/>
     
   </entry>
   
