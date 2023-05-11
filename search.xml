@@ -148,11 +148,11 @@
             
             <tag> 网络运维 </tag>
             
+            <tag> CDN </tag>
+            
             <tag> 域名 </tag>
             
             <tag> DNS </tag>
-            
-            <tag> CDN </tag>
             
             <tag> SEO </tag>
             
@@ -181,8 +181,6 @@
       
         <tags>
             
-            <tag> CDN </tag>
-            
             <tag> JavaScript </tag>
             
             <tag> 不蒜子 </tag>
@@ -194,6 +192,8 @@
             <tag> pv </tag>
             
             <tag> uv </tag>
+            
+            <tag> CDN </tag>
             
         </tags>
       
@@ -1351,9 +1351,9 @@
       
         <tags>
             
-            <tag> 江苏 </tag>
-            
             <tag> 大学 </tag>
+            
+            <tag> 江苏 </tag>
             
             <tag> 面试 </tag>
             
@@ -1486,9 +1486,9 @@
       
         <tags>
             
-            <tag> Node.js </tag>
-            
             <tag> 博客 </tag>
+            
+            <tag> Node.js </tag>
             
             <tag> Hexo </tag>
             
@@ -1663,9 +1663,9 @@
       
         <tags>
             
-            <tag> 桌面运维 </tag>
-            
             <tag> 壁纸 </tag>
+            
+            <tag> 桌面运维 </tag>
             
             <tag> 主题 </tag>
             
