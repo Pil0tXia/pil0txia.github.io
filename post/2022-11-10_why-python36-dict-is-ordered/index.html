@@ -1,0 +1,308 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>为什么 Python 3.6 以后字典有序并且效率更高？ | Pil0tXia</title><meta name="author" content="Pil0tXia"><meta name="copyright" content="Pil0tXia"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="在 Python 3.5（含）以前，字典是不能保证顺序的，键值对 A 先插入字典，键值对 B 后插入字典，但是当你打印字典的 Keys 列表时，你会发现 B 可能在 A 的前面。 但是从 Python 3.6 开始，字典是变成有顺序的了。你先插入键值对 A，后插入键值对 B，那么当你打印 Keys 列表的时候，你就会发现 B 在 A 的后面。 不仅如此，从 Python 3.6 开始，下面的三种遍">
+<meta property="og:type" content="article">
+<meta property="og:title" content="为什么 Python 3.6 以后字典有序并且效率更高？">
+<meta property="og:url" content="https://www.pil0txia.com/post/2022-11-10_why-python36-dict-is-ordered/">
+<meta property="og:site_name" content="Pil0tXia">
+<meta property="og:description" content="在 Python 3.5（含）以前，字典是不能保证顺序的，键值对 A 先插入字典，键值对 B 后插入字典，但是当你打印字典的 Keys 列表时，你会发现 B 可能在 A 的前面。 但是从 Python 3.6 开始，字典是变成有顺序的了。你先插入键值对 A，后插入键值对 B，那么当你打印 Keys 列表的时候，你就会发现 B 在 A 的后面。 不仅如此，从 Python 3.6 开始，下面的三种遍">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://static.pil0txia.com/cover/material_9.webp">
+<meta property="article:published_time" content="2022-11-10T11:48:46.000Z">
+<meta property="article:modified_time" content="2022-11-10T11:48:46.000Z">
+<meta property="article:author" content="Pil0tXia">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="字典">
+<meta property="article:tag" content="数据结构">
+<meta property="article:tag" content="排序">
+<meta property="article:tag" content="键值对">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://static.pil0txia.com/cover/material_9.webp"><link rel="shortcut icon" href="https://static.pil0txia.com/assets/favicon.ico"><link rel="canonical" href="https://www.pil0txia.com/post/2022-11-10_why-python36-dict-is-ordered/"><link rel="preconnect" href="https://cdn.staticfile.org"/><link rel="preconnect" href="//www.google-analytics.com" crossorigin=""/><link rel="preconnect" href="//hm.baidu.com"/><meta name="baidu-site-verification" content="code-lhG1qFUBLz"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.4.2/css/all.min.css"><link rel="stylesheet" href="https://cdn.staticfile.org/node-snackbar/0.1.16/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.staticfile.org/fancyapps-ui/5.0.28/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?033cea028d1903fd4a1c0f93cb0639c4";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script><script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-PXENV1F7F1"></script><script>window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-PXENV1F7F1');
+</script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":800},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体中文","cht_to_chs":"你已切换为简体中文","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#1f1f1f","position":"top-right"},
+  infinitegrid: {
+    js: 'https://cdn.staticfile.org/egjs-infinitegrid/4.11.0/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: true,
+  islazyload: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '为什么 Python 3.6 以后字典有序并且效率更高？',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: false,
+  postUpdate: '2022-11-10 19:48:46'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+          if (t === undefined) {
+            if (isLightMode) activateLightMode()
+            else if (isDarkMode) activateDarkMode()
+            else if (isNotSpecified || hasNoSupport) {
+              const now = new Date()
+              const hour = now.getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(e => {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><link rel="preload" href="https://lib.baomitu.com/fonts/ubuntu/ubuntu-regular.woff2" as="font" crossorigin><link rel="preload" href="https://lib.baomitu.com/fonts/varela-round/varela-round-regular.woff2" as="font" crossorigin><link rel="stylesheet" href="https://static.pil0txia.com/assets/customStyle.css"><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="Pil0tXia" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxOTIwIiBoZWlnaHQ9IjEwODAiIHZpZXdCb3g9IjAgMCAxOTIwIDEwODAiPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9IiNmZmYiLz48L3N2Zz4=" data-lazy-src="https://static.pil0txia.com/assets/03_3_600p.webp" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">63</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">205</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">13</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/random"><i class="fa-fw fas fa-random"></i><span> 随机</span></a></div><div class="menus_item"><a class="site-page group hide" href="javascript:void(0);" rel="external nofollow noreferrer"><i class="fa-fw fa-solid fa-compass"></i><span> 目录</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" target="_blank" rel="noopener external nofollow noreferrer" href="https://docs.pil0txia.com"><i class="fa-fw fa-solid fa-book"></i><span> 文档</span></a></div><div class="menus_item"><a class="site-page" href="/gallery/"><i class="fa-fw fa-regular fa-images"></i><span> 图库</span></a></div><div class="menus_item"><a class="site-page group hide" href="javascript:void(0);" rel="external nofollow noreferrer"><i class="fa-fw fa-solid fa-code"></i><span> 功能</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" target="_blank" rel="noopener external nofollow noreferrer" href="https://status.pil0txia.com"><i class="fa-fw fa-solid fa-bolt-lightning"></i><span> 监控</span></a></li><li><a class="site-page child" href="/atom.xml"><i class="fa-fw fa-solid fa-square-rss"></i><span> RSS</span></a></li></ul></div><div class="menus_item"><a class="site-page group hide" href="javascript:void(0);" rel="external nofollow noreferrer"><i class="fa-fw fa-solid fa-gift"></i><span> 彩蛋</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/gift/snow/"><i class="fa-fw fa-regular fa-snowflake"></i><span> 下雪啦</span></a></li><li><a class="site-page child" href="/gift/christmas_tree/"><i class="fa-fw fa-solid fa-tree"></i><span> 圣诞树</span></a></li><li><a class="site-page child" href="/gift/santa_game/"><i class="fa-fw fa-solid fa-gamepad"></i><span> 圣诞游戏</span></a></li><li><a class="site-page child" href="/gift/small_snow/"><i class="fa-fw fa-solid fa-candy-cane"></i><span> 雪变小了</span></a></li><li><a class="site-page child" href="/gift/love_text/"><i class="fa-fw fas fa-heart"></i><span> Love终端</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa-solid fa-hashtag"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://static.pil0txia.com/cover/material_9.webp')"><nav id="nav"><span id="blog-info"><a href="/" title="Pil0tXia"><img class="site-icon" src= "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxOTIwIiBoZWlnaHQ9IjEwODAiIHZpZXdCb3g9IjAgMCAxOTIwIDEwODAiPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9IiNmZmYiLz48L3N2Zz4=" data-lazy-src="https://static.pil0txia.com/assets/logo.png"/></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);" rel="external nofollow noreferrer"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/random"><i class="fa-fw fas fa-random"></i><span> 随机</span></a></div><div class="menus_item"><a class="site-page group hide" href="javascript:void(0);" rel="external nofollow noreferrer"><i class="fa-fw fa-solid fa-compass"></i><span> 目录</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" target="_blank" rel="noopener external nofollow noreferrer" href="https://docs.pil0txia.com"><i class="fa-fw fa-solid fa-book"></i><span> 文档</span></a></div><div class="menus_item"><a class="site-page" href="/gallery/"><i class="fa-fw fa-regular fa-images"></i><span> 图库</span></a></div><div class="menus_item"><a class="site-page group hide" href="javascript:void(0);" rel="external nofollow noreferrer"><i class="fa-fw fa-solid fa-code"></i><span> 功能</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" target="_blank" rel="noopener external nofollow noreferrer" href="https://status.pil0txia.com"><i class="fa-fw fa-solid fa-bolt-lightning"></i><span> 监控</span></a></li><li><a class="site-page child" href="/atom.xml"><i class="fa-fw fa-solid fa-square-rss"></i><span> RSS</span></a></li></ul></div><div class="menus_item"><a class="site-page group hide" href="javascript:void(0);" rel="external nofollow noreferrer"><i class="fa-fw fa-solid fa-gift"></i><span> 彩蛋</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/gift/snow/"><i class="fa-fw fa-regular fa-snowflake"></i><span> 下雪啦</span></a></li><li><a class="site-page child" href="/gift/christmas_tree/"><i class="fa-fw fa-solid fa-tree"></i><span> 圣诞树</span></a></li><li><a class="site-page child" href="/gift/santa_game/"><i class="fa-fw fa-solid fa-gamepad"></i><span> 圣诞游戏</span></a></li><li><a class="site-page child" href="/gift/small_snow/"><i class="fa-fw fa-solid fa-candy-cane"></i><span> 雪变小了</span></a></li><li><a class="site-page child" href="/gift/love_text/"><i class="fa-fw fas fa-heart"></i><span> Love终端</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa-solid fa-hashtag"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);" rel="external nofollow noreferrer"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">为什么 Python 3.6 以后字典有序并且效率更高？</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-11-10T11:48:46.000Z" title="发表于 2022-11-10 19:48:46">2022-11-10</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-11-10T11:48:46.000Z" title="更新于 2022-11-10 19:48:46">2022-11-10</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Python/">Python</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">1.9k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>6分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="为什么 Python 3.6 以后字典有序并且效率更高？"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p>在 Python 3.5（含）以前，字典是不能保证顺序的，键值对 A 先插入字典，键值对 B 后插入字典，但是当你打印字典的 Keys 列表时，你会发现 B 可能在 A 的前面。</p>
+<p>但是从 Python 3.6 开始，字典是变成有顺序的了。你先插入键值对 A，后插入键值对 B，那么当你打印 Keys 列表的时候，你就会发现 B 在 A 的后面。</p>
+<p>不仅如此，从 Python 3.6 开始，下面的三种遍历操作，效率要高于 Python 3.5 之前：</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> key <span class="keyword">in</span> 字典</span><br><span class="line"><span class="keyword">for</span> value <span class="keyword">in</span> 字典.values()</span><br><span class="line"><span class="keyword">for</span> key, value <span class="keyword">in</span> 字典.items()</span><br></pre></td></tr></tbody></table></figure>
+
+<p>从 Python 3.6 开始，字典占用内存空间的大小，视字典里面键值对的个数，只有原来的 30%~95%。</p>
+<p>Python 3.6 到底对字典做了什么优化呢？为了说明这个问题，我们需要先来说一说，在 Python 3.5（含）之前，字典的底层原理。</p>
+<p>当我们初始化一个空字典的时候，CPython 的底层会初始化一个二维数组，这个数组有 8 行，3 列，如下面的示意图所示：</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">my_dict = {}</span><br><span class="line"></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">此时的内存示意图</span></span><br><span class="line"><span class="string">[[---, ---, ---],</span></span><br><span class="line"><span class="string">[---, ---, ---],</span></span><br><span class="line"><span class="string">[---, ---, ---],</span></span><br><span class="line"><span class="string">[---, ---, ---],</span></span><br><span class="line"><span class="string">[---, ---, ---],</span></span><br><span class="line"><span class="string">[---, ---, ---],</span></span><br><span class="line"><span class="string">[---, ---, ---],</span></span><br><span class="line"><span class="string">[---, ---, ---]]</span></span><br><span class="line"><span class="string">'''</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p>现在，我们往字典里面添加一个数据：</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">my_dict[<span class="string">'name'</span>] = <span class="string">'kingname'</span></span><br><span class="line"></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">此时的内存示意图</span></span><br><span class="line"><span class="string">[[---, ---, ---],</span></span><br><span class="line"><span class="string">[---, ---, ---],</span></span><br><span class="line"><span class="string">[---, ---, ---],</span></span><br><span class="line"><span class="string">[---, ---, ---],</span></span><br><span class="line"><span class="string">[---, ---, ---],</span></span><br><span class="line"><span class="string">[1278649844881305901, 指向name的指针, 指向kingname的指针],</span></span><br><span class="line"><span class="string">[---, ---, ---],</span></span><br><span class="line"><span class="string">[---, ---, ---]]</span></span><br><span class="line"><span class="string">'''</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p>这里解释一下，为什么添加了一个键值对以后，内存变成了这个样子：</p>
+<p>首先我们调用 Python 的 <code>hash</code> 函数，计算 <code>name</code> 这个字符串在<strong>当前运行时</strong>的 hash 值：</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">hash</span>(<span class="string">'name'</span>)</span><br><span class="line"><span class="number">1278649844881305901</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p>特别注意，我这里强调了『当前运行时』，这是因为，Python 自带的这个 <code>hash</code> 函数，和我们传统上认为的 Hash 函数是不一样的。Python 自带的这个 <code>hash</code> 函数计算出来的值，只能保证在每一个运行时的时候不变，但是当你关闭 Python 再重新打开，那么它的值就可能会改变，如下图所示：</p>
+<p><img src= "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxOTIwIiBoZWlnaHQ9IjEwODAiIHZpZXdCb3g9IjAgMCAxOTIwIDEwODAiPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9IiNmZmYiLz48L3N2Zz4=" data-lazy-src="https://kingname-1257411235.cos.ap-chengdu.myqcloud.com/2019-07-12-21-49-44.png" alt="img"></p>
+<p>假设在某一个运行时里面，<code>hash('name')</code> 的值为 <code>1278649844881305901</code>。现在我们要把这个数对 8 取余数：</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="number">1278649844881305901</span> % <span class="number">8</span></span><br><span class="line"><span class="number">5</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p>余数为 5，那么就把它放在刚刚初始化的二维数组中，下标为 5 的这一行。由于 <code>name</code> 和 <code>kingname</code> 是两个字符串，所以底层 C 语言会使用两个字符串变量存放这两个值，然后得到他们对应的指针。于是，我们这个二维数组下标为 5 的这一行，第一个值为 <code>name</code> 的 hash 值，第二个值为 <code>name</code> 这个字符串所在的内存的地址（指针就是内存地址），第三个值为 <code>kingname</code> 这个字符串所在的内存的地址。</p>
+<p>现在，我们再来插入两个键值对：</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">my_dict[<span class="string">'age'</span>] = <span class="number">26</span></span><br><span class="line">my_dict[<span class="string">'salary'</span>] = <span class="number">999999</span></span><br><span class="line"></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">此时的内存示意图</span></span><br><span class="line"><span class="string">[[-4234469173262486640, 指向salary的指针, 指向999999的指针],</span></span><br><span class="line"><span class="string">[1545085610920597121, 执行age的指针, 指向26的指针],</span></span><br><span class="line"><span class="string">[---, ---, ---],</span></span><br><span class="line"><span class="string">[---, ---, ---],</span></span><br><span class="line"><span class="string">[---, ---, ---],</span></span><br><span class="line"><span class="string">[1278649844881305901, 指向name的指针, 指向kingname的指针],</span></span><br><span class="line"><span class="string">[---, ---, ---],</span></span><br><span class="line"><span class="string">[---, ---, ---]]</span></span><br><span class="line"><span class="string">'''</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p>那么字典怎么读取数据呢？首先假设我们要读取 <code>age</code> 对应的值。</p>
+<p>此时，Python 先计算在当前运行时下面，<code>age</code> 对应的 Hash 值是多少：</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">hash</span>(<span class="string">'age'</span>)</span><br><span class="line"><span class="number">1545085610920597121</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p>现在这个 hash 值对 8 取余数：</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="number">1545085610920597121</span> % <span class="number">8</span></span><br><span class="line"><span class="number">1</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p>余数为 1，那么二维数组里面，下标为 1 的这一行就是需要的键值对。直接返回这一行第三个指针对应的内存中的值，就是 <code>age</code> 对应的值 <code>26</code>。</p>
+<p>当你要循环遍历字典的 Key 的时候，Python 底层会遍历这个二维数组，如果当前行有数据，那么就返回 Key 指针对应的内存里面的值。如果当前行没有数据，那么就跳过。所以总是会遍历整个二位数组的每一行。</p>
+<p>每一行有三列，每一列占用 8byte 的内存空间，所以每一行会占用 24byte 的内存空间。</p>
+<p>由于 Hash 值取余数以后，余数可大可小，所以字典的 Key 并不是按照插入的顺序存放的。</p>
+<blockquote>
+<p>注意，这里我省略了与本文没有太大关系的两个点：</p>
+<ol>
+<li>开放寻址，当两个不同的 Key，经过 Hash 以后，再对 8 取余数，可能余数会相同。此时 Python 为了不覆盖之前已有的值，就会使用<code>开放寻址</code>技术重新寻找一个新的位置存放这个新的键值对。</li>
+<li>当字典的键值对数量超过当前数组长度的 2/3 时，数组会进行扩容，8 行变成 16 行，16 行变成 32 行。长度变了以后，原来的余数位置也会发生变化，此时就需要移动原来位置的数据，导致插入效率变低。</li>
+</ol>
+</blockquote>
+<p>在 Python 3.6 以后，字典的底层数据结构发生了变化，现在当你初始化一个空的字典以后，它在底层是这样的：</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">my_dict = {}</span><br><span class="line"></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">此时的内存示意图</span></span><br><span class="line"><span class="string">indices = [None, None, None, None, None, None, None, None]</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">entries = []</span></span><br><span class="line"><span class="string">'''</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p>当你初始化一个字典以后，Python 单独生成了一个长度为 8 的一维数组。然后又生成了一个空的二维数组。</p>
+<p>现在，我们往字典里面添加一个键值对：</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">my_dict[<span class="string">'name'</span>] = <span class="string">'kingname'</span></span><br><span class="line"></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">此时的内存示意图</span></span><br><span class="line"><span class="string">indices = [None, 0, None, None, None, None, None, None]</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">entries = [[-5954193068542476671, 指向name的指针, 执行kingname的指针]]</span></span><br><span class="line"><span class="string">'''</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p>为什么内存会变成这个样子呢？我们来一步一步地看：</p>
+<p>在当前运行时，<code>name</code> 这个字符串的 hash 值为 <code>-5954193068542476671</code>，这个值对 8 取余数是 1：</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">hash</span>(<span class="string">'name'</span>)</span><br><span class="line">-<span class="number">5954193068542476671</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">hash</span>(<span class="string">'name'</span>) % <span class="number">8</span></span><br><span class="line"><span class="number">1</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p>所以，我们把 <code>indices</code> 这个一维数组里面，下标为 1 的位置修改为 0。</p>
+<p>这里的 0 是什么意思呢？0 是二位数组 <code>entries</code> 的索引。现在 <code>entries</code> 里面只有一行，就是我们刚刚添加的这个键值对的三个数据：<code>name</code> 的 hash 值、指向 <code>name</code> 的指针和指向 <code>kinganme</code> 的指针。所以 <code>indices</code> 里面填写的数字 0，就是刚刚我们插入的这个键值对的数据在二位数组里面的行索引。</p>
+<p>好，现在我们再来插入两条数据：</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">my_dict[<span class="string">'address'</span>] = <span class="string">'xxx'</span></span><br><span class="line">my_dict[<span class="string">'salary'</span>] = <span class="number">999999</span></span><br><span class="line"></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">此时的内存示意图</span></span><br><span class="line"><span class="string">indices = [1, 0, None, None, None, None, 2, None]</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">entries = [[-5954193068542476671, 指向name的指针, 执行kingname的指针],</span></span><br><span class="line"><span class="string">          [9043074951938101872, 指向address的指针，指向xxx的指针],</span></span><br><span class="line"><span class="string">          [7324055671294268046, 指向salary的指针, 指向999999的指针]</span></span><br><span class="line"><span class="string">         ]</span></span><br><span class="line"><span class="string">'''</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p>现在如果我要读取数据怎么办呢？假如我要读取 <code>salary</code> 的值，那么首先计算 <code>salary</code> 的 hash 值，以及这个值对 8 的余数：</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">hash</span>(<span class="string">'salary'</span>)</span><br><span class="line"><span class="number">7324055671294268046</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">hash</span>(<span class="string">'salary'</span>) % <span class="number">8</span></span><br><span class="line"><span class="number">6</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p>那么我就去读 <code>indices</code> 下标为 6 的这个值。这个值为 2.</p>
+<p>然后再去读 entries 里面，下标为 2 的这一行的数据，也就是 salary 对应的数据了。</p>
+<p>新的这种方式，当我要插入新的数据的时候，始终只是往 <code>entries</code> 的后面添加数据，这样就能保证插入的顺序。当我们要遍历字典的 Keys 和 Values 的时候，直接遍历 <code>entries</code> 即可，里面每一行都是有用的数据，不存在跳过的情况，减少了遍历的个数。</p>
+<p>老的方式，当二维数组有 8 行的时候，即使有效数据只有 3 行，但它占用的内存空间还是 <code>8*24 = 192 byte</code>。但使用新的方式，如果只有三行有效数据，那么 <code>entries</code> 也就只有 3 行，占用的空间为 <code>3*24 =72 byte</code>，而 <code>indices</code> 由于只是一个一维的数组，只占用 8 byte，所以一共占用 80 byte。内存占用只有原来的 41%。</p>
+<blockquote>
+<p><a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.kingname.info/2019/07/13/python-dict/">原文地址</a></p>
+</blockquote>
+</article><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Python/">Python</a><a class="post-meta__tags" href="/tags/%E5%AD%97%E5%85%B8/">字典</a><a class="post-meta__tags" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a><a class="post-meta__tags" href="/tags/%E6%8E%92%E5%BA%8F/">排序</a><a class="post-meta__tags" href="/tags/%E9%94%AE%E5%80%BC%E5%AF%B9/">键值对</a></div><div class="post_share"><div class="social-share" data-image="https://static.pil0txia.com/cover/material_9.webp" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.staticfile.org/butterfly-extsrc/1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.staticfile.org/butterfly-extsrc/1.1.3/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/post/2022-12-06_cloudflare-for-saas-backblaze-b2/" title="替代 jsDelivr？Cloudflare for SaaS + Backblaze B2 免备案自建图床"><img class="cover" src= "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxOTIwIiBoZWlnaHQ9IjEwODAiIHZpZXdCb3g9IjAgMCAxOTIwIDEwODAiPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9IiNmZmYiLz48L3N2Zz4=" data-lazy-src="https://static.pil0txia.com/picgo/image-20221217015128945.webp" onerror="onerror=null;src='https://static.pil0txia.com/banner/60914916_404-NOT-FOUND_720p.webp'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">替代 jsDelivr？Cloudflare for SaaS + Backblaze B2 免备案自建图床</div></div></a></div><div class="next-post pull-right"><a href="/post/2022-09-29_servlet-get-post-garbage-characters/" title="Servlet 中请求和响应过程中的乱码问题解决"><img class="cover" src= "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxOTIwIiBoZWlnaHQ9IjEwODAiIHZpZXdCb3g9IjAgMCAxOTIwIDEwODAiPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9IiNmZmYiLz48L3N2Zz4=" data-lazy-src="https://static.pil0txia.com/cover/11_gettyimages-831408032_resized.webp" onerror="onerror=null;src='https://static.pil0txia.com/banner/60914916_404-NOT-FOUND_720p.webp'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Servlet 中请求和响应过程中的乱码问题解决</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/post/2022-09-19_python-notes/" title="Python 程序设计学习笔记"><img class="cover" src= "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxOTIwIiBoZWlnaHQ9IjEwODAiIHZpZXdCb3g9IjAgMCAxOTIwIDEwODAiPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9IiNmZmYiLz48L3N2Zz4=" data-lazy-src="https://static.pil0txia.com/picgo/image-20220919110722606.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-09-19</div><div class="title">Python 程序设计学习笔记</div></div></a></div><div><a href="/post/2023-07-06_stream-comparator-and-lambda-sort/" title="【联想实习笔记】克服在流中使用 Lambda 表达式排序时编译器类型推断的弱点"><img class="cover" src= "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxOTIwIiBoZWlnaHQ9IjEwODAiIHZpZXdCb3g9IjAgMCAxOTIwIDEwODAiPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9IiNmZmYiLz48L3N2Zz4=" data-lazy-src="https://static.pil0txia.com/cover/220148592_123616426606761_3180647973349825260_n.webp" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-07-06</div><div class="title">【联想实习笔记】克服在流中使用 Lambda 表达式排序时编译器类型推断的弱点</div></div></a></div></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="giscus-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src= "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxOTIwIiBoZWlnaHQ9IjEwODAiIHZpZXdCb3g9IjAgMCAxOTIwIDEwODAiPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9IiNmZmYiLz48L3N2Zz4=" data-lazy-src="https://static.pil0txia.com/assets/03_3_600p.webp" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Pil0tXia</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">63</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">205</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">13</div></a></div><a id="card-info-btn" href="mailto:admin@pil0txia.com" rel="external nofollow noreferrer"><i class="fas fa-envelope"></i><span>Contact Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/Pil0tXia" rel="external nofollow noreferrer" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="https://www.v2ex.com/member/Pil0tXia" rel="external nofollow noreferrer" target="_blank" title="V2EX"><i class="fa-solid fa-v"></i></a><a class="social-icon" href="https://space.bilibili.com/286768851/" rel="external nofollow noreferrer" target="_blank" title="Bilibili"><i class="fa-brands fa-bilibili"></i></a><a class="social-icon" href="https://user.qzone.qq.com/1837713753/main" rel="external nofollow noreferrer" target="_blank" title="Photography"><i class="fa-solid fa-camera"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">不会摄影的白帽子不是好机长！</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/post/2023-08-28_community-over-code-asia-2023/" title="Apache 社区力量的汇聚 &amp; 程序员奔现大会：CommunityOverCode Asia 2023 给我的成长"><img src= "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxOTIwIiBoZWlnaHQ9IjEwODAiIHZpZXdCb3g9IjAgMCAxOTIwIDEwODAiPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9IiNmZmYiLz48L3N2Zz4=" data-lazy-src="https://dg.static.pil0txia.com/gallery/apache/community-over-code-asia-2023-banner-bagevent.webp" onerror="this.onerror=null;this.src='https://static.pil0txia.com/banner/60914916_404-NOT-FOUND_720p.webp'" alt="Apache 社区力量的汇聚 &amp; 程序员奔现大会：CommunityOverCode Asia 2023 给我的成长"/></a><div class="content"><a class="title" href="/post/2023-08-28_community-over-code-asia-2023/" title="Apache 社区力量的汇聚 &amp; 程序员奔现大会：CommunityOverCode Asia 2023 给我的成长">Apache 社区力量的汇聚 &amp; 程序员奔现大会：CommunityOverCode Asia 2023 给我的成长</a><time datetime="2023-08-28T08:56:30.000Z" title="发表于 2023-08-28 16:56:30">2023-08-28</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/post/2023-08-11_sync-cache-under-async-events/" title="【开源贡献笔记】异步文件事件监听：协调稳健的 Webhook 配置缓存同步"><img src= "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxOTIwIiBoZWlnaHQ9IjEwODAiIHZpZXdCb3g9IjAgMCAxOTIwIDEwODAiPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9IiNmZmYiLz48L3N2Zz4=" data-lazy-src="https://static.pil0txia.com/picgo/image-20230825103741155.webp" onerror="this.onerror=null;this.src='https://static.pil0txia.com/banner/60914916_404-NOT-FOUND_720p.webp'" alt="【开源贡献笔记】异步文件事件监听：协调稳健的 Webhook 配置缓存同步"/></a><div class="content"><a class="title" href="/post/2023-08-11_sync-cache-under-async-events/" title="【开源贡献笔记】异步文件事件监听：协调稳健的 Webhook 配置缓存同步">【开源贡献笔记】异步文件事件监听：协调稳健的 Webhook 配置缓存同步</a><time datetime="2023-08-11T08:54:43.000Z" title="发表于 2023-08-11 16:54:43">2023-08-11</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/post/2023-07-06_stream-comparator-and-lambda-sort/" title="【联想实习笔记】克服在流中使用 Lambda 表达式排序时编译器类型推断的弱点"><img src= "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxOTIwIiBoZWlnaHQ9IjEwODAiIHZpZXdCb3g9IjAgMCAxOTIwIDEwODAiPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9IiNmZmYiLz48L3N2Zz4=" data-lazy-src="https://static.pil0txia.com/cover/220148592_123616426606761_3180647973349825260_n.webp" onerror="this.onerror=null;this.src='https://static.pil0txia.com/banner/60914916_404-NOT-FOUND_720p.webp'" alt="【联想实习笔记】克服在流中使用 Lambda 表达式排序时编译器类型推断的弱点"/></a><div class="content"><a class="title" href="/post/2023-07-06_stream-comparator-and-lambda-sort/" title="【联想实习笔记】克服在流中使用 Lambda 表达式排序时编译器类型推断的弱点">【联想实习笔记】克服在流中使用 Lambda 表达式排序时编译器类型推断的弱点</a><time datetime="2023-07-06T09:57:39.000Z" title="发表于 2023-07-06 17:57:39">2023-07-06</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/post/2023-06-27_do-not-trust-todo-comment/" title="【开源贡献笔记】前辈在单元测试里留下的 TODO 注释，你该信吗？"><img src= "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxOTIwIiBoZWlnaHQ9IjEwODAiIHZpZXdCb3g9IjAgMCAxOTIwIDEwODAiPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9IiNmZmYiLz48L3N2Zz4=" data-lazy-src="https://static.pil0txia.com/picgo/image-20230629152048147.webp" onerror="this.onerror=null;this.src='https://static.pil0txia.com/banner/60914916_404-NOT-FOUND_720p.webp'" alt="【开源贡献笔记】前辈在单元测试里留下的 TODO 注释，你该信吗？"/></a><div class="content"><a class="title" href="/post/2023-06-27_do-not-trust-todo-comment/" title="【开源贡献笔记】前辈在单元测试里留下的 TODO 注释，你该信吗？">【开源贡献笔记】前辈在单元测试里留下的 TODO 注释，你该信吗？</a><time datetime="2023-06-27T12:47:54.000Z" title="发表于 2023-06-27 20:47:54">2023-06-27</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/post/2023-06-23_glcc-2023-dss/" title="【开源之夏】DataSphereStudio 集成 GitLab 课题 Proposal（已中选）"><img src= "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxOTIwIiBoZWlnaHQ9IjEwODAiIHZpZXdCb3g9IjAgMCAxOTIwIDEwODAiPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9IiNmZmYiLz48L3N2Zz4=" data-lazy-src="https://static.pil0txia.com/picgo/image-20230623220151200.webp" onerror="this.onerror=null;this.src='https://static.pil0txia.com/banner/60914916_404-NOT-FOUND_720p.webp'" alt="【开源之夏】DataSphereStudio 集成 GitLab 课题 Proposal（已中选）"/></a><div class="content"><a class="title" href="/post/2023-06-23_glcc-2023-dss/" title="【开源之夏】DataSphereStudio 集成 GitLab 课题 Proposal（已中选）">【开源之夏】DataSphereStudio 集成 GitLab 课题 Proposal（已中选）</a><time datetime="2023-06-23T13:42:30.000Z" title="发表于 2023-06-23 21:42:30">2023-06-23</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('https://static.pil0txia.com/cover/material_9.webp')"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By Pil0tXia</div><div class="footer_custom_text"><a href="https://beian.miit.gov.cn/" rel="external nofollow noreferrer" target="_blank">苏ICP备2023001491号-1</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.staticfile.org/fancyapps-ui/5.0.28/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.staticfile.org/instant.page/5.2.0/instantpage.min.js" type="module"></script><script src="https://cdn.staticfile.org/vanilla-lazyload/17.8.5/lazyload.iife.min.js"></script><script src="https://cdn.staticfile.org/node-snackbar/0.1.16/snackbar.min.js"></script><div class="js-pjax"><script>(()=>{
+  const getGiscusTheme = theme => {
+    return theme === 'dark' ? 'dark' : 'light'
+  }
+
+  const loadGiscus = () => {
+    const config = Object.assign({
+      src: 'https://giscus.app/client.js',
+      'data-repo': 'Pil0tXia/hexo-giscus',
+      'data-repo-id': 'R_kgDOIPxOww',
+      'data-category-id': 'DIC_kwDOIPxOw84CSC9p',
+      'data-mapping': 'pathname',
+      'data-theme': getGiscusTheme(document.documentElement.getAttribute('data-theme')),
+      'data-reactions-enabled': '1',
+      crossorigin: 'anonymous',
+      async: true
+    },null)
+
+    const ele = document.createElement('script')
+    for (let key in config) {
+      ele.setAttribute(key, config[key])
+    }
+    document.getElementById('giscus-wrap').appendChild(ele)
+  }
+
+  const changeGiscusTheme = theme => {
+    const sendMessage = message => {
+      const iframe = document.querySelector('iframe.giscus-frame')
+      if (!iframe) return
+      iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app')
+    }
+
+    sendMessage({
+      setConfig: {
+        theme: getGiscusTheme(theme)
+      }
+    });
+  }
+
+  btf.addGlobalFn('themeChange', changeGiscusTheme, 'giscus')
+
+  if ('Giscus' === 'Giscus' || !true) {
+    if (true) btf.loadComment(document.getElementById('giscus-wrap'), loadGiscus)
+    else loadGiscus()
+  } else {
+    window.loadOtherComment= loadGiscus
+  }
+})()</script></div><script defer="defer" id="ribbon" src="https://cdn.staticfile.org/butterfly-extsrc/1.1.3/canvas-ribbon.min.js" size="170" alpha="0.6" zIndex="-1" mobile="true" data-click="true"></script><script async data-pjax src="https://static.pil0txia.com/assets/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>

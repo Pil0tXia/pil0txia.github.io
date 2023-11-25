@@ -1,0 +1,394 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>编译原理学习笔记 | Pil0tXia</title><meta name="author" content="Pil0tXia"><meta name="copyright" content="Pil0tXia"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="不讲不考察的内容 参考：编译原理 - 学习笔记 - Zhang T’s Blog   1.5 编译程序的生成  第七章 作用域  第八章   日常课堂笔记非确定集与确定集的分辨一个状态（字符集合）在接收到同样的字符串时，会转变到不同的状态（集合），导致了它的非确定性。 NFA 转换为 DFA所谓的状态闭包是指，从当前节点，经过 ε 符（无条件转移）能到达的所有节点的集合，包括当前节点自己。 分解A">
+<meta property="og:type" content="article">
+<meta property="og:title" content="编译原理学习笔记">
+<meta property="og:url" content="https://www.pil0txia.com/post/2023-05-08_compilation-principle-notes/">
+<meta property="og:site_name" content="Pil0tXia">
+<meta property="og:description" content="不讲不考察的内容 参考：编译原理 - 学习笔记 - Zhang T’s Blog   1.5 编译程序的生成  第七章 作用域  第八章   日常课堂笔记非确定集与确定集的分辨一个状态（字符集合）在接收到同样的字符串时，会转变到不同的状态（集合），导致了它的非确定性。 NFA 转换为 DFA所谓的状态闭包是指，从当前节点，经过 ε 符（无条件转移）能到达的所有节点的集合，包括当前节点自己。 分解A">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://static.pil0txia.com/cover/material_6.webp">
+<meta property="article:published_time" content="2023-05-08T09:04:17.000Z">
+<meta property="article:modified_time" content="2023-05-08T09:34:17.000Z">
+<meta property="article:author" content="Pil0tXia">
+<meta property="article:tag" content="本科CS课程笔记">
+<meta property="article:tag" content="大三下">
+<meta property="article:tag" content="编译原理">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://static.pil0txia.com/cover/material_6.webp"><link rel="shortcut icon" href="https://static.pil0txia.com/assets/favicon.ico"><link rel="canonical" href="https://www.pil0txia.com/post/2023-05-08_compilation-principle-notes/"><link rel="preconnect" href="https://cdn.staticfile.org"/><link rel="preconnect" href="//www.google-analytics.com" crossorigin=""/><link rel="preconnect" href="//hm.baidu.com"/><meta name="baidu-site-verification" content="code-lhG1qFUBLz"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.4.2/css/all.min.css"><link rel="stylesheet" href="https://cdn.staticfile.org/node-snackbar/0.1.16/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.staticfile.org/fancyapps-ui/5.0.28/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?033cea028d1903fd4a1c0f93cb0639c4";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script><script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-PXENV1F7F1"></script><script>window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-PXENV1F7F1');
+</script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":800},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体中文","cht_to_chs":"你已切换为简体中文","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#1f1f1f","position":"top-right"},
+  infinitegrid: {
+    js: 'https://cdn.staticfile.org/egjs-infinitegrid/4.11.0/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: true,
+  islazyload: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '编译原理学习笔记',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-05-08 17:34:17'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+          if (t === undefined) {
+            if (isLightMode) activateLightMode()
+            else if (isDarkMode) activateDarkMode()
+            else if (isNotSpecified || hasNoSupport) {
+              const now = new Date()
+              const hour = now.getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(e => {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><link rel="preload" href="https://lib.baomitu.com/fonts/ubuntu/ubuntu-regular.woff2" as="font" crossorigin><link rel="preload" href="https://lib.baomitu.com/fonts/varela-round/varela-round-regular.woff2" as="font" crossorigin><link rel="stylesheet" href="https://static.pil0txia.com/assets/customStyle.css"><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="Pil0tXia" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxOTIwIiBoZWlnaHQ9IjEwODAiIHZpZXdCb3g9IjAgMCAxOTIwIDEwODAiPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9IiNmZmYiLz48L3N2Zz4=" data-lazy-src="https://static.pil0txia.com/assets/03_3_600p.webp" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">63</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">205</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">13</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/random"><i class="fa-fw fas fa-random"></i><span> 随机</span></a></div><div class="menus_item"><a class="site-page group hide" href="javascript:void(0);" rel="external nofollow noreferrer"><i class="fa-fw fa-solid fa-compass"></i><span> 目录</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" target="_blank" rel="noopener external nofollow noreferrer" href="https://docs.pil0txia.com"><i class="fa-fw fa-solid fa-book"></i><span> 文档</span></a></div><div class="menus_item"><a class="site-page" href="/gallery/"><i class="fa-fw fa-regular fa-images"></i><span> 图库</span></a></div><div class="menus_item"><a class="site-page group hide" href="javascript:void(0);" rel="external nofollow noreferrer"><i class="fa-fw fa-solid fa-code"></i><span> 功能</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" target="_blank" rel="noopener external nofollow noreferrer" href="https://status.pil0txia.com"><i class="fa-fw fa-solid fa-bolt-lightning"></i><span> 监控</span></a></li><li><a class="site-page child" href="/atom.xml"><i class="fa-fw fa-solid fa-square-rss"></i><span> RSS</span></a></li></ul></div><div class="menus_item"><a class="site-page group hide" href="javascript:void(0);" rel="external nofollow noreferrer"><i class="fa-fw fa-solid fa-gift"></i><span> 彩蛋</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/gift/snow/"><i class="fa-fw fa-regular fa-snowflake"></i><span> 下雪啦</span></a></li><li><a class="site-page child" href="/gift/christmas_tree/"><i class="fa-fw fa-solid fa-tree"></i><span> 圣诞树</span></a></li><li><a class="site-page child" href="/gift/santa_game/"><i class="fa-fw fa-solid fa-gamepad"></i><span> 圣诞游戏</span></a></li><li><a class="site-page child" href="/gift/small_snow/"><i class="fa-fw fa-solid fa-candy-cane"></i><span> 雪变小了</span></a></li><li><a class="site-page child" href="/gift/love_text/"><i class="fa-fw fas fa-heart"></i><span> Love终端</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa-solid fa-hashtag"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://static.pil0txia.com/cover/material_6.webp')"><nav id="nav"><span id="blog-info"><a href="/" title="Pil0tXia"><img class="site-icon" src= "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxOTIwIiBoZWlnaHQ9IjEwODAiIHZpZXdCb3g9IjAgMCAxOTIwIDEwODAiPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9IiNmZmYiLz48L3N2Zz4=" data-lazy-src="https://static.pil0txia.com/assets/logo.png"/></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);" rel="external nofollow noreferrer"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/random"><i class="fa-fw fas fa-random"></i><span> 随机</span></a></div><div class="menus_item"><a class="site-page group hide" href="javascript:void(0);" rel="external nofollow noreferrer"><i class="fa-fw fa-solid fa-compass"></i><span> 目录</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" target="_blank" rel="noopener external nofollow noreferrer" href="https://docs.pil0txia.com"><i class="fa-fw fa-solid fa-book"></i><span> 文档</span></a></div><div class="menus_item"><a class="site-page" href="/gallery/"><i class="fa-fw fa-regular fa-images"></i><span> 图库</span></a></div><div class="menus_item"><a class="site-page group hide" href="javascript:void(0);" rel="external nofollow noreferrer"><i class="fa-fw fa-solid fa-code"></i><span> 功能</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" target="_blank" rel="noopener external nofollow noreferrer" href="https://status.pil0txia.com"><i class="fa-fw fa-solid fa-bolt-lightning"></i><span> 监控</span></a></li><li><a class="site-page child" href="/atom.xml"><i class="fa-fw fa-solid fa-square-rss"></i><span> RSS</span></a></li></ul></div><div class="menus_item"><a class="site-page group hide" href="javascript:void(0);" rel="external nofollow noreferrer"><i class="fa-fw fa-solid fa-gift"></i><span> 彩蛋</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/gift/snow/"><i class="fa-fw fa-regular fa-snowflake"></i><span> 下雪啦</span></a></li><li><a class="site-page child" href="/gift/christmas_tree/"><i class="fa-fw fa-solid fa-tree"></i><span> 圣诞树</span></a></li><li><a class="site-page child" href="/gift/santa_game/"><i class="fa-fw fa-solid fa-gamepad"></i><span> 圣诞游戏</span></a></li><li><a class="site-page child" href="/gift/small_snow/"><i class="fa-fw fa-solid fa-candy-cane"></i><span> 雪变小了</span></a></li><li><a class="site-page child" href="/gift/love_text/"><i class="fa-fw fas fa-heart"></i><span> Love终端</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa-solid fa-hashtag"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);" rel="external nofollow noreferrer"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">编译原理学习笔记</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-05-08T09:04:17.000Z" title="发表于 2023-05-08 17:04:17">2023-05-08</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-05-08T09:34:17.000Z" title="更新于 2023-05-08 17:34:17">2023-05-08</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">4.6k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>14分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="编译原理学习笔记"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="不讲不考察的内容"><a href="#不讲不考察的内容" class="headerlink" title="不讲不考察的内容"></a>不讲不考察的内容</h2><blockquote>
+<p>参考：<a target="_blank" rel="noopener external nofollow noreferrer" href="https://zhangt.top/CS/Compilation-Principles-Study-Notes/">编译原理 - 学习笔记 - Zhang T’s Blog</a></p>
+</blockquote>
+<ul>
+<li><p>1.5 编译程序的生成</p>
+</li>
+<li><p>第七章 作用域</p>
+</li>
+<li><p>第八章</p>
+</li>
+</ul>
+<h2 id="日常课堂笔记"><a href="#日常课堂笔记" class="headerlink" title="日常课堂笔记"></a>日常课堂笔记</h2><h3 id="非确定集与确定集的分辨"><a href="#非确定集与确定集的分辨" class="headerlink" title="非确定集与确定集的分辨"></a>非确定集与确定集的分辨</h3><p>一个状态（字符集合）在接收到同样的字符串时，会转变到不同的状态（集合），导致了它的非确定性。</p>
+<h3 id="NFA转换为DFA"><a href="#NFA转换为DFA" class="headerlink" title="NFA转换为DFA"></a>NFA 转换为 DFA</h3><p>所谓的状态闭包是指，从当前节点，经过 ε 符（无条件转移）能到达的所有节点的集合，包括当前节点自己。</p>
+<h4 id="分解"><a href="#分解" class="headerlink" title="分解"></a>分解</h4><p>A -&gt; 1 -&gt; B 指 B 从 A 接收 1</p>
+<p>self 0 指该节点有一个指向自己的、以接收到的字符为 0 为条件的无限循环</p>
+<p>1/0 指该节点有两条指向下一节点的、分别以 0 和 1 为条件的状态转移</p>
+<p>ε 不代表什么都接收，而是无条件转移的意思</p>
+<ol>
+<li><p>A -&gt; 1(0|1)*(1|0) -&gt; B</p>
+<p>A -&gt; 1 -&gt; C -&gt; E(self 0/1) -&gt; D -&gt; 1/0 -&gt; B</p>
+</li>
+<li><p>A -&gt; 1*(0|1)0* -&gt; B</p>
+<p>A -&gt; C(self 1) -&gt; C -&gt; 0/1 -&gt; D -&gt; E(self 0)  -&gt; B</p>
+</li>
+</ol>
+<h4 id="状态转移矩阵"><a href="#状态转移矩阵" class="headerlink" title="状态转移矩阵"></a>状态转移矩阵</h4><p>第一行 I 是起始点的状态闭包，在求第一行 I<del>a</del> 的时候，除了要列出可以从 I 中某个元素接收 a 的节点，还要在全部列出后补充 I<del>a</del> 这些节点的状态闭包，即可以从 I<del>a</del> 某个节点通过 ε 前往的节点。</p>
+<p>然后，新的集合添加到下一行，进行重复的步骤。</p>
+<p>最后，为每一行从头到尾添加节点编号，进行化简。</p>
+<h4 id="DFA化简"><a href="#DFA化简" class="headerlink" title="DFA化简"></a>DFA 化简</h4><p>将终止态和非终止态分开</p>
+<p>用非终止态开始一个一个字符开始测试</p>
+<p>测试完得到一些划分</p>
+<p>两个字符到同一个状态集合就算等价，不一定只能是到一个状态</p>
+<p>例如，{3,4,5,6} 中的 3,4,5 接收 a 不到达同一个状态，那就也不是同一个功能，需要分开。</p>
+<h3 id="LR-0"><a href="#LR-0" class="headerlink" title="LR(0)"></a>LR(0)</h3><p><a target="_blank" rel="noopener external nofollow noreferrer" href="https://blog.csdn.net/weixin_44225182/article/details/105554383">编译原理学习笔记（七）~LR (0) 分析_海轰 Pro 的博客 - CSDN 博客</a></p>
+<h3 id="LR-1"><a href="#LR-1" class="headerlink" title="LR(1)"></a>LR(1)</h3><p>在 LR (0) 的基础后面加 #,{c,d} 等</p>
+<h3 id="LL-1"><a href="#LL-1" class="headerlink" title="LL(1)"></a>LL(1)</h3><h2 id="期中考试复习课"><a href="#期中考试复习课" class="headerlink" title="期中考试复习课"></a>期中考试复习课</h2><h3 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h3><p>词法分析包括：标识符、常数、字符串、关键字、界符</p>
+<p>中间代码、优化器 会出简答题</p>
+<p>出错处理：词法分析中关键词与标识符冲突、界符写错（没有大括号），打印 / 显示出来</p>
+<p>表格管理：不断地在每个步骤生成结果，保存到表格中</p>
+<p>一个典型的编译器通常由以下几个模块组成，每个模块都有不同的功能和任务：</p>
+<ol>
+<li>词法分析器：也称为扫描器（Scanner），它是编译器的第一个模块，负责将源代码中的字符序列转换为有意义的单词（Token）序列，并为每个 Token 分配一个 Token 种类（Token Type）。</li>
+<li>语法分析器：也称为解析器（Parser），它是编译器的第二个模块，负责将 Token 序列转换为抽象语法树（AST）或语法分析树，以及对语法错误进行检测和报告。</li>
+<li>语义分析器：它是编译器的第三个模块，负责对 AST 进行类型检查、语义检查、符号表管理等操作，以及生成中间代码或目标代码。</li>
+<li>中间代码生成器：它是编译器的第四个模块，负责将 AST 或符号表转换为中间表示（IR），并进行优化和优化。</li>
+<li>目标代码生成器：它是编译器的第五个模块，负责将 IR 转换为目标机器的汇编代码或机器码，并进行优化和优化。</li>
+<li>目标代码优化器：它是编译器的第六个模块，负责对生成的目标代码进行优化，以提高程序的执行效率和减少程序的存储空间。</li>
+<li>目标代码链接器：它是编译器的最后一个模块，负责将多个目标文件和库文件链接成一个可执行文件，以及进行地址和符号重定位等操作。</li>
+</ol>
+<p>编译器的工作流程通常包括以下几个步骤：</p>
+<ol>
+<li>词法分析：将源代码中的字符序列转换为有意义的单词序列，并为每个单词分配 Token 种类。</li>
+<li>语法分析：将 Token 序列转换为语法分析树或抽象语法树，以及对语法错误进行检测和报告。</li>
+<li>语义分析：对语法分析树或抽象语法树进行类型检查、语义检查、符号表管理等操作，以及生成中间代码或目标代码。</li>
+<li>中间代码生成：将 AST 或符号表转换为中间表示（IR），并进行优化和优化。</li>
+<li>目标代码生成：将 IR 转换为目标机器的汇编代码或机器码，并进行优化和优化。</li>
+<li>目标代码优化：对生成的目标代码进行优化，以提高程序的执行效率和减少程序的存储空间。</li>
+<li>目标代码链接：将多个目标文件和库文件链接成一个可执行文件，并进行地址和符号重定位等操作。</li>
+</ol>
+<h3 id="遍"><a href="#遍" class="headerlink" title="遍"></a>遍</h3><p>扫描越多遍越不好</p>
+<h3 id="文法"><a href="#文法" class="headerlink" title="文法"></a>文法</h3><p>ε 空串的意思，起到一个语义复写的作用，把属性复写成综合属性往上传</p>
+<p>空集和空字符串不是一个东西</p>
+<p>右箭头 产生式符号</p>
+<p>右箭头加星号 推导</p>
+<p>句型：从开始符号经过 N 步推导，之间生成的任何字符串都是句型</p>
+<p>句子：相比句型，只有有终结符的，才是句子</p>
+<p>0 型文法最简单、表达能力最强，1 型文法增加了约束条件，2、3 型增加了更多。约束条件越多，表达能力越弱。</p>
+<h3 id="第三章"><a href="#第三章" class="headerlink" title="第三章"></a>第三章</h3><h4 id="NFA-DFA-的区别"><a href="#NFA-DFA-的区别" class="headerlink" title="NFA DFA 的区别"></a>NFA DFA 的区别</h4><ul>
+<li>DFA 只有一个起点</li>
+<li> NFA 上面是一个字符串，DFA 上面是一个字符</li>
+<li> NFA 同一个状态出发，同一个条件可以到达不同的状态；DFA 只能到达同一个状态</li>
+</ul>
+<h4 id="改写、化简、状态矩阵"><a href="#改写、化简、状态矩阵" class="headerlink" title="改写、化简、状态矩阵"></a>改写、化简、状态矩阵</h4><blockquote>
+<p>就是一开始学的图</p>
+</blockquote>
+<p>确定化</p>
+<p>最少化</p>
+<h4 id="正规式改写DFA"><a href="#正规式改写DFA" class="headerlink" title="正规式改写DFA"></a>正规式改写 DFA</h4><p>1(0|1)*101</p>
+<h3 id="自上而下语法树构造"><a href="#自上而下语法树构造" class="headerlink" title="自上而下语法树构造"></a>自上而下语法树构造</h3><h4 id="左递归的消除"><a href="#左递归的消除" class="headerlink" title="左递归的消除"></a>左递归的消除</h4><p>E-&gt;Ex|Ey|z </p>
+<p>把所有包含左递归的候选式提取出来 E -&gt;  E (x|y)|z</p>
+<p>X=x|y Y=z</p>
+<p>E-&gt;EX|Y</p>
+<p>用通用格式改写</p>
+<p>E-&gt;YE’</p>
+<p>E’-&gt;XE’|e</p>
+<p>再代入 X 和 Y</p>
+<p>E-&gt;zE’</p>
+<p>E’-&gt;xE’|yE’|e</p>
+<p>直接左递归是指产生式中右边的第一个符号就是左边的符号，间接左递归则不是。</p>
+<p>把间接左递归通过代入的方式，改写成直接左递归，再使用直接左递归通用的改写方式</p>
+<h4 id="LL-1-1"><a href="#LL-1-1" class="headerlink" title="LL(1)"></a>LL(1)</h4><h5 id="意义"><a href="#意义" class="headerlink" title="意义"></a>意义</h5><p>第一个 L：从左往右输入，每次读入一个非终结符进行推导</p>
+<p>第二个 L：产生式使用最左推导</p>
+<p>1：每次只需要看右边的第一个数字</p>
+<p>LL 代表左向右扫描输入，左推导，1 代表在任何时候，仅仅需要查看输入的下一个符号。</p>
+<h5 id="三个条件"><a href="#三个条件" class="headerlink" title="三个条件"></a>三个条件</h5><p>不能存在左递归和二义性</p>
+<p>可以通过 FIRST 集和 FOLLOW 集构造出一个 LL (1) 分析表</p>
+<p>LL (1) 语法符合哪三个条件：不允许有左递归（改写），求 FIRST 集（从下往上，每个产生式的候选式相交为空、左边的符号能否推出 epsilon，如果一个产生式的候选式 L 推导出来之后能推出 epsilon，要拿它的 FOLLOW 集与每一个 FIRST 集相交）</p>
+<p>如果一个文法的候选式可以推导出 ε，则 FIRST 和 FOLLOW 集都为空</p>
+<h5 id="求FIRST集和FOLLOW集"><a href="#求FIRST集和FOLLOW集" class="headerlink" title="求FIRST集和FOLLOW集"></a>求 FIRST 集和 FOLLOW 集</h5><p>求 FOLLOW 集以右边为主</p>
+<p>FOLLOW 集里是不可能有 epsilon 的，最多只有#</p>
+<h2 id="最后一节新课（第七章）"><a href="#最后一节新课（第七章）" class="headerlink" title="最后一节新课（第七章）"></a>最后一节新课（第七章）</h2><h3 id="抽象语法树-AST"><a href="#抽象语法树-AST" class="headerlink" title="抽象语法树 (AST)"></a>抽象语法树 (AST)</h3><ul>
+<li><p>操作符在中间，左右两边的子结点是两个数</p>
+</li>
+<li><p>在属性文法阶段生成抽象语法树</p>
+</li>
+<li><p>逆波兰式：使用后序遍历抽象语法树的结果</p>
+</li>
+<li><p>考试可能会考给一个逆波兰式，把抽象语法树写出来</p>
+</li>
+<li><p>AST 对编程是很重要的工具，因为操作符就是 “操作码”、子结点就是 “操作数”</p>
+</li>
+</ul>
+<h3 id="DAG图"><a href="#DAG图" class="headerlink" title="DAG图"></a>DAG 图</h3><p>DAG 图是抽象语法树的简化表达形式</p>
+<h3 id="三地址代码"><a href="#三地址代码" class="headerlink" title="三地址代码"></a>三地址代码</h3><blockquote>
+<p>难度比较大，后面还有四元式、三元式、间接三元式，要注意区别。作用域及其之后的内容不考察。</p>
+</blockquote>
+<p>三地址代码是代码的逻辑表达形式，两个操作数加上一个运算符就是三地址了（如 a+b）</p>
+<p>三地址语句是中间代码的一种抽象形式，四元式（操作码、两个操作数、操作结果）是三地址代码在内存中的一种存放形式。因此四元式表格中会有很多操作数是子树的操作结果（帮助自底向上运算）。</p>
+<p>三元式相比四元式，省去了操作结果，把需要中间结果参与运算的地方替换成了运算这个中间结果的指令的编号（内存地址）。缺点：如果指令编号发生变化，则绑定操作结果的指令都出错了。为了解决这个缺点，有了间接三元式。</p>
+<p>间接三元式的表格中的编号（1、2 等）指的并不是表格第一列的指令编号（内存地址），而是指向了间接码表中的间接代码，间接代码再去指向指令编号。需要调整运算顺序时，只需重新安排间接码表，无需改动三元式。</p>
+<h2 id="期末复习课"><a href="#期末复习课" class="headerlink" title="期末复习课"></a>期末复习课</h2><h3 id="上下文无关文法"><a href="#上下文无关文法" class="headerlink" title="上下文无关文法"></a>上下文无关文法</h3><p>上下文无关文法（Context-Free Grammar, CFG）是一种形式文法，其产生式规则只能够在左侧非终结符号周围添加或删除终结符号，而不考虑符号周围的上下文信息。在上下文无关文法中，每个产生式规则都由一个非终结符号和一个由终结符号和非终结符号构成的字符串组成，用符号 “-&gt;” 分隔。</p>
+<p>最左推导：每次都从产生式最多边第一个符号开始推导</p>
+<p>语法的二义性：二义性文法是指存在两种或多种不同的解析方式，即存在多个推导树的上下文无关文法。这种情况会导致语法分析器无法准确地确定语法结构，进而产生歧义。</p>
+<p>为了避免二义性，可以采取以下几种方法：</p>
+<ol>
+<li>优先级和结合性：在产生式规则中添加优先级和结合性的限制，例如在上述文法中，可以修改为 <code>E -&gt; E * E | num</code> 和 <code>E -&gt; E + E | num</code>，从而明确乘法优先于加法。</li>
+<li>左递归消除：将产生式规则中的左递归转化为右递归，例如将 <code>E -&gt; E + E</code> 转化为 <code>E -&gt; E + T</code> 和 <code>T -&gt; E</code>，从而消除左递归，减少二义性。</li>
+<li>增加限制条件：在文法中增加限制条件，例如在上述文法中，可以限制加号和乘号不能同时出现，从而避免二义性。</li>
+</ol>
+<h3 id="第三章-1"><a href="#第三章-1" class="headerlink" title="第三章"></a>第三章</h3><h4 id="词法分析"><a href="#词法分析" class="headerlink" title="词法分析"></a>词法分析</h4><p>词法分析的目标</p>
+<p>结果（五类词）：标识符，关键字，阶符，，分隔符，常数</p>
+<p>正则表达式（正规式）：正则闭包和正法闭包的区别</p>
+<p>正规式改写为 NFA DFA DFA 化简 必考</p>
+<p>NFA 和 DFA 的三个区别：</p>
+<ol>
+<li>状态转换规则不同：DFA 中，每个状态只能由当前输入的字符转换到唯一的一个状态，即对于每个状态和输入符号，只有唯一的下一个状态；而在 NFA 中，对于每个状态和输入符号，可以转移到零个或多个状态。</li>
+<li>状态转移表的大小不同：由于 DFA 状态转移规则的唯一性，DFA 可以使用状态转移表来表示状态转换；而 NFA 由于其状态转换规则的非确定性，需要使用更复杂的转换关系来表示，通常采用状态转移图来表示，因此状态转移表的大小也不同。</li>
+<li>接受输入的方式不同：DFA 接受输入的方式是在最终状态上标记一个可接受状态，即只有当输入字符串结束时，DFA 最终状态是可接受状态时，DFA 才能接受该输入；而在 NFA 中，可以有多个可接受状态，只要有一个状态是可接受状态，NFA 就可以接受输入字符串。</li>
+</ol>
+<p>总之，DFA 具有确定性、状态转移表简单、只有一个接受状态等特点，适合处理结构相对简单的输入；而 NFA 具有非确定性、状态转移图复杂、可有多个接受状态等特点，适合处理结构相对复杂的输入。</p>
+<h3 id="第四章"><a href="#第四章" class="headerlink" title="第四章"></a>第四章</h3><h4 id="语法分析"><a href="#语法分析" class="headerlink" title="语法分析"></a>语法分析</h4><h5 id="从上往下推导和从下往上推导"><a href="#从上往下推导和从下往上推导" class="headerlink" title="从上往下推导和从下往上推导"></a>从上往下推导和从下往上推导</h5><p>从上往下推导是一种自顶向下的分析方法，它从语法的起始符号开始，通过不断地将它展开为更小的非终结符号，直到最终生成语法的终结符号序列。这个过程可以看作是一种自上而下的递归过程，常用的方法有递归下降分析（Recursive Descent Parsing）和预测分析（Predictive Parsing）。从上往下推导的一个特点是它需要提前知道语法的结构，也就是需要一个预测的语法分析表或递归下降分析程序。</p>
+<p>从下往上推导是一种自底向上的分析方法，它从输入符号开始，逐步合并符号直到生成起始符号。这个过程可以看作是一种自底向上的规约过程，常用的方法有移进 - 归约分析（Shift-Reduce Parsing）和 LR 分析（LR Parsing）。从下往上推导的一个特点是它不需要提前知道语法的结构，而是通过观察输入符号和栈中的符号来进行规约操作，直到最终生成起始符号。</p>
+<p>从上往下推导和从下往上推导在语法分析过程中的顺序和方式上存在一些区别。从上往下推导是自顶向下的展开过程，它从起始符号开始逐步展开直到终结符号；而从下往上推导是自底向上的合并过程，它从终结符号开始逐步合并直到起始符号。此外，从上往下推导需要预先知道语法的结构，而从下往上推导则是根据输入符号和栈中符号进行动态的规约操作。</p>
+<h5 id="左递归改写"><a href="#左递归改写" class="headerlink" title="左递归改写"></a>左递归改写</h5><h5 id="从上往下推导时如何避免回溯"><a href="#从上往下推导时如何避免回溯" class="headerlink" title="从上往下推导时如何避免回溯"></a>从上往下推导时如何避免回溯</h5><ol>
+<li>预测分析表（Predictive Parsing Table）：使用预测分析表可以在每个推导步骤中直接确定要选择的产生式，而无需回溯。预测分析表是一个二维表，行代表非终结符号，列代表终结符号（包括一个特殊的 “结束符号”），表格中的每个单元格包含相应非终结符和终结符组合的产生式。预测分析表的构建需要使用文法的 FIRST 和 FOLLOW 集合，确保表中没有冲突的项。</li>
+<li>递归下降分析（Recursive Descent Parsing）：递归下降分析是一种基于递归的从上往下推导方法，每个非终结符号对应一个递归子程序。通过编写递归子程序来递归地展开非终结符号，遇到终结符号时进行匹配，避免回溯。确保在递归子程序中按照正确的顺序调用子程序，避免出现回溯。</li>
+<li>预测子程序（Predictive Subroutine）：预测子程序是一种将递归下降分析与预测分析表相结合的方法。通过使用递归子程序和预测分析表中的产生式，可以在每个推导步骤中直接选择正确的产生式，避免回溯。</li>
+<li>提前处理可选项：在编写文法时，可以将可选项提前处理为多个产生式，而不是使用可选项标记。这样可以减少回溯的机会，使得在每个推导步骤中能够直接选择正确的产生式。</li>
+<li>语法设计的优化：通过优化文法的设计，可以减少回溯的可能性。例如，避免使用左递归、消除公共前缀等。</li>
+</ol>
+<h5 id="FIRST集的求法"><a href="#FIRST集的求法" class="headerlink" title="FIRST集的求法"></a>FIRST 集的求法</h5><h5 id="书上LL-1-模型：指针扫描字符串（看看）"><a href="#书上LL-1-模型：指针扫描字符串（看看）" class="headerlink" title="书上LL(1)模型：指针扫描字符串（看看）"></a>书上 LL (1) 模型：指针扫描字符串（看看）</h5><h3 id="第五章"><a href="#第五章" class="headerlink" title="第五章"></a>第五章</h3><h4 id="LR-0-1"><a href="#LR-0-1" class="headerlink" title="LR(0)"></a>LR(0)</h4><p>LR (0)：使用状态机来模拟堆栈 (LR 分析法，它的模型时什么？根据 LR 的分析表来判断四个动作，ACCEPT、空白出错等。规约（必会）：栈顶形成句柄时要将句柄弹出来，将栈顶的字符规约成一个符号，此时需要查 GOTO 表，这决定了新的字符进入新的栈顶之后，新的字符是什么字段) - r 规约 s 移进 accept:1， 空白：出错</p>
+<p>移进和规约冲突等，LR (0) 就不行了</p>
+<h4 id="SLR"><a href="#SLR" class="headerlink" title="SLR"></a>SLR</h4><p>规约与…</p>
+<h4 id="LR-1-1"><a href="#LR-1-1" class="headerlink" title="LR(1)"></a>LR(1)</h4><p>推导项目集（作业里有，考试时没有那么难）</p>
+<h4 id="LALR"><a href="#LALR" class="headerlink" title="LALR"></a>LALR</h4><p>LR (1) 会生成大量的项目集，爆炸式增长</p>
+<h3 id="第六章"><a href="#第六章" class="headerlink" title="第六章"></a>第六章</h3><p>S 属性、L 属性、为什么要定义 L 属性</p>
+<p>L 属性的引入是为了处理依赖于上下文信息的语法结构和语义规则。它允许从产生式的右部符号向左部符号传递属性值，以满足上下文相关的计算需求。在某些语法结构中，仅使用 S 属性无法满足对上下文信息的处理，而 L 属性可以提供更灵活的属性传递机制，支持对上下文信息的分析和计算。</p>
+<h3 id="第七章"><a href="#第七章" class="headerlink" title="第七章"></a>第七章</h3><p>四个表达式（逆波兰式等）</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://www.pil0txia.com">Pil0tXia</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://www.pil0txia.com/post/2023-05-08_compilation-principle-notes/">https://www.pil0txia.com/post/2023-05-08_compilation-principle-notes/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow noreferrer" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://www.pil0txia.com" target="_blank">Pil0tXia</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E6%9C%AC%E7%A7%91CS%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0/">本科CS课程笔记</a><a class="post-meta__tags" href="/tags/%E5%A4%A7%E4%B8%89%E4%B8%8B/">大三下</a><a class="post-meta__tags" href="/tags/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/">编译原理</a></div><div class="post_share"><div class="social-share" data-image="https://static.pil0txia.com/cover/material_6.webp" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.staticfile.org/butterfly-extsrc/1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.staticfile.org/butterfly-extsrc/1.1.3/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/post/2023-06-02_join-table-query-or-step-by-step-query/" title="【联想实习笔记】分步查询真的一定比联表查询更好吗？"><img class="cover" src= "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxOTIwIiBoZWlnaHQ9IjEwODAiIHZpZXdCb3g9IjAgMCAxOTIwIDEwODAiPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9IiNmZmYiLz48L3N2Zz4=" data-lazy-src="https://static.pil0txia.com/cover/10_gettyimages-64965750_resized.webp" onerror="onerror=null;src='https://static.pil0txia.com/banner/60914916_404-NOT-FOUND_720p.webp'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">【联想实习笔记】分步查询真的一定比联表查询更好吗？</div></div></a></div><div class="next-post pull-right"><a href="/post/2023-05-05_dev-processes-and-specifications/" title="【联想实习笔记】软件开发的流程和规范"><img class="cover" src= "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxOTIwIiBoZWlnaHQ9IjEwODAiIHZpZXdCb3g9IjAgMCAxOTIwIDEwODAiPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9IiNmZmYiLz48L3N2Zz4=" data-lazy-src="https://static.pil0txia.com/cover/08_gettyimages-466990737_resized.webp" onerror="onerror=null;src='https://static.pil0txia.com/banner/60914916_404-NOT-FOUND_720p.webp'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">【联想实习笔记】软件开发的流程和规范</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/post/2022-02-21_dbms-notes/" title="数据库系统课程笔记"><img class="cover" src= "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxOTIwIiBoZWlnaHQ9IjEwODAiIHZpZXdCb3g9IjAgMCAxOTIwIDEwODAiPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9IiNmZmYiLz48L3N2Zz4=" data-lazy-src="https://static.pil0txia.com/picgo/QQ%E5%9B%BE%E7%89%8720220228114653.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-02-21</div><div class="title">数据库系统课程笔记</div></div></a></div><div><a href="/post/2022-03-17_computer-organization-and-architecture-notes/" title="计算机组成与系统结构课程笔记"><img class="cover" src= "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxOTIwIiBoZWlnaHQ9IjEwODAiIHZpZXdCb3g9IjAgMCAxOTIwIDEwODAiPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9IiNmZmYiLz48L3N2Zz4=" data-lazy-src="https://static.pil0txia.com/cover/04_gettyimages-939130910_resized.webp" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-03-17</div><div class="title">计算机组成与系统结构课程笔记</div></div></a></div><div><a href="/post/2022-03-18_computer-networks-notes/" title="计算机网络课程笔记"><img class="cover" src= "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxOTIwIiBoZWlnaHQ9IjEwODAiIHZpZXdCb3g9IjAgMCAxOTIwIDEwODAiPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9IiNmZmYiLz48L3N2Zz4=" data-lazy-src="https://static.pil0txia.com/picgo/1996208-20200416224258894-1241589285.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-03-18</div><div class="title">计算机网络课程笔记</div></div></a></div><div><a href="/post/2022-06-20_ai-introductory-theory-notes/" title="人工智能课程重点题目整理"><img class="cover" src= "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxOTIwIiBoZWlnaHQ9IjEwODAiIHZpZXdCb3g9IjAgMCAxOTIwIDEwODAiPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9IiNmZmYiLz48L3N2Zz4=" data-lazy-src="https://static.pil0txia.com/picgo/image-20220621130226727.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-06-20</div><div class="title">人工智能课程重点题目整理</div></div></a></div><div><a href="/post/2022-09-13_assembler-language-notes/" title="汇编语言程序设计学习笔记"><img class="cover" src= "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxOTIwIiBoZWlnaHQ9IjEwODAiIHZpZXdCb3g9IjAgMCAxOTIwIDEwODAiPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9IiNmZmYiLz48L3N2Zz4=" data-lazy-src="https://static.pil0txia.com/picgo/image-20220913160311958.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-09-13</div><div class="title">汇编语言程序设计学习笔记</div></div></a></div><div><a href="/post/2022-09-19_python-notes/" title="Python 程序设计学习笔记"><img class="cover" src= "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxOTIwIiBoZWlnaHQ9IjEwODAiIHZpZXdCb3g9IjAgMCAxOTIwIDEwODAiPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9IiNmZmYiLz48L3N2Zz4=" data-lazy-src="https://static.pil0txia.com/picgo/image-20220919110722606.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-09-19</div><div class="title">Python 程序设计学习笔记</div></div></a></div></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="giscus-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src= "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxOTIwIiBoZWlnaHQ9IjEwODAiIHZpZXdCb3g9IjAgMCAxOTIwIDEwODAiPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9IiNmZmYiLz48L3N2Zz4=" data-lazy-src="https://static.pil0txia.com/assets/03_3_600p.webp" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Pil0tXia</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">63</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">205</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">13</div></a></div><a id="card-info-btn" href="mailto:admin@pil0txia.com" rel="external nofollow noreferrer"><i class="fas fa-envelope"></i><span>Contact Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/Pil0tXia" rel="external nofollow noreferrer" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="https://www.v2ex.com/member/Pil0tXia" rel="external nofollow noreferrer" target="_blank" title="V2EX"><i class="fa-solid fa-v"></i></a><a class="social-icon" href="https://space.bilibili.com/286768851/" rel="external nofollow noreferrer" target="_blank" title="Bilibili"><i class="fa-brands fa-bilibili"></i></a><a class="social-icon" href="https://user.qzone.qq.com/1837713753/main" rel="external nofollow noreferrer" target="_blank" title="Photography"><i class="fa-solid fa-camera"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">不会摄影的白帽子不是好机长！</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%8D%E8%AE%B2%E4%B8%8D%E8%80%83%E5%AF%9F%E7%9A%84%E5%86%85%E5%AE%B9"><span class="toc-number">1.</span> <span class="toc-text">不讲不考察的内容</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%97%A5%E5%B8%B8%E8%AF%BE%E5%A0%82%E7%AC%94%E8%AE%B0"><span class="toc-number">2.</span> <span class="toc-text">日常课堂笔记</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9D%9E%E7%A1%AE%E5%AE%9A%E9%9B%86%E4%B8%8E%E7%A1%AE%E5%AE%9A%E9%9B%86%E7%9A%84%E5%88%86%E8%BE%A8"><span class="toc-number">2.1.</span> <span class="toc-text">非确定集与确定集的分辨</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#NFA%E8%BD%AC%E6%8D%A2%E4%B8%BADFA"><span class="toc-number">2.2.</span> <span class="toc-text">NFA 转换为 DFA</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%86%E8%A7%A3"><span class="toc-number">2.2.1.</span> <span class="toc-text">分解</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%8A%B6%E6%80%81%E8%BD%AC%E7%A7%BB%E7%9F%A9%E9%98%B5"><span class="toc-number">2.2.2.</span> <span class="toc-text">状态转移矩阵</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#DFA%E5%8C%96%E7%AE%80"><span class="toc-number">2.2.3.</span> <span class="toc-text">DFA 化简</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#LR-0"><span class="toc-number">2.3.</span> <span class="toc-text">LR(0)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#LR-1"><span class="toc-number">2.4.</span> <span class="toc-text">LR(1)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#LL-1"><span class="toc-number">2.5.</span> <span class="toc-text">LL(1)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%9F%E4%B8%AD%E8%80%83%E8%AF%95%E5%A4%8D%E4%B9%A0%E8%AF%BE"><span class="toc-number">3.</span> <span class="toc-text">期中考试复习课</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B5%81%E7%A8%8B"><span class="toc-number">3.1.</span> <span class="toc-text">流程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%81%8D"><span class="toc-number">3.2.</span> <span class="toc-text">遍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%87%E6%B3%95"><span class="toc-number">3.3.</span> <span class="toc-text">文法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%B8%89%E7%AB%A0"><span class="toc-number">3.4.</span> <span class="toc-text">第三章</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#NFA-DFA-%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-number">3.4.1.</span> <span class="toc-text">NFA DFA 的区别</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%94%B9%E5%86%99%E3%80%81%E5%8C%96%E7%AE%80%E3%80%81%E7%8A%B6%E6%80%81%E7%9F%A9%E9%98%B5"><span class="toc-number">3.4.2.</span> <span class="toc-text">改写、化简、状态矩阵</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%AD%A3%E8%A7%84%E5%BC%8F%E6%94%B9%E5%86%99DFA"><span class="toc-number">3.4.3.</span> <span class="toc-text">正规式改写 DFA</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%87%AA%E4%B8%8A%E8%80%8C%E4%B8%8B%E8%AF%AD%E6%B3%95%E6%A0%91%E6%9E%84%E9%80%A0"><span class="toc-number">3.5.</span> <span class="toc-text">自上而下语法树构造</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B7%A6%E9%80%92%E5%BD%92%E7%9A%84%E6%B6%88%E9%99%A4"><span class="toc-number">3.5.1.</span> <span class="toc-text">左递归的消除</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#LL-1-1"><span class="toc-number">3.5.2.</span> <span class="toc-text">LL(1)</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%84%8F%E4%B9%89"><span class="toc-number">3.5.2.1.</span> <span class="toc-text">意义</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%B8%89%E4%B8%AA%E6%9D%A1%E4%BB%B6"><span class="toc-number">3.5.2.2.</span> <span class="toc-text">三个条件</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%B1%82FIRST%E9%9B%86%E5%92%8CFOLLOW%E9%9B%86"><span class="toc-number">3.5.2.3.</span> <span class="toc-text">求 FIRST 集和 FOLLOW 集</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%80%E5%90%8E%E4%B8%80%E8%8A%82%E6%96%B0%E8%AF%BE%EF%BC%88%E7%AC%AC%E4%B8%83%E7%AB%A0%EF%BC%89"><span class="toc-number">4.</span> <span class="toc-text">最后一节新课（第七章）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8A%BD%E8%B1%A1%E8%AF%AD%E6%B3%95%E6%A0%91-AST"><span class="toc-number">4.1.</span> <span class="toc-text">抽象语法树 (AST)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DAG%E5%9B%BE"><span class="toc-number">4.2.</span> <span class="toc-text">DAG 图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%89%E5%9C%B0%E5%9D%80%E4%BB%A3%E7%A0%81"><span class="toc-number">4.3.</span> <span class="toc-text">三地址代码</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0%E8%AF%BE"><span class="toc-number">5.</span> <span class="toc-text">期末复习课</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8A%E4%B8%8B%E6%96%87%E6%97%A0%E5%85%B3%E6%96%87%E6%B3%95"><span class="toc-number">5.1.</span> <span class="toc-text">上下文无关文法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%B8%89%E7%AB%A0-1"><span class="toc-number">5.2.</span> <span class="toc-text">第三章</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AF%8D%E6%B3%95%E5%88%86%E6%9E%90"><span class="toc-number">5.2.1.</span> <span class="toc-text">词法分析</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E5%9B%9B%E7%AB%A0"><span class="toc-number">5.3.</span> <span class="toc-text">第四章</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90"><span class="toc-number">5.3.1.</span> <span class="toc-text">语法分析</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%BB%8E%E4%B8%8A%E5%BE%80%E4%B8%8B%E6%8E%A8%E5%AF%BC%E5%92%8C%E4%BB%8E%E4%B8%8B%E5%BE%80%E4%B8%8A%E6%8E%A8%E5%AF%BC"><span class="toc-number">5.3.1.1.</span> <span class="toc-text">从上往下推导和从下往上推导</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%B7%A6%E9%80%92%E5%BD%92%E6%94%B9%E5%86%99"><span class="toc-number">5.3.1.2.</span> <span class="toc-text">左递归改写</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%BB%8E%E4%B8%8A%E5%BE%80%E4%B8%8B%E6%8E%A8%E5%AF%BC%E6%97%B6%E5%A6%82%E4%BD%95%E9%81%BF%E5%85%8D%E5%9B%9E%E6%BA%AF"><span class="toc-number">5.3.1.3.</span> <span class="toc-text">从上往下推导时如何避免回溯</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#FIRST%E9%9B%86%E7%9A%84%E6%B1%82%E6%B3%95"><span class="toc-number">5.3.1.4.</span> <span class="toc-text">FIRST 集的求法</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%B9%A6%E4%B8%8ALL-1-%E6%A8%A1%E5%9E%8B%EF%BC%9A%E6%8C%87%E9%92%88%E6%89%AB%E6%8F%8F%E5%AD%97%E7%AC%A6%E4%B8%B2%EF%BC%88%E7%9C%8B%E7%9C%8B%EF%BC%89"><span class="toc-number">5.3.1.5.</span> <span class="toc-text">书上 LL (1) 模型：指针扫描字符串（看看）</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%BA%94%E7%AB%A0"><span class="toc-number">5.4.</span> <span class="toc-text">第五章</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#LR-0-1"><span class="toc-number">5.4.1.</span> <span class="toc-text">LR(0)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#SLR"><span class="toc-number">5.4.2.</span> <span class="toc-text">SLR</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#LR-1-1"><span class="toc-number">5.4.3.</span> <span class="toc-text">LR(1)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#LALR"><span class="toc-number">5.4.4.</span> <span class="toc-text">LALR</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E5%85%AD%E7%AB%A0"><span class="toc-number">5.5.</span> <span class="toc-text">第六章</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%B8%83%E7%AB%A0"><span class="toc-number">5.6.</span> <span class="toc-text">第七章</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/post/2023-08-28_community-over-code-asia-2023/" title="Apache 社区力量的汇聚 &amp; 程序员奔现大会：CommunityOverCode Asia 2023 给我的成长"><img src= "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxOTIwIiBoZWlnaHQ9IjEwODAiIHZpZXdCb3g9IjAgMCAxOTIwIDEwODAiPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9IiNmZmYiLz48L3N2Zz4=" data-lazy-src="https://dg.static.pil0txia.com/gallery/apache/community-over-code-asia-2023-banner-bagevent.webp" onerror="this.onerror=null;this.src='https://static.pil0txia.com/banner/60914916_404-NOT-FOUND_720p.webp'" alt="Apache 社区力量的汇聚 &amp; 程序员奔现大会：CommunityOverCode Asia 2023 给我的成长"/></a><div class="content"><a class="title" href="/post/2023-08-28_community-over-code-asia-2023/" title="Apache 社区力量的汇聚 &amp; 程序员奔现大会：CommunityOverCode Asia 2023 给我的成长">Apache 社区力量的汇聚 &amp; 程序员奔现大会：CommunityOverCode Asia 2023 给我的成长</a><time datetime="2023-08-28T08:56:30.000Z" title="发表于 2023-08-28 16:56:30">2023-08-28</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/post/2023-08-11_sync-cache-under-async-events/" title="【开源贡献笔记】异步文件事件监听：协调稳健的 Webhook 配置缓存同步"><img src= "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxOTIwIiBoZWlnaHQ9IjEwODAiIHZpZXdCb3g9IjAgMCAxOTIwIDEwODAiPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9IiNmZmYiLz48L3N2Zz4=" data-lazy-src="https://static.pil0txia.com/picgo/image-20230825103741155.webp" onerror="this.onerror=null;this.src='https://static.pil0txia.com/banner/60914916_404-NOT-FOUND_720p.webp'" alt="【开源贡献笔记】异步文件事件监听：协调稳健的 Webhook 配置缓存同步"/></a><div class="content"><a class="title" href="/post/2023-08-11_sync-cache-under-async-events/" title="【开源贡献笔记】异步文件事件监听：协调稳健的 Webhook 配置缓存同步">【开源贡献笔记】异步文件事件监听：协调稳健的 Webhook 配置缓存同步</a><time datetime="2023-08-11T08:54:43.000Z" title="发表于 2023-08-11 16:54:43">2023-08-11</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/post/2023-07-06_stream-comparator-and-lambda-sort/" title="【联想实习笔记】克服在流中使用 Lambda 表达式排序时编译器类型推断的弱点"><img src= "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxOTIwIiBoZWlnaHQ9IjEwODAiIHZpZXdCb3g9IjAgMCAxOTIwIDEwODAiPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9IiNmZmYiLz48L3N2Zz4=" data-lazy-src="https://static.pil0txia.com/cover/220148592_123616426606761_3180647973349825260_n.webp" onerror="this.onerror=null;this.src='https://static.pil0txia.com/banner/60914916_404-NOT-FOUND_720p.webp'" alt="【联想实习笔记】克服在流中使用 Lambda 表达式排序时编译器类型推断的弱点"/></a><div class="content"><a class="title" href="/post/2023-07-06_stream-comparator-and-lambda-sort/" title="【联想实习笔记】克服在流中使用 Lambda 表达式排序时编译器类型推断的弱点">【联想实习笔记】克服在流中使用 Lambda 表达式排序时编译器类型推断的弱点</a><time datetime="2023-07-06T09:57:39.000Z" title="发表于 2023-07-06 17:57:39">2023-07-06</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/post/2023-06-27_do-not-trust-todo-comment/" title="【开源贡献笔记】前辈在单元测试里留下的 TODO 注释，你该信吗？"><img src= "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxOTIwIiBoZWlnaHQ9IjEwODAiIHZpZXdCb3g9IjAgMCAxOTIwIDEwODAiPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9IiNmZmYiLz48L3N2Zz4=" data-lazy-src="https://static.pil0txia.com/picgo/image-20230629152048147.webp" onerror="this.onerror=null;this.src='https://static.pil0txia.com/banner/60914916_404-NOT-FOUND_720p.webp'" alt="【开源贡献笔记】前辈在单元测试里留下的 TODO 注释，你该信吗？"/></a><div class="content"><a class="title" href="/post/2023-06-27_do-not-trust-todo-comment/" title="【开源贡献笔记】前辈在单元测试里留下的 TODO 注释，你该信吗？">【开源贡献笔记】前辈在单元测试里留下的 TODO 注释，你该信吗？</a><time datetime="2023-06-27T12:47:54.000Z" title="发表于 2023-06-27 20:47:54">2023-06-27</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/post/2023-06-23_glcc-2023-dss/" title="【开源之夏】DataSphereStudio 集成 GitLab 课题 Proposal（已中选）"><img src= "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxOTIwIiBoZWlnaHQ9IjEwODAiIHZpZXdCb3g9IjAgMCAxOTIwIDEwODAiPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9IiNmZmYiLz48L3N2Zz4=" data-lazy-src="https://static.pil0txia.com/picgo/image-20230623220151200.webp" onerror="this.onerror=null;this.src='https://static.pil0txia.com/banner/60914916_404-NOT-FOUND_720p.webp'" alt="【开源之夏】DataSphereStudio 集成 GitLab 课题 Proposal（已中选）"/></a><div class="content"><a class="title" href="/post/2023-06-23_glcc-2023-dss/" title="【开源之夏】DataSphereStudio 集成 GitLab 课题 Proposal（已中选）">【开源之夏】DataSphereStudio 集成 GitLab 课题 Proposal（已中选）</a><time datetime="2023-06-23T13:42:30.000Z" title="发表于 2023-06-23 21:42:30">2023-06-23</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('https://static.pil0txia.com/cover/material_6.webp')"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By Pil0tXia</div><div class="footer_custom_text"><a href="https://beian.miit.gov.cn/" rel="external nofollow noreferrer" target="_blank">苏ICP备2023001491号-1</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.staticfile.org/fancyapps-ui/5.0.28/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.staticfile.org/instant.page/5.2.0/instantpage.min.js" type="module"></script><script src="https://cdn.staticfile.org/vanilla-lazyload/17.8.5/lazyload.iife.min.js"></script><script src="https://cdn.staticfile.org/node-snackbar/0.1.16/snackbar.min.js"></script><div class="js-pjax"><script>(()=>{
+  const getGiscusTheme = theme => {
+    return theme === 'dark' ? 'dark' : 'light'
+  }
+
+  const loadGiscus = () => {
+    const config = Object.assign({
+      src: 'https://giscus.app/client.js',
+      'data-repo': 'Pil0tXia/hexo-giscus',
+      'data-repo-id': 'R_kgDOIPxOww',
+      'data-category-id': 'DIC_kwDOIPxOw84CSC9p',
+      'data-mapping': 'pathname',
+      'data-theme': getGiscusTheme(document.documentElement.getAttribute('data-theme')),
+      'data-reactions-enabled': '1',
+      crossorigin: 'anonymous',
+      async: true
+    },null)
+
+    const ele = document.createElement('script')
+    for (let key in config) {
+      ele.setAttribute(key, config[key])
+    }
+    document.getElementById('giscus-wrap').appendChild(ele)
+  }
+
+  const changeGiscusTheme = theme => {
+    const sendMessage = message => {
+      const iframe = document.querySelector('iframe.giscus-frame')
+      if (!iframe) return
+      iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app')
+    }
+
+    sendMessage({
+      setConfig: {
+        theme: getGiscusTheme(theme)
+      }
+    });
+  }
+
+  btf.addGlobalFn('themeChange', changeGiscusTheme, 'giscus')
+
+  if ('Giscus' === 'Giscus' || !true) {
+    if (true) btf.loadComment(document.getElementById('giscus-wrap'), loadGiscus)
+    else loadGiscus()
+  } else {
+    window.loadOtherComment= loadGiscus
+  }
+})()</script></div><script defer="defer" id="ribbon" src="https://cdn.staticfile.org/butterfly-extsrc/1.1.3/canvas-ribbon.min.js" size="170" alpha="0.6" zIndex="-1" mobile="true" data-click="true"></script><script async data-pjax src="https://static.pil0txia.com/assets/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>
