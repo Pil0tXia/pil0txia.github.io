@@ -4105,6 +4105,14 @@ h1.page-title + .tag-cloud-list {
   font-family: Monaco, 'Ubuntu Mono', monospace;
   line-height: 1em;
 }
+#article-container h1,
+#article-container h2,
+#article-container h3,
+#article-container h4,
+#article-container h5,
+#article-container h6 {
+  width: fit-content;
+}
 #article-container h1 a:not(.headerlink),
 #article-container h2 a:not(.headerlink),
 #article-container h3 a:not(.headerlink),

@@ -211,11 +211,11 @@
     
     <category term="开源" scheme="https://www.pil0txia.com/tags/%E5%BC%80%E6%BA%90/"/>
     
+    <category term="GLCC" scheme="https://www.pil0txia.com/tags/GLCC/"/>
+    
     <category term="Apache" scheme="https://www.pil0txia.com/tags/Apache/"/>
     
     <category term="EventMesh" scheme="https://www.pil0txia.com/tags/EventMesh/"/>
-    
-    <category term="GLCC" scheme="https://www.pil0txia.com/tags/GLCC/"/>
     
     <category term="Proposal" scheme="https://www.pil0txia.com/tags/Proposal/"/>
     
@@ -241,19 +241,19 @@
     <category term="Java" scheme="https://www.pil0txia.com/categories/Java/"/>
     
     
-    <category term="多线程" scheme="https://www.pil0txia.com/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/"/>
-    
     <category term="开源" scheme="https://www.pil0txia.com/tags/%E5%BC%80%E6%BA%90/"/>
+    
+    <category term="Apache" scheme="https://www.pil0txia.com/tags/Apache/"/>
+    
+    <category term="EventMesh" scheme="https://www.pil0txia.com/tags/EventMesh/"/>
+    
+    <category term="多线程" scheme="https://www.pil0txia.com/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/"/>
     
     <category term="阻塞" scheme="https://www.pil0txia.com/tags/%E9%98%BB%E5%A1%9E/"/>
     
     <category term="中断" scheme="https://www.pil0txia.com/tags/%E4%B8%AD%E6%96%AD/"/>
     
     <category term="异常" scheme="https://www.pil0txia.com/tags/%E5%BC%82%E5%B8%B8/"/>
-    
-    <category term="Apache" scheme="https://www.pil0txia.com/tags/Apache/"/>
-    
-    <category term="EventMesh" scheme="https://www.pil0txia.com/tags/EventMesh/"/>
     
   </entry>
   
@@ -408,9 +408,9 @@
     <category term="ACG" scheme="https://www.pil0txia.com/categories/ACG/"/>
     
     
-    <category term="新海诚" scheme="https://www.pil0txia.com/tags/%E6%96%B0%E6%B5%B7%E8%AF%9A/"/>
-    
     <category term="壁纸" scheme="https://www.pil0txia.com/tags/%E5%A3%81%E7%BA%B8/"/>
+    
+    <category term="新海诚" scheme="https://www.pil0txia.com/tags/%E6%96%B0%E6%B5%B7%E8%AF%9A/"/>
     
     <category term="你的名字。" scheme="https://www.pil0txia.com/tags/%E4%BD%A0%E7%9A%84%E5%90%8D%E5%AD%97%E3%80%82/"/>
     
@@ -479,11 +479,11 @@
     
     <category term="网络运维" scheme="https://www.pil0txia.com/tags/%E7%BD%91%E7%BB%9C%E8%BF%90%E7%BB%B4/"/>
     
-    <category term="CDN" scheme="https://www.pil0txia.com/tags/CDN/"/>
-    
     <category term="域名" scheme="https://www.pil0txia.com/tags/%E5%9F%9F%E5%90%8D/"/>
     
     <category term="DNS" scheme="https://www.pil0txia.com/tags/DNS/"/>
+    
+    <category term="CDN" scheme="https://www.pil0txia.com/tags/CDN/"/>
     
     <category term="SEO" scheme="https://www.pil0txia.com/tags/SEO/"/>
     
@@ -511,6 +511,8 @@
     <category term="前端" scheme="https://www.pil0txia.com/categories/%E5%89%8D%E7%AB%AF/"/>
     
     
+    <category term="CDN" scheme="https://www.pil0txia.com/tags/CDN/"/>
+    
     <category term="JavaScript" scheme="https://www.pil0txia.com/tags/JavaScript/"/>
     
     <category term="不蒜子" scheme="https://www.pil0txia.com/tags/%E4%B8%8D%E8%92%9C%E5%AD%90/"/>
@@ -522,8 +524,6 @@
     <category term="pv" scheme="https://www.pil0txia.com/tags/pv/"/>
     
     <category term="uv" scheme="https://www.pil0txia.com/tags/uv/"/>
-    
-    <category term="CDN" scheme="https://www.pil0txia.com/tags/CDN/"/>
     
   </entry>
   
