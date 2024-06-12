@@ -4,6 +4,45 @@
   
     
     <entry>
+      <title>Apache EventMesh vs. AWS EventBridge: “产品化” 是开源中间件的出路吗？</title>
+      <link href="/post/2024-06-12_os-or-commercial-product/"/>
+      <url>/post/2024-06-12_os-or-commercial-product/</url>
+      
+        <content type="html"><![CDATA[<h2 id="AWS-EventBridge-是-Apache-EventMesh-的理想形态吗？"><a href="#AWS-EventBridge-是-Apache-EventMesh-的理想形态吗？" class="headerlink" title="AWS EventBridge 是 Apache EventMesh 的理想形态吗？"></a>AWS EventBridge 是 Apache EventMesh 的理想形态吗？</h2><p>在 5 月底的亚马逊云科技中国峰会上，80% 的议题的项目架构都使用了 AWS 的 EventBridge。EventBridge 在 AWS 的生态中已经与 Serverless 概念和 Lambda 云函数几乎完全绑定。</p><p><img src="https://static.pil0txia.com/picgo/IMG_20240530_144804.webp" alt="EventBridge 解耦微服务与函数计算"></p><p>开源的 Apache EventMesh 可以从中学到些什么？我与在场的 SkyWalking 的<a href="https://github.com/wu-sheng">吴晟</a>老师就此问题进行了一些讨论，感谢吴晟老师的启发。</p><h2 id="事件驱动消息总线还有更广的应用场景"><a href="#事件驱动消息总线还有更广的应用场景" class="headerlink" title="事件驱动消息总线还有更广的应用场景"></a>事件驱动消息总线还有更广的应用场景</h2><p>EventMesh 适用于具有跨部门传输事件的需求的用户，这部分用户数量注定是很少的。想要拓展其应用场景，要么打破产品自身的定位（例如去做事件聚合等 ETL 的能力），要么只能接受这个现状（并不是妥协）。</p><p><img src="https://static.pil0txia.com/picgo/image-20240612004155011.webp" alt="哔哩哔哩直播行为系统"></p><p>微服务拆得越碎，越需要事件驱动。<a href="https://mp.weixin.qq.com/s/XCWM1OFDKXBGxa7TebrrzA">哔哩哔哩直播榜单</a> 这个场景的应用就挺好的。</p><p><img src="https://static.pil0txia.com/picgo/image-20240612004346549.webp" alt="异步事件聚合"></p><p>事件聚合功能将在 Filter 和 Transformer 实现可编排能力后，再考虑开发。</p><h2 id="EventMesh-和-EventBridge-不在一个赛道"><a href="#EventMesh-和-EventBridge-不在一个赛道" class="headerlink" title="EventMesh 和 EventBridge 不在一个赛道"></a>EventMesh 和 EventBridge 不在一个赛道</h2><p>EventMesh 是开源项目，EventBridge 是商业服务。使用 EventMesh 这样的开源项目就意味着企业需要雇一个人来运维、背锅，非互联网行业的企业一旦选择了云厂商就不会选择需要自行维护的开源项目。</p><p>因此，EventMesh 没有必要和云厂商的全托管方案去比较、模仿、竞争，但是从可以降低用户的使用和运维成本方面下手，来吸引更多 Subscriber（对项目感兴趣的人，包括可以拍板做 POC 的管理层，和执行 POC 的开发者）。</p><h2 id="控制台不用追求“产品化”"><a href="#控制台不用追求“产品化”" class="headerlink" title="控制台不用追求“产品化”"></a>控制台不用追求 “产品化”</h2><p>在 Apache EventMesh Dashboard 方面，半托管（接入并管理 EventMesh 集群的 Connection 为主）比全托管方案（在 K8s 中创建、管理 Store 集群和 Meta 集群）更适合开源项目。</p><p>云厂商的服务使用单一的环境，但你不知道开源项目的用户会怎么用。以 EventMesh Dashboard 管理 K8s 集群为例，用户可能会开启 TCP Mesh, CNI, OpenShift……Dashboard 是没法全部兼顾的。</p><p>即使全部支持并长期维护，这也并不是全托管，因为 K8s 集群并不是 Dashboard 托管的。如果 Dashboard 连 K8s 集群都需要 exclusive 专用的，那就挤占了用户的物理机资源，也不容易做弹性。开源项目没有能力维护这样的一个 DevOps 平台。</p><p>再者，大多数目标用户也不关心 EventMesh Dashboard 能不能管理 Store 和 Meta 的集群。在云厂商的平台上，用户需要自行创建不同服务的实例，再将它们关联起来；各个服务的管理页面也是独立的。对 Dashboard 来说，虽然一站式可观测是一个趋势，但这并不意味着需要在 Dashboard 上管理所有服务的集群。</p><p>因此，“产品化” 与 “全托管” 将会是 EventMesh Dashboard 锦上添花的能力。“方便运维人员能够在 Web 端为 EventMesh Runtime 集群选取一个 MQ 集群用作 Store，而不是填写一台现有的 MQ 的接入配置”，并不会成为技术选型时的决定性因素。</p><hr><h2 id="2024-亚马逊云科技中国峰会"><a href="#2024-亚马逊云科技中国峰会" class="headerlink" title="2024 亚马逊云科技中国峰会"></a>2024 亚马逊云科技中国峰会</h2><p>正文到此就结束了。以下是我参加本次峰会的一些感想。</p><h3 id="受众"><a href="#受众" class="headerlink" title="受众"></a>受众</h3><ul><li>产品经理、架构师或中小公司 CTO 在议题中主讲的比例相当高，占到所有议题的 60% 以上。</li><li>其中约有 30% 的议题 / 展台与其它公司的解决方案具有一定重合，但在宣传自己的解决方案时并未体现出竞争力。</li><li>Presentation 面向的客户会更偏向于甲方的经理。</li></ul><p><img src="https://static.pil0txia.com/picgo/IMG_20240530_135106.webp" alt="凳子旁可见一只拐杖"></p><p>这位老哥腿脚不太方便，但讲课四平八稳，有点佩服。看得出来，平时坐在电脑前面的时间肯定是很多的，也就能有更多时间在自己的专业领域（韧性系统）内思考。</p><h3 id="展台"><a href="#展台" class="headerlink" title="展台"></a>展台</h3><ul><li>展会与议题是同时进行的。为了逛这个展，我不得不连翘两个议题。</li><li>展台是与各个公司沟通的最佳途径。相较于 CommunityOverCode Asia，本峰会的议题结束后几乎没有时间与主讲人对话，但你可以在展台边轻松地与类似的角色聊上一个小时。</li><li>约 50% 的展台配备的人员只有销售，还不是技术型销售。一问三不知，但是打哈哈能力一流。</li></ul><p><img src="https://static.pil0txia.com/picgo/IMG_20240529_133705.webp" alt="乐高城市的可观测性"></p><p><img src="https://static.pil0txia.com/picgo/IMG_20240529_133724.webp" alt="场景说明"></p><p>像是炫 idea 的产物，技术实现上不难。</p><hr><p>AWS 在场地内有一个在各展台答题集章、兑换限量奖品的活动，这种周边往往都是最精致的。然而展台的 Logo 往往都是产品名，而集章卡片上只写了公司名，让我化身为了人形 DFS。</p><p>在各展台领到的奖品装满了德勤的镭射袋，其中我最喜欢的是 RedHat 的胸针。然而，集齐印章后的 “终极大奖” 只是一个看上去很廉价的风扇，恐怕印着 AWS Logo 的包装都更有纪念意义。</p><h3 id="图集"><a href="#图集" class="headerlink" title="图集"></a>图集</h3><div class="gallery-container" data-type="data" data-button="">      <div class="gallery-data">[{"url":"https://static.pil0txia.com/picgo/IMG_20240529_090402.webp","alt":"世博中心"},{"url":"https://static.pil0txia.com/picgo/IMG_20240529_090506.webp","alt":"峰会 Logo"},{"url":"https://static.pil0txia.com/picgo/IMG_20240529_091050.webp","alt":"大厅内景布置"},{"url":"https://static.pil0txia.com/picgo/IMG_20240529_091619_mosaic.webp","alt":"讲师的挂绳颜色为蓝色，AWS 员工的为橙色"},{"url":"https://static.pil0txia.com/picgo/IMG_20240529_091956.webp","alt":"Keynote 会场"},{"url":"https://static.pil0txia.com/picgo/image-20240612163154351.webp","alt":"EventBridge at AWS re:Invent 2023 SVS401"}]</div>      <div class="gallery-items">      </div>    </div><p><img src="https://static.pil0txia.com/picgo/MYXJ_20240530164448716_fast.webp" alt="最后一场议题结束 | AWS 员工同款周边 T 恤奖品，图案是一朵云"></p><blockquote><p>有趣的是，会后我应邀去小红书总部参观时，被误以为是供应商。</p></blockquote><p>期待明年再会。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 架构 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 开源 </tag>
+            
+            <tag> Apache </tag>
+            
+            <tag> EventMesh </tag>
+            
+            <tag> 亚马逊云科技中国峰会 </tag>
+            
+            <tag> AWS </tag>
+            
+            <tag> EventBridge </tag>
+            
+            <tag> Dashboard </tag>
+            
+            <tag> 产品 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>《铃芽之旅》4K SDR madVR 渲染壁纸</title>
       <link href="/post/2024-02-29_suzume-no-tojimari-wallpaper/"/>
       <url>/post/2024-02-29_suzume-no-tojimari-wallpaper/</url>
@@ -366,13 +405,13 @@
             
             <tag> 实习 </tag>
             
-            <tag> MySQL </tag>
-            
-            <tag> Oracle </tag>
-            
             <tag> HANA </tag>
             
             <tag> SQL优化 </tag>
+            
+            <tag> MySQL </tag>
+            
+            <tag> Oracle </tag>
             
             <tag> 联表查询 </tag>
             
@@ -529,11 +568,11 @@
             
             <tag> 网络运维 </tag>
             
-            <tag> CDN </tag>
-            
             <tag> 域名 </tag>
             
             <tag> DNS </tag>
+            
+            <tag> CDN </tag>
             
             <tag> SEO </tag>
             
@@ -562,6 +601,8 @@
       
         <tags>
             
+            <tag> CDN </tag>
+            
             <tag> JavaScript </tag>
             
             <tag> 不蒜子 </tag>
@@ -573,8 +614,6 @@
             <tag> pv </tag>
             
             <tag> uv </tag>
-            
-            <tag> CDN </tag>
             
         </tags>
       
@@ -1348,8 +1387,6 @@
       
         <tags>
             
-            <tag> OneDrive </tag>
-            
             <tag> 学生组织 </tag>
             
             <tag> 大学生艺术团 </tag>
@@ -1357,6 +1394,8 @@
             <tag> 摄影 </tag>
             
             <tag> 新媒体 </tag>
+            
+            <tag> OneDrive </tag>
             
             <tag> 达芬奇 </tag>
             
@@ -1420,13 +1459,13 @@
             
             <tag> Joplin </tag>
             
+            <tag> OneDrive </tag>
+            
             <tag> Obsidian </tag>
             
             <tag> 简悦 </tag>
             
             <tag> 符号链接 </tag>
-            
-            <tag> OneDrive </tag>
             
             <tag> FolderSync </tag>
             
