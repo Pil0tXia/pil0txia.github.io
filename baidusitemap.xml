@@ -1,15 +1,75 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://www.pil0txia.com/post/2024-08-29_community-over-code-asia-2024/</loc>
+    <lastmod>2024-09-05</lastmod>
+  </url>
+  <url>
+    <loc>https://www.pil0txia.com/post/2024-06-12_os-or-commercial-product/</loc>
+    <lastmod>2024-06-12</lastmod>
+  </url>
+  <url>
+    <loc>https://www.pil0txia.com/post/2022-12-09_chatgpt-teach-stable-diffusion-nsfw/</loc>
+    <lastmod>2024-06-12</lastmod>
+  </url>
+  <url>
+    <loc>https://www.pil0txia.com/post/2024-02-29_suzume-no-tojimari-wallpaper/</loc>
+    <lastmod>2024-02-29</lastmod>
+  </url>
+  <url>
+    <loc>https://www.pil0txia.com/post/2023-04-05_suzume-no-tojimari-review/</loc>
+    <lastmod>2024-02-29</lastmod>
+  </url>
+  <url>
+    <loc>https://www.pil0txia.com/post/2024-01-21_what-is-an-apache-committer/</loc>
+    <lastmod>2024-01-24</lastmod>
+  </url>
+  <url>
+    <loc>https://www.pil0txia.com/post/2023-06-23_glcc-2023-eventmesh/</loc>
+    <lastmod>2023-10-11</lastmod>
+  </url>
+  <url>
+    <loc>https://www.pil0txia.com/post/2023-08-28_community-over-code-asia-2023/</loc>
+    <lastmod>2023-08-28</lastmod>
+  </url>
+  <url>
+    <loc>https://www.pil0txia.com/post/2023-08-11_sync-cache-under-async-events/</loc>
+    <lastmod>2023-08-23</lastmod>
+  </url>
+  <url>
+    <loc>https://www.pil0txia.com/post/2023-07-06_stream-comparator-and-lambda-sort/</loc>
+    <lastmod>2023-07-06</lastmod>
+  </url>
+  <url>
+    <loc>https://www.pil0txia.com/post/2023-06-27_do-not-trust-todo-comment/</loc>
+    <lastmod>2023-06-27</lastmod>
+  </url>
+  <url>
+    <loc>https://www.pil0txia.com/post/2023-06-23_glcc-2023-dss/</loc>
+    <lastmod>2023-06-27</lastmod>
+  </url>
+  <url>
+    <loc>https://www.pil0txia.com/post/2023-06-18_handle-interrupted-exception/</loc>
+    <lastmod>2023-06-17</lastmod>
+  </url>
+  <url>
+    <loc>https://www.pil0txia.com/post/2023-06-09_handle-database-one-to-many-records/</loc>
+    <lastmod>2023-06-09</lastmod>
+  </url>
+  <url>
+    <loc>https://www.pil0txia.com/post/2023-06-02_join-table-query-or-step-by-step-query/</loc>
+    <lastmod>2023-06-09</lastmod>
+  </url>
+  <url>
+    <loc>https://www.pil0txia.com/post/2023-05-05_dev-processes-and-specifications/</loc>
+    <lastmod>2023-06-01</lastmod>
+  </url>
+  <url>
     <loc>https://www.pil0txia.com/post/2023-05-08_compilation-principle-notes/</loc>
     <lastmod>2023-05-08</lastmod>
   </url>
   <url>
     <loc>https://www.pil0txia.com/post/2022-03-18_23-spring-internship/</loc>
-    <lastmod>2023-05-05</lastmod>
-  </url>
-  <url>
-    <loc>https://www.pil0txia.com/post/2023-05-05_dev-processes-and-specifications/</loc>
     <lastmod>2023-05-05</lastmod>
   </url>
   <url>
@@ -21,16 +81,8 @@
     <lastmod>2023-04-05</lastmod>
   </url>
   <url>
-    <loc>https://www.pil0txia.com/post/2023-04-05_suzume-no-tojimari-review/</loc>
-    <lastmod>2023-04-05</lastmod>
-  </url>
-  <url>
     <loc>https://www.pil0txia.com/post/2022-12-09_chatgpt-teach-stable-diffusion/</loc>
     <lastmod>2023-03-29</lastmod>
-  </url>
-  <url>
-    <loc>https://www.pil0txia.com/post/2022-12-09_chatgpt-teach-stable-diffusion-nsfw/</loc>
-    <lastmod>2023-02-10</lastmod>
   </url>
   <url>
     <loc>https://www.pil0txia.com/post/2022-12-06_cloudflare-for-saas-backblaze-b2/</loc>
@@ -49,11 +101,11 @@
     <lastmod>2023-01-12</lastmod>
   </url>
   <url>
-    <loc>https://www.pil0txia.com/post/2022-09-13_assembler-language-notes/</loc>
+    <loc>https://www.pil0txia.com/post/2022-09-08_os-notes/</loc>
     <lastmod>2023-01-04</lastmod>
   </url>
   <url>
-    <loc>https://www.pil0txia.com/post/2022-09-08_os-notes/</loc>
+    <loc>https://www.pil0txia.com/post/2022-09-13_assembler-language-notes/</loc>
     <lastmod>2023-01-04</lastmod>
   </url>
   <url>
@@ -85,15 +137,15 @@
     <lastmod>2022-09-20</lastmod>
   </url>
   <url>
-    <loc>https://www.pil0txia.com/post/2022-09-17_why-ipv6-WOL-fails/</loc>
+    <loc>https://www.pil0txia.com/post/2022-09-17_why-ipv6-wol-fails/</loc>
     <lastmod>2022-09-17</lastmod>
   </url>
   <url>
-    <loc>https://www.pil0txia.com/post/2022-02-21_DBMS-notes/</loc>
+    <loc>https://www.pil0txia.com/post/2022-02-21_dbms-notes/</loc>
     <lastmod>2022-07-02</lastmod>
   </url>
   <url>
-    <loc>https://www.pil0txia.com/post/2022-03-17_Computer-Organization-and-Architecture-notes/</loc>
+    <loc>https://www.pil0txia.com/post/2022-03-17_computer-organization-and-architecture-notes/</loc>
     <lastmod>2022-07-01</lastmod>
   </url>
   <url>
@@ -173,7 +225,7 @@
     <lastmod>2020-06-28</lastmod>
   </url>
   <url>
-    <loc>https://www.pil0txia.com/post/2020-06-20_How-to-be-a-Better-Liar/</loc>
+    <loc>https://www.pil0txia.com/post/2020-06-20_how-to-be-a-better-liar/</loc>
     <lastmod>2020-06-20</lastmod>
   </url>
   <url>
