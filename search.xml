@@ -271,13 +271,13 @@
             
             <tag> 开源 </tag>
             
-            <tag> Apache </tag>
-            
-            <tag> EventMesh </tag>
-            
             <tag> 测试 </tag>
             
             <tag> Mockito </tag>
+            
+            <tag> Apache </tag>
+            
+            <tag> EventMesh </tag>
             
         </tags>
       
@@ -306,11 +306,11 @@
             
             <tag> GLCC </tag>
             
+            <tag> Proposal </tag>
+            
             <tag> DataSphereStudio </tag>
             
             <tag> GitLab </tag>
-            
-            <tag> Proposal </tag>
             
         </tags>
       
@@ -337,13 +337,13 @@
             
             <tag> 开源 </tag>
             
-            <tag> GLCC </tag>
-            
-            <tag> Proposal </tag>
-            
             <tag> Apache </tag>
             
             <tag> EventMesh </tag>
+            
+            <tag> GLCC </tag>
+            
+            <tag> Proposal </tag>
             
         </tags>
       
@@ -370,6 +370,10 @@
             
             <tag> 开源 </tag>
             
+            <tag> Apache </tag>
+            
+            <tag> EventMesh </tag>
+            
             <tag> 多线程 </tag>
             
             <tag> 阻塞 </tag>
@@ -377,10 +381,6 @@
             <tag> 中断 </tag>
             
             <tag> 异常 </tag>
-            
-            <tag> Apache </tag>
-            
-            <tag> EventMesh </tag>
             
         </tags>
       
@@ -1420,9 +1420,9 @@
       
         <tags>
             
-            <tag> 摄影 </tag>
-            
             <tag> OneDrive </tag>
+            
+            <tag> 摄影 </tag>
             
             <tag> 学生组织 </tag>
             
@@ -1653,9 +1653,9 @@
             
             <tag> 桌面运维 </tag>
             
-            <tag> 想法 </tag>
-            
             <tag> NAS </tag>
+            
+            <tag> 想法 </tag>
             
         </tags>
       
@@ -1684,13 +1684,13 @@
             
             <tag> 桌面运维 </tag>
             
+            <tag> 想法 </tag>
+            
             <tag> ITX </tag>
             
             <tag> 轻薄本 </tag>
             
             <tag> 游戏本 </tag>
-            
-            <tag> 想法 </tag>
             
         </tags>
       

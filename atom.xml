@@ -286,13 +286,13 @@
     
     <category term="开源" scheme="https://www.pil0txia.com/tags/%E5%BC%80%E6%BA%90/"/>
     
-    <category term="Apache" scheme="https://www.pil0txia.com/tags/Apache/"/>
-    
-    <category term="EventMesh" scheme="https://www.pil0txia.com/tags/EventMesh/"/>
-    
     <category term="测试" scheme="https://www.pil0txia.com/tags/%E6%B5%8B%E8%AF%95/"/>
     
     <category term="Mockito" scheme="https://www.pil0txia.com/tags/Mockito/"/>
+    
+    <category term="Apache" scheme="https://www.pil0txia.com/tags/Apache/"/>
+    
+    <category term="EventMesh" scheme="https://www.pil0txia.com/tags/EventMesh/"/>
     
   </entry>
   
@@ -322,11 +322,11 @@
     
     <category term="GLCC" scheme="https://www.pil0txia.com/tags/GLCC/"/>
     
+    <category term="Proposal" scheme="https://www.pil0txia.com/tags/Proposal/"/>
+    
     <category term="DataSphereStudio" scheme="https://www.pil0txia.com/tags/DataSphereStudio/"/>
     
     <category term="GitLab" scheme="https://www.pil0txia.com/tags/GitLab/"/>
-    
-    <category term="Proposal" scheme="https://www.pil0txia.com/tags/Proposal/"/>
     
   </entry>
   
@@ -354,13 +354,13 @@
     
     <category term="开源" scheme="https://www.pil0txia.com/tags/%E5%BC%80%E6%BA%90/"/>
     
-    <category term="GLCC" scheme="https://www.pil0txia.com/tags/GLCC/"/>
-    
-    <category term="Proposal" scheme="https://www.pil0txia.com/tags/Proposal/"/>
-    
     <category term="Apache" scheme="https://www.pil0txia.com/tags/Apache/"/>
     
     <category term="EventMesh" scheme="https://www.pil0txia.com/tags/EventMesh/"/>
+    
+    <category term="GLCC" scheme="https://www.pil0txia.com/tags/GLCC/"/>
+    
+    <category term="Proposal" scheme="https://www.pil0txia.com/tags/Proposal/"/>
     
   </entry>
   
@@ -386,6 +386,10 @@
     
     <category term="开源" scheme="https://www.pil0txia.com/tags/%E5%BC%80%E6%BA%90/"/>
     
+    <category term="Apache" scheme="https://www.pil0txia.com/tags/Apache/"/>
+    
+    <category term="EventMesh" scheme="https://www.pil0txia.com/tags/EventMesh/"/>
+    
     <category term="多线程" scheme="https://www.pil0txia.com/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/"/>
     
     <category term="阻塞" scheme="https://www.pil0txia.com/tags/%E9%98%BB%E5%A1%9E/"/>
@@ -393,10 +397,6 @@
     <category term="中断" scheme="https://www.pil0txia.com/tags/%E4%B8%AD%E6%96%AD/"/>
     
     <category term="异常" scheme="https://www.pil0txia.com/tags/%E5%BC%82%E5%B8%B8/"/>
-    
-    <category term="Apache" scheme="https://www.pil0txia.com/tags/Apache/"/>
-    
-    <category term="EventMesh" scheme="https://www.pil0txia.com/tags/EventMesh/"/>
     
   </entry>
   
